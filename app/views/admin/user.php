@@ -201,7 +201,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="index.php?page=product" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
               <p>
                 Sản phẩm
@@ -210,7 +210,7 @@
             
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="index.php?page=donhang" class="nav-link">
               <i class="nav-icon fas fa-chart-pie"></i>
               <p>
               Đơn hàng
@@ -219,7 +219,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="index.php?page=user" class="nav-link">
               <i class="nav-icon fas fa-tree"></i>
               <p>
                 Tài khoản
@@ -227,7 +227,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="index.php?page=binhluan" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
               <p>
                 Bình luận
@@ -274,10 +274,11 @@
     <section class="content">
       <div class="container-fluid">
         <div class="row">
+        
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">DataTable with minimal features & hover style</h3>
+                <button class="btn btn-primary" style="margin: bottom 20px; ;">Nhập</button>
               </div>
               <!-- /.card-header -->
               <div class="card-body">

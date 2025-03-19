@@ -23,21 +23,20 @@ switch ($page) {
         } else {
             echo "Sản phẩm không tồn tại!";
         }
+        include 'app/views/admin/product.php'; // sản phẩm
         break;
     case 'brand':
-        include 'app/views/admin/brand.php'; // Trang chủ
+        include 'app/views/admin/brand.php'; // danh mục
         break;
     case 'user':
-        include 'app/views/admin/user.php'; // Trang chủ
+        include 'app/views/admin/user.php'; // tài khoản
         break;
-    case 'product':
-        include 'app/views/admin/product.php'; // Trang chủ
-        break;
+        
     case 'donhang':
-        include 'app/views/admin/donhang.php'; // Trang chủ
+        include 'app/views/admin/donhang.php'; // đơn hàng
         break;
     case 'binhluan':
-        include 'app/views/admin/binhluan.php'; // Trang chủ
+        include 'app/views/admin/binhluan.php'; // bình luận
         break;
     default:
         include 'app/views/guest/list.php'; // Trang chủ
