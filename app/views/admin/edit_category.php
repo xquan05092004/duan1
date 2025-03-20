@@ -292,7 +292,7 @@
                                     ?>
 
                                     <form method="POST" action="index.php?page=edit_categories">
-                                        <input type="text" name="id" value="<?= htmlspecialchars($category['id']) ?>" disabled>
+                                        <input type="hidden" name="id" value="<?= htmlspecialchars($category['id']) ?>" >
 
                                         <label for="name">Tên danh mục:</label>
                                         <input type="text" name="name" value="<?= htmlspecialchars($category['name']) ?>" required>
