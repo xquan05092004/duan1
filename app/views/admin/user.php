@@ -193,7 +193,7 @@
             
           </div>
           <li class="nav-item">
-            <a href="index.php?page=brand" class="nav-link">
+            <a href="index.php?page=categories" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Danh Mục

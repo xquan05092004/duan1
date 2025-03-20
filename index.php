@@ -1,37 +1,31 @@
 <?php
+session_start();
 // Kết nối cơ sở dữ liệu
 require_once 'app/config/database.php';
 
 // Tải các Controller cần thiết
-require_once 'app/controllers/ProductController.php';
+require_once 'app/controllers/AdminController.php';
 
 // Lấy tham số từ URL
 $page = isset($_GET['page']) ? $_GET['page'] : 'home';
-
-// Khởi tạo Controller với kết nối database
-$productController = new ProductController($db);
-
 // Điều hướng URL
 switch ($page) {
-    case 'products':
-        $productController->listProducts();
+    case 'categories':
+        $adminController->listCategories();
         break;
-
-    case 'product':
-        if (isset($_GET['id'])) {
-            $productController->viewProducts($_GET['id']);
-        } else {
-            echo "Sản phẩm không tồn tại!";
-        }
-        include 'app/views/admin/product.php'; // sản phẩm
+    case 'add_categories':
+        $adminController->addCategories();
         break;
-    case 'brand':
-        include 'app/views/admin/brand.php'; // danh mục
+    case 'edit_categories':
+        $adminController->editCategories();
+        break;
+    case 'delete_categories':
+        $adminController->deleteCategories();
         break;
     case 'user':
         include 'app/views/admin/user.php'; // tài khoản
         break;
-        
+
     case 'donhang':
         include 'app/views/admin/donhang.php'; // đơn hàng
         break;
