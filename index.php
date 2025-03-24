@@ -10,6 +10,33 @@ require_once 'app/controllers/AdminController.php';
 $page = isset($_GET['page']) ? $_GET['page'] : 'home';
 // Điều hướng URL
 switch ($page) {
+    case 'product':
+        $adminController->listProducts();
+        break;
+    case 'products':
+        if (isset($_GET['id'])) {
+            $adminController->viewProduct($_GET['id']);
+        } else {
+            echo "Sản phẩm không tồn tại!";
+        }
+        break;
+    case 'create_product':
+        $adminController->createProduct();
+        break;
+    case 'edit_product':
+        if (isset($_GET['id'])) {
+            $adminController->updateProduct($_GET['id']);
+        } else {
+            echo "Sản phẩm không tồn tại!";
+        }
+        break;
+    case 'delete_product':
+        if (isset($_GET['id'])) {
+            $adminController->deleteProduct($_GET['id']);
+        } else {
+            echo "Sản phẩm không tồn tại!";
+        }
+        break;
     case 'categories':
         $adminController->listCategories();
         break;
