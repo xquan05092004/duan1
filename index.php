@@ -5,11 +5,19 @@ require_once 'app/config/database.php';
 
 // Tải các Controller cần thiết
 require_once 'app/controllers/AdminController.php';
+require_once 'app/controllers/UserController.php';
 
 // Lấy tham số từ URL
 $page = isset($_GET['page']) ? $_GET['page'] : 'home';
 // Điều hướng URL
 switch ($page) {
+    case 'home':
+        $userController->home();
+        break;
+    case 'chitiet':
+        $userController->showProductDetail($_GET['id']);
+        break;
+    
     case 'product':
         $adminController->listProducts();
         break;
