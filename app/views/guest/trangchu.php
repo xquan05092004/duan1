@@ -233,13 +233,22 @@
             nh-block-cache="true"
             class="float-lg-right">
             <div nh-mini-member class="entire-action-header">
-              <a
-                class="btn-action-header"
-                title="Tài khoản"
-                href="javascript:;"
-                data-toggle="modal"
-                data-target="#login-modal"><i class="fa-light fa-user"></i></a>
-            </div>
+            <?php if (isset($_SESSION['user'])): ?>
+              <li class="nav-item">
+                        <a class="nav-link">👋 Xin chào, <strong><?= $_SESSION['user']['name'] ?></strong></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="app/controllers/UserController.php">Đăng xuất</a>
+                    </li>
+                <?php else: ?>
+                <a
+                  class="btn-action-header"
+                  title="Tài khoản"
+                  href="app/views/users/login.php"
+                  ><i class="fa-light fa-user"></i
+                ></a>
+                <?php endif; ?>
+              </div>
           </div>
           <div nh-block="mgqafzd" nh-block-cache="true" class="float-right">
             <div class="entire-action-header">
