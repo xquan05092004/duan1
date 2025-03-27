@@ -17,7 +17,9 @@ switch ($page) {
     case 'chitiet':
         $userController->showProductDetail($_GET['id']);
         break;
-    
+    case 'showCategory':
+        $userController->showCategory($_GET['id']);
+        break;
     case 'product':
         $adminController->listProducts();
         break;

@@ -76,6 +76,7 @@ class AdminController{
     public function listProducts()
     {
         $products = $this->productModel->getAllProducts();
+        $categories = $this->categoriesModel->getAllCategories();
 
         // Đảm bảo $products không null khi truyền vào view
         if ($products === null || $products === false) {

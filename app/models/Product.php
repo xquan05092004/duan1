@@ -37,6 +37,16 @@ class Product
     
         return []; // Trả về mảng rỗng nếu không tìm thấy sản phẩm liên quan
     }
+    public function getProductsByCategoryId($categoryId) {
+        $sql = "SELECT * FROM products WHERE category_id = ?";
+        $stmt = $this->db->runQuery($sql, [$categoryId]);
+
+        if ($stmt instanceof PDOStatement) {
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        return [];
+    }
     
     
 

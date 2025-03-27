@@ -308,7 +308,18 @@
                                                     <td><?php echo $product['name']; ?></td>
                                                     <td><?php echo number_format($product['price'], 0); ?> VNĐ</td>
                                                     <td><?php echo $product['description']; ?></td>
-                                                    <td><?php echo $product['category_id']; ?></td>
+                                                    <td>
+                                                        <?php
+                                                        if (isset($categories) && is_array($categories)) {
+                                                            foreach ($categories as $category) {
+                                                                if ($category['id'] == $product['category_id']) {
+                                                                    echo htmlspecialchars($category['name']);
+                                                                    break; // Dừng vòng lặp khi tìm thấy danh mục phù hợp
+                                                                }
+                                                            }
+                                                        }
+                                                        ?>
+                                                    </td>
                                                     <td><?php echo $product['quantity']; ?></td>
                                                     <td>
                                                         <!-- Hiển thị ảnh sản phẩm với kích thước nhỏ -->

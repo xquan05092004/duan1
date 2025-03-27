@@ -147,6 +147,7 @@
                 href="javascript:;"><i class="fa-light fa-bars-staggered"></i></a>
               <div class="back-drop"></div>
               <nav class="menu-section" nh-menu="sidebar" menu-type="main">
+              
                 <div class="menu-top">
                   <span class="menu-header">Menu</span><a
                     href="javascript:;"
@@ -164,12 +165,12 @@
                     <ul
                       nh-toggle-element="th47ce3fyn"
                       class="entry-menu dropdown">
+                      <?php foreach ($categories as $category): ?>
                       <li class=" ">
-                        <a class="menu-link" href="ao-nam.html">Áo Nam</a>
+                        <a class="menu-link" href="index.php?page=showCategory&id=<?= $category['id'] ?>"><?= htmlspecialchars($category['name']) ?></a>
                       </li>
-                      <li class=" ">
-                        <a class="menu-link" href="quan-nam.html">Quần Nam</a>
-                      </li>
+                      
+                      <?php endforeach; ?>
                     </ul>
                   </li>
                   <li class="">
@@ -179,6 +180,7 @@
                     <a href="lien-he.html">Liên hệ<span class="fa-light fa-chevron-down"></span></a>
                   </li>
                 </ul>
+              
               </nav>
             </div>
           </div>
@@ -303,64 +305,46 @@
           <div class="box-category-product">
             <h3 class="title-section text-center">BỘ SƯU TẬP</h3>
             <div class="category-list">
+              <?php
+              // Mảng ánh xạ danh mục với ảnh tương ứng
+              $categoryImages = [
+                'Áo Nam' => 'https://cdn3533.cdn-template-4s.com/thumbs/danh-muc/17_thumb_720.jpg',
+                'Quần Nam' => 'https://cdn3533.cdn-template-4s.com/thumbs/danh-muc/ao-so-mi-trang-nam-nu-form-rong-jbagy-js02-2_thumb_720.jpg',
+                'Phụ Kiện' => 'https://cdn3533.cdn-template-4s.com/thumbs/danh-muc/ao-so-mi-nam-jbagy-js02_thumb_720.jpg',
+              ];
+
+              // Ảnh mặc định nếu không tìm thấy danh mục
+              $defaultImage = 'https://via.placeholder.com/300x300?text=No+Image';
+
+              ?>
+
               <div class="row">
-                <div class="col-md-4 col-12 mb-md-0 mb-4">
-                  <div class="item">
-                    <div class="inter-img">
+                <?php foreach ($categories as $category): ?>
+                  <?php
+                  // Lấy ảnh từ mảng, nếu không có thì dùng ảnh mặc định
+                  $categoryImage = $categoryImages[$category['name']] ?? $defaultImage;
+                  ?>
+                  <div class="col-md-4 col-12 mb-md-0 mb-4">
+                    <div class="item">
+                      <div class="inter-img">
                       <div class="img ratio-1-1">
-                        <a href="ao-nam.html" title="Áo Nam"><img
-                            nh-lazy="image"
-                            class="img-fluid"
-                            data-src="https://cdn3533.cdn-template-4s.com/thumbs/danh-muc/17_thumb_720.jpg"
-                            alt="Áo Nam"
-                            src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" /></a>
-                      </div>
+                        <a href="/products?category_id=<?= htmlspecialchars($category['id']) ?>" title="<?= htmlspecialchars($category['name']) ?>">
+                            <img nh-lazy="image" class="img-fluid" data-src="<?= $categoryImage ?>" alt="<?= htmlspecialchars($category['name']) ?>" />
+                        </a>
                     </div>
-                    <div class="inter-content">
-                      <div class="name">
-                        <a href="ao-nam.html" title="Áo Nam">Áo Nam</a>
+                      </div>
+                      <div class="inter-content">
+                        <div class="name">
+                          <a href="index.php?page=showCategory&id=<?= $category['id'] ?>">
+                            <?= htmlspecialchars($category['name']) ?>
+                          </a>
+
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="col-md-4 col-12 mb-md-0 mb-4">
-                  <div class="item">
-                    <div class="inter-img">
-                      <div class="img ratio-1-1">
-                        <a href="quan-nam.html" title="Quần Nam"><img
-                            nh-lazy="image"
-                            class="img-fluid"
-                            data-src="https://cdn3533.cdn-template-4s.com/thumbs/danh-muc/ao-so-mi-trang-nam-nu-form-rong-jbagy-js02-2_thumb_720.jpg"
-                            alt="Quần Nam"
-                            src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" /></a>
-                      </div>
-                    </div>
-                    <div class="inter-content">
-                      <div class="name">
-                        <a href="quan-nam.html" title="Quần Nam">Quần Nam</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-4 col-12 mb-md-0 mb-4">
-                  <div class="item">
-                    <div class="inter-img">
-                      <div class="img ratio-1-1">
-                        <a href="phu-kien.html" title="Phụ Kiện"><img
-                            nh-lazy="image"
-                            class="img-fluid"
-                            data-src="https://cdn3533.cdn-template-4s.com/thumbs/danh-muc/ao-so-mi-nam-jbagy-js02_thumb_720.jpg"
-                            alt="Phụ Kiện"
-                            src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" /></a>
-                      </div>
-                    </div>
-                    <div class="inter-content">
-                      <div class="name">
-                        <a href="phu-kien.html" title="Phụ Kiện">Phụ Kiện</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+
+                <?php endforeach; ?>
               </div>
             </div>
           </div>
@@ -379,51 +363,50 @@
           class="box-product-home">
           <h3 class="title-section text-center mb-5">Sản phẩm mới</h3>
           <div class="row">
-          <?php if (!empty($products)): ?>
-            <?php foreach ($products as $product): ?> 
-            <div class="col-lg-3 col-md-4 col-6 mb-lg-5 mb-lg-4 mb-3">
-              <div
-                nh-product="16"
-                nh-product-item-id="71"
-                nh-product-attribute-special='{"size_31":{"id":71,"product_id":16,"code":"CPES8GHVA9","barcode":null,"price":590000,"discount_percent":"10.00","price_special":530000,"time_start_special":null,"time_end_special":null,"images":["\/media\/san-pham\/16\/20240822_odcbvrviby.webp","\/media\/san-pham\/16\/20240822_9squxqiyrr.webp","\/media\/san-pham\/16\/20240822_e97k2kjovn.webp","\/media\/san-pham\/16\/20240822_yqugh1hwoq.webp","\/media\/san-pham\/16\/20240822_2sm7oxcqdr.webp","\/media\/san-pham\/16\/20240822_pqtryanlgl.webp"],"quantity_available":null,"kiotviet_id":null,"kiotviet_code":null,"position":1,"status":1,"product_item_id":71,"date_special":null,"time_special":null,"apply_special":true,"special_code":"size_31","special_id":"size_5","attribute_name":"31","attributes":[{"code":"size","attribute_id":1,"input_type":"special_select_item","value":"5"}],"extend_name":"31","attributes_normal":[]},"size_32":{"id":72,"product_id":16,"code":"OSPKEW9XN2","barcode":null,"price":590000,"discount_percent":"10.00","price_special":530000,"time_start_special":null,"time_end_special":null,"images":["\/media\/san-pham\/16\/20240822_odcbvrviby.webp","\/media\/san-pham\/16\/20240822_9squxqiyrr.webp","\/media\/san-pham\/16\/20240822_e97k2kjovn.webp","\/media\/san-pham\/16\/20240822_yqugh1hwoq.webp","\/media\/san-pham\/16\/20240822_2sm7oxcqdr.webp","\/media\/san-pham\/16\/20240822_pqtryanlgl.webp"],"quantity_available":null,"kiotviet_id":null,"kiotviet_code":null,"position":2,"status":1,"product_item_id":72,"date_special":null,"time_special":null,"apply_special":true,"special_code":"size_32","special_id":"size_4","attribute_name":"32","attributes":[{"code":"size","attribute_id":1,"input_type":"special_select_item","value":"4"}],"extend_name":"32","attributes_normal":[]},"size_33":{"id":73,"product_id":16,"code":"UOZFQ0GRLB","barcode":null,"price":590000,"discount_percent":"10.00","price_special":530000,"time_start_special":null,"time_end_special":null,"images":["\/media\/san-pham\/16\/20240822_odcbvrviby.webp","\/media\/san-pham\/16\/20240822_9squxqiyrr.webp","\/media\/san-pham\/16\/20240822_e97k2kjovn.webp","\/media\/san-pham\/16\/20240822_yqugh1hwoq.webp","\/media\/san-pham\/16\/20240822_2sm7oxcqdr.webp","\/media\/san-pham\/16\/20240822_pqtryanlgl.webp"],"quantity_available":null,"kiotviet_id":null,"kiotviet_code":null,"position":3,"status":1,"product_item_id":73,"date_special":null,"time_special":null,"apply_special":true,"special_code":"size_33","special_id":"size_3","attribute_name":"33","attributes":[{"code":"size","attribute_id":1,"input_type":"special_select_item","value":"3"}],"extend_name":"33","attributes_normal":[]},"size_34":{"id":74,"product_id":16,"code":"6W2GSH38UV","barcode":null,"price":590000,"discount_percent":"10.00","price_special":530000,"time_start_special":null,"time_end_special":null,"images":["\/media\/san-pham\/16\/20240822_odcbvrviby.webp","\/media\/san-pham\/16\/20240822_9squxqiyrr.webp","\/media\/san-pham\/16\/20240822_e97k2kjovn.webp","\/media\/san-pham\/16\/20240822_yqugh1hwoq.webp","\/media\/san-pham\/16\/20240822_2sm7oxcqdr.webp","\/media\/san-pham\/16\/20240822_pqtryanlgl.webp"],"quantity_available":null,"kiotviet_id":null,"kiotviet_code":null,"position":4,"status":1,"product_item_id":74,"date_special":null,"time_special":null,"apply_special":true,"special_code":"size_34","special_id":"size_2","attribute_name":"34","attributes":[{"code":"size","attribute_id":1,"input_type":"special_select_item","value":"2"}],"extend_name":"34","attributes_normal":[]}}'
-                class="product-item swiper-slide">
-                <div class="inner-image mb-3">
-                  <div class="product-status">
-                    <span class="onsale">-10%</span>
-                  </div>
-                  <div class="ratio-custome">
-                    
-                   
-                    <a
-                     href="index.php?page=chitiet&id=<?= $product['id'] ?>"
-                      title="Quần Jeans Slim 6124"><img src="public/uploads/<?= htmlspecialchars($product['image']) ?>" alt="<?= htmlspecialchars($product['name']) ?>" width="150"></a>
-                  </div>
-                  <div class="product-action">
-                    <a
-                      class="btn-product-action"
-                     href="index.php?page=chitiet&id=<?= $product['id'] ?>"
-                      title="Xem chi tiết"><i class="fa-light fa-cart-shopping"></i> Thêm giỏ
-                      hàng</a><a
-                      class="btn-product-action"
-                      href="index.php?page=chitiet&id=<?= $product['id'] ?>"
-                      title="Xem chi tiết"><i class="fa-light fa-eye"></i> Xem chi tiết</a>
+            <?php if (!empty($products)): ?>
+              <?php foreach ($products as $product): ?>
+                <div class="col-lg-3 col-md-4 col-6 mb-lg-5 mb-lg-4 mb-3">
+                  <div
+                    nh-product="16"
+                    nh-product-item-id="71"
+                    nh-product-attribute-special='{"size_31":{"id":71,"product_id":16,"code":"CPES8GHVA9","barcode":null,"price":590000,"discount_percent":"10.00","price_special":530000,"time_start_special":null,"time_end_special":null,"images":["\/media\/san-pham\/16\/20240822_odcbvrviby.webp","\/media\/san-pham\/16\/20240822_9squxqiyrr.webp","\/media\/san-pham\/16\/20240822_e97k2kjovn.webp","\/media\/san-pham\/16\/20240822_yqugh1hwoq.webp","\/media\/san-pham\/16\/20240822_2sm7oxcqdr.webp","\/media\/san-pham\/16\/20240822_pqtryanlgl.webp"],"quantity_available":null,"kiotviet_id":null,"kiotviet_code":null,"position":1,"status":1,"product_item_id":71,"date_special":null,"time_special":null,"apply_special":true,"special_code":"size_31","special_id":"size_5","attribute_name":"31","attributes":[{"code":"size","attribute_id":1,"input_type":"special_select_item","value":"5"}],"extend_name":"31","attributes_normal":[]},"size_32":{"id":72,"product_id":16,"code":"OSPKEW9XN2","barcode":null,"price":590000,"discount_percent":"10.00","price_special":530000,"time_start_special":null,"time_end_special":null,"images":["\/media\/san-pham\/16\/20240822_odcbvrviby.webp","\/media\/san-pham\/16\/20240822_9squxqiyrr.webp","\/media\/san-pham\/16\/20240822_e97k2kjovn.webp","\/media\/san-pham\/16\/20240822_yqugh1hwoq.webp","\/media\/san-pham\/16\/20240822_2sm7oxcqdr.webp","\/media\/san-pham\/16\/20240822_pqtryanlgl.webp"],"quantity_available":null,"kiotviet_id":null,"kiotviet_code":null,"position":2,"status":1,"product_item_id":72,"date_special":null,"time_special":null,"apply_special":true,"special_code":"size_32","special_id":"size_4","attribute_name":"32","attributes":[{"code":"size","attribute_id":1,"input_type":"special_select_item","value":"4"}],"extend_name":"32","attributes_normal":[]},"size_33":{"id":73,"product_id":16,"code":"UOZFQ0GRLB","barcode":null,"price":590000,"discount_percent":"10.00","price_special":530000,"time_start_special":null,"time_end_special":null,"images":["\/media\/san-pham\/16\/20240822_odcbvrviby.webp","\/media\/san-pham\/16\/20240822_9squxqiyrr.webp","\/media\/san-pham\/16\/20240822_e97k2kjovn.webp","\/media\/san-pham\/16\/20240822_yqugh1hwoq.webp","\/media\/san-pham\/16\/20240822_2sm7oxcqdr.webp","\/media\/san-pham\/16\/20240822_pqtryanlgl.webp"],"quantity_available":null,"kiotviet_id":null,"kiotviet_code":null,"position":3,"status":1,"product_item_id":73,"date_special":null,"time_special":null,"apply_special":true,"special_code":"size_33","special_id":"size_3","attribute_name":"33","attributes":[{"code":"size","attribute_id":1,"input_type":"special_select_item","value":"3"}],"extend_name":"33","attributes_normal":[]},"size_34":{"id":74,"product_id":16,"code":"6W2GSH38UV","barcode":null,"price":590000,"discount_percent":"10.00","price_special":530000,"time_start_special":null,"time_end_special":null,"images":["\/media\/san-pham\/16\/20240822_odcbvrviby.webp","\/media\/san-pham\/16\/20240822_9squxqiyrr.webp","\/media\/san-pham\/16\/20240822_e97k2kjovn.webp","\/media\/san-pham\/16\/20240822_yqugh1hwoq.webp","\/media\/san-pham\/16\/20240822_2sm7oxcqdr.webp","\/media\/san-pham\/16\/20240822_pqtryanlgl.webp"],"quantity_available":null,"kiotviet_id":null,"kiotviet_code":null,"position":4,"status":1,"product_item_id":74,"date_special":null,"time_special":null,"apply_special":true,"special_code":"size_34","special_id":"size_2","attribute_name":"34","attributes":[{"code":"size","attribute_id":1,"input_type":"special_select_item","value":"2"}],"extend_name":"34","attributes_normal":[]}}'
+                    class="product-item swiper-slide">
+                    <div class="inner-image mb-3">
+                      <div class="product-status">
+                        <span class="onsale">-10%</span>
+                      </div>
+                      <div class="ratio-custome">
+
+
+                        <a
+                          href="index.php?page=chitiet&id=<?= $product['id'] ?>"><img src="public/uploads/<?= htmlspecialchars($product['image']) ?>" alt="<?= htmlspecialchars($product['name']) ?>" width="150"></a>
+                      </div>
+                      <div class="product-action">
+                        <a
+                          class="btn-product-action"
+                          href="index.php?page=chitiet&id=<?= $product['id'] ?>"
+                          title="Xem chi tiết"><i class="fa-light fa-cart-shopping"></i> Thêm giỏ
+                          hàng</a><a
+                          class="btn-product-action"
+                          href="index.php?page=chitiet&id=<?= $product['id'] ?>"
+                          title="Xem chi tiết"><i class="fa-light fa-eye"></i> Xem chi tiết</a>
+                      </div>
+                    </div>
+                    <div class="inner-content text-center">
+                      <h4 class="product-title">
+                        <a href="index.php?page=chitiet&id=<?= $product['id'] ?>"><?= htmlspecialchars($product['name']) ?></a>
+                      </h4>
+                      <div class="price mt-2">
+                        <span class="price-amount">Giá: <?= number_format($product['price'], 0, ',', '.') ?><span class="currency-symbol">VND</span></span><span class="price-amount old-price">590,000<span class="currency-symbol">VND</span></span>
+                      </div>
+                    </div>
                   </div>
                 </div>
-                <div class="inner-content text-center">
-                  <h4 class="product-title">
-                    <a href="index.php?page=chitiet&id=<?= $product['id'] ?>"><?= htmlspecialchars($product['name']) ?></a>
-                  </h4>
-                  <div class="price mt-2">
-                    <span class="price-amount">Giá: <?= number_format($product['price'], 0, ',', '.') ?><span class="currency-symbol">VND</span></span><span class="price-amount old-price">590,000<span class="currency-symbol">VND</span></span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <?php endforeach; ?>
+              <?php endforeach; ?>
             <?php else: ?>
-                      <p>Không có sản phẩm nào!</p>
-                    <?php endif; ?>
-            
+              <p>Không có sản phẩm nào!</p>
+            <?php endif; ?>
+
             <div class="col-lg-3 col-md-4 col-6 mb-lg-5 mb-lg-4 mb-3">
               <div
                 nh-product="15"
@@ -466,7 +449,7 @@
                 </div>
               </div>
             </div>
-           
+
           </div>
         </div>
       </div>
