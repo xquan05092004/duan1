@@ -285,6 +285,9 @@
                                     <a href="index.php?page=create_product" class="btn btn-success mb-3">
                                         <i class="fas fa-plus-circle"></i> Thêm Sản Phẩm
                                     </a>
+                                    <a href="index.php?page=product_variants" class="btn btn-info mb-3">
+                                        <i class="fas fa-layer-group"></i> Quản lý Biến Thể Sản Phẩm
+                                    </a>
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">
@@ -354,6 +357,7 @@
                                             <h5 class="modal-title">Thêm danh mục</h5>
                                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                                         </div>
+                                        
                                         <div class="modal-body">
                                             <form action="index.php?page=add_categories" method="POST">
                                                 <div class="form-group">

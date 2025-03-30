@@ -238,7 +238,7 @@
                         <a class="nav-link">👋 Xin chào, <strong><?= $_SESSION['user']['name'] ?></strong></a>
                     </li>
                     <li class="nav-item">
-                        <a href="app/controllers/UserController.php">Đăng xuất</a>
+                        <a href="/duan11/routes/User.php?action=logout">Đăng xuất</a>
                     </li>
                 <?php else: ?>
                 <a
@@ -317,9 +317,9 @@
               <?php
               // Mảng ánh xạ danh mục với ảnh tương ứng
               $categoryImages = [
-                'Áo Nam' => 'https://cdn3533.cdn-template-4s.com/thumbs/danh-muc/17_thumb_720.jpg',
-                'Quần Nam' => 'https://cdn3533.cdn-template-4s.com/thumbs/danh-muc/ao-so-mi-trang-nam-nu-form-rong-jbagy-js02-2_thumb_720.jpg',
-                'Phụ Kiện' => 'https://cdn3533.cdn-template-4s.com/thumbs/danh-muc/ao-so-mi-nam-jbagy-js02_thumb_720.jpg',
+                'Áo Thun' => 'https://cdn3533.cdn-template-4s.com/thumbs/danh-muc/17_thumb_720.jpg',
+                'Quần Jean' => 'https://cdn3533.cdn-template-4s.com/thumbs/danh-muc/ao-so-mi-trang-nam-nu-form-rong-jbagy-js02-2_thumb_720.jpg',
+                'Giày Dép' => 'https://cdn3533.cdn-template-4s.com/thumbs/danh-muc/ao-so-mi-nam-jbagy-js02_thumb_720.jpg',
               ];
 
               // Ảnh mặc định nếu không tìm thấy danh mục

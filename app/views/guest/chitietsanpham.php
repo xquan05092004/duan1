@@ -65,6 +65,50 @@
     <link href="assets/templates/thoitrang05/assets/css/custom.css" rel="stylesheet" type="text/css" />
 
     <style type='text/css'>
+        .btn-cart-buy {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .btn-cart-buy li {
+            list-style: none;
+        }
+
+        .btn-cart-buy a {
+            display: inline-block;
+            padding: 12px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease-in-out;
+            min-width: 150px;
+        }
+
+        .add-to-cart {
+            background-color: #ff6600;
+            color: #fff;
+            border: 2px solid #ff6600;
+        }
+
+        .add-to-cart:hover {
+            background-color: #ff4500;
+            border-color: #ff4500;
+        }
+
+        .add-to-cart-buy {
+            background-color: #28a745;
+            color: #fff;
+            border: 2px solid #28a745;
+        }
+
+        .add-to-cart-buy:hover {
+            background-color: #218838;
+            border-color: #218838;
+        }
+
         /* <![CDATA[ */
         @font-face {
             font-family: 'Font Awesome 6 Pro';
@@ -113,11 +157,19 @@
                             <nav class="menu-section" nh-menu="sidebar" menu-type="main">
                                 <div class="menu-top"><span class="menu-header">Menu</span><a href="javascript:;" nh-menu="btn-close" class="close-sidebar effect-rotate icon-close"><i class="fa-light fa-xmark"></i></a></div>
                                 <ul>
-                                    <li class=""><a href="index.html"> Trang chủ<span class="fa-light fa-chevron-down"></span></a></li>
-                                    <li class="position-relative has-child "><a href="san-pham.html">Sản phẩm<span class="fa-light fa-chevron-down"></span></a><span class="grower" nh-toggle="e0tgovcuby"></span>
-                                        <ul nh-toggle-element="e0tgovcuby" class="entry-menu dropdown">
-                                            <li class=" "><a class="menu-link" href="ao-nam.html">Áo Nam</a></li>
-                                            <li class=" "><a class="menu-link" href="quan-nam.html">Quần Nam</a></li>
+                                    <li class=""><a href="index.php"> Trang chủ<span class="fa-light fa-chevron-down"></span></a></li>
+                                    <li class="position-relative has-child">
+                                        <a href="san-pham.html">Sản phẩm<span
+                                                class="fa-light fa-chevron-down"></span></a><span class="grower" nh-toggle="th47ce3fyn"></span>
+                                        <ul
+                                            nh-toggle-element="th47ce3fyn"
+                                            class="entry-menu dropdown">
+                                            <?php foreach ($categories as $category): ?>
+                                                <li class=" ">
+                                                    <a class="menu-link" href="index.php?page=showCategory&id=<?= $category['id'] ?>"><?= htmlspecialchars($category['name']) ?></a>
+                                                </li>
+
+                                            <?php endforeach; ?>
                                         </ul>
                                     </li>
                                     <li class=""><a href="trang-tin-tuc.html">Bài viết<span class="fa-light fa-chevron-down"></span></a></li>
@@ -134,7 +186,7 @@
                 </div>
                 <div class="col-md-4 col-12">
                     <div nh-block="8bxkyf0" nh-block-cache="true" class="">
-                        <div class="entire-action-header entire-action-search"><span class="btn-action-header btn-mini-search"><img src="templates/thoitrang05/assets/media/icon/search.svg" class="icon"></span>
+                        <div class="entire-action-header entire-action-search"><span class="btn-action-header btn-mini-search"><img src="assets/templates/thoitrang05/assets/media/icon/search.svg" class="icon"></span>
                             <form class="form-search position-relative" action="https://thoitrang09.themeweb4s.com/tim-kiem" method="get" autocomplete="off">
                                 <div class="input-group">
                                     <div class="input-group-append"><button nh-btn-submit class="btn btn-submit" type="submit"><img src="assets/templates/thoitrang05/assets/media/icon/search.svg" class="icon"></button></div><input nh-auto-suggest="product" name="keyword" placeholder="Từ khóa tìm kiếm" type="text" class="form-control" value="">
@@ -160,7 +212,7 @@
             <div class="row ">
                 <div class="col-md-12 col-12">
                     <div nh-block="tyc9jrx" nh-block-cache="false" class="">
-                        <nav class="breadcrumbs-section my-3"><a href="index.html">Trang chủ</a><a href="quan-nam.html">Quần Nam</a><a href="quan-au.html">Quần Âu</a><a href="quan-au-carrot-polyester-7054.html"><span>Quần Âu Carrot Polyester 7054</span></a></nav>
+                        <nav class="breadcrumbs-section my-3"><a href="index.php">Trang chủ</a><a href="quan-nam.html">Quần Nam</a><a href="quan-au.html">Quần Âu</a><a href="quan-au-carrot-polyester-7054.html"><span>Quần Âu Carrot Polyester 7054</span></a></nav>
                     </div>
                 </div>
             </div>
@@ -182,7 +234,7 @@
                                                 <div class="swiper mb-0" nh-swiper-large="{&quot;navigation&quot;:{&quot;nextEl&quot;:&quot;.swiper-button-next&quot;,&quot;prevEl&quot;:&quot;.swiper-button-prev&quot;}}">
                                                     <div class="swiper-wrapper">
                                                         <div class="swiper-slide inner-image">
-                                                        <img src="public/uploads/<?= htmlspecialchars($product['image']) ?>" alt="<?= htmlspecialchars($product['name']) ?>" width="150">
+                                                            <img src="public/uploads/<?= htmlspecialchars($product['image']) ?>" alt="<?= htmlspecialchars($product['name']) ?>" width="150">
                                                         </div>
                                                         <div class="swiper-slide inner-image">
                                                             <img class="img-fluid" src="https://cdn3533.cdn-template-4s.com/media/san-pham/9/20240627_zgwv5rrxdq.webp" alt="Quần Âu Carrot Polyester 7054">
@@ -391,7 +443,7 @@
                                         <div nh-product-detail nh-product="9" nh-product-item-id="39" nh-product-attribute-special="{&quot;color_aeaaa7_size_28&quot;:{&quot;id&quot;:39,&quot;product_id&quot;:9,&quot;code&quot;:&quot;H7C2V0L15S&quot;,&quot;barcode&quot;:null,&quot;price&quot;:579000,&quot;discount_percent&quot;:&quot;17.00&quot;,&quot;price_special&quot;:479000,&quot;time_start_special&quot;:null,&quot;time_end_special&quot;:null,&quot;images&quot;:[&quot;\/media\/san-pham\/9\/20240702_rwwtbtwbno.webp&quot;,&quot;\/media\/san-pham\/9\/20240627_zgwv5rrxdq.webp&quot;,&quot;\/media\/san-pham\/9\/20240702_nrrw3qqnmq.webp&quot;,&quot;\/media\/san-pham\/9\/20240702_juvu46qwm7.webp&quot;,&quot;\/media\/san-pham\/9\/20240702_flidg73rlh.webp&quot;,&quot;\/media\/san-pham\/9\/20240702_oeouofeoga.webp&quot;],&quot;quantity_available&quot;:null,&quot;kiotviet_id&quot;:null,&quot;kiotviet_code&quot;:null,&quot;position&quot;:1,&quot;status&quot;:1,&quot;product_item_id&quot;:39,&quot;date_special&quot;:null,&quot;time_special&quot;:null,&quot;apply_special&quot;:true,&quot;special_code&quot;:&quot;color_aeaaa7_size_28&quot;,&quot;special_id&quot;:&quot;size_8_color_16&quot;,&quot;attribute_name&quot;:&quot;28 - Be&quot;,&quot;attributes&quot;:[{&quot;code&quot;:&quot;color&quot;,&quot;attribute_id&quot;:2,&quot;input_type&quot;:&quot;special_select_item&quot;,&quot;value&quot;:&quot;16&quot;},{&quot;code&quot;:&quot;size&quot;,&quot;attribute_id&quot;:1,&quot;input_type&quot;:&quot;special_select_item&quot;,&quot;value&quot;:&quot;8&quot;}],&quot;extend_name&quot;:&quot;Be - 28&quot;,&quot;attributes_normal&quot;:[]},&quot;color_aeaaa7_size_30&quot;:{&quot;id&quot;:40,&quot;product_id&quot;:9,&quot;code&quot;:&quot;EHNDT5GU40&quot;,&quot;barcode&quot;:null,&quot;price&quot;:579000,&quot;discount_percent&quot;:&quot;17.00&quot;,&quot;price_special&quot;:479000,&quot;time_start_special&quot;:null,&quot;time_end_special&quot;:null,&quot;images&quot;:[&quot;\/media\/san-pham\/9\/20240702_rwwtbtwbno.webp&quot;,&quot;\/media\/san-pham\/9\/20240627_zgwv5rrxdq.webp&quot;,&quot;\/media\/san-pham\/9\/20240702_nrrw3qqnmq.webp&quot;,&quot;\/media\/san-pham\/9\/20240702_juvu46qwm7.webp&quot;,&quot;\/media\/san-pham\/9\/20240702_flidg73rlh.webp&quot;,&quot;\/media\/san-pham\/9\/20240702_oeouofeoga.webp&quot;],&quot;quantity_available&quot;:null,&quot;kiotviet_id&quot;:null,&quot;kiotviet_code&quot;:null,&quot;position&quot;:2,&quot;status&quot;:1,&quot;product_item_id&quot;:40,&quot;date_special&quot;:null,&quot;time_special&quot;:null,&quot;apply_special&quot;:true,&quot;special_code&quot;:&quot;color_aeaaa7_size_30&quot;,&quot;special_id&quot;:&quot;size_6_color_16&quot;,&quot;attribute_name&quot;:&quot;30 - Be&quot;,&quot;attributes&quot;:[{&quot;code&quot;:&quot;color&quot;,&quot;attribute_id&quot;:2,&quot;input_type&quot;:&quot;special_select_item&quot;,&quot;value&quot;:&quot;16&quot;},{&quot;code&quot;:&quot;size&quot;,&quot;attribute_id&quot;:1,&quot;input_type&quot;:&quot;special_select_item&quot;,&quot;value&quot;:&quot;6&quot;}],&quot;extend_name&quot;:&quot;Be - 30&quot;,&quot;attributes_normal&quot;:[]},&quot;color_aeaaa7_size_32&quot;:{&quot;id&quot;:41,&quot;product_id&quot;:9,&quot;code&quot;:&quot;6QHJG2W3SP&quot;,&quot;barcode&quot;:null,&quot;price&quot;:579000,&quot;discount_percent&quot;:&quot;17.00&quot;,&quot;price_special&quot;:479000,&quot;time_start_special&quot;:null,&quot;time_end_special&quot;:null,&quot;images&quot;:[&quot;\/media\/san-pham\/9\/20240702_rwwtbtwbno.webp&quot;,&quot;\/media\/san-pham\/9\/20240627_zgwv5rrxdq.webp&quot;,&quot;\/media\/san-pham\/9\/20240702_nrrw3qqnmq.webp&quot;,&quot;\/media\/san-pham\/9\/20240702_juvu46qwm7.webp&quot;,&quot;\/media\/san-pham\/9\/20240702_flidg73rlh.webp&quot;,&quot;\/media\/san-pham\/9\/20240702_oeouofeoga.webp&quot;],&quot;quantity_available&quot;:null,&quot;kiotviet_id&quot;:null,&quot;kiotviet_code&quot;:null,&quot;position&quot;:3,&quot;status&quot;:1,&quot;product_item_id&quot;:41,&quot;date_special&quot;:null,&quot;time_special&quot;:null,&quot;apply_special&quot;:true,&quot;special_code&quot;:&quot;color_aeaaa7_size_32&quot;,&quot;special_id&quot;:&quot;size_4_color_16&quot;,&quot;attribute_name&quot;:&quot;32 - Be&quot;,&quot;attributes&quot;:[{&quot;code&quot;:&quot;color&quot;,&quot;attribute_id&quot;:2,&quot;input_type&quot;:&quot;special_select_item&quot;,&quot;value&quot;:&quot;16&quot;},{&quot;code&quot;:&quot;size&quot;,&quot;attribute_id&quot;:1,&quot;input_type&quot;:&quot;special_select_item&quot;,&quot;value&quot;:&quot;4&quot;}],&quot;extend_name&quot;:&quot;Be - 32&quot;,&quot;attributes_normal&quot;:[]},&quot;color_f4f4f4f4_size_28&quot;:{&quot;id&quot;:42,&quot;product_id&quot;:9,&quot;code&quot;:&quot;CUDFP1N85M&quot;,&quot;barcode&quot;:null,&quot;price&quot;:579000,&quot;discount_percent&quot;:&quot;17.00&quot;,&quot;price_special&quot;:479000,&quot;time_start_special&quot;:null,&quot;time_end_special&quot;:null,&quot;images&quot;:[&quot;\/media\/san-pham\/9\/20240606_xk4jppuumt.webp&quot;,&quot;\/media\/san-pham\/9\/20240606_44jqjywhx2.webp&quot;,&quot;\/media\/san-pham\/9\/20240606_wfc99e5eqy.webp&quot;,&quot;\/media\/san-pham\/9\/20240606_tfqusqlmvc.webp&quot;],&quot;quantity_available&quot;:null,&quot;kiotviet_id&quot;:null,&quot;kiotviet_code&quot;:null,&quot;position&quot;:4,&quot;status&quot;:1,&quot;product_item_id&quot;:42,&quot;date_special&quot;:null,&quot;time_special&quot;:null,&quot;apply_special&quot;:true,&quot;special_code&quot;:&quot;color_f4f4f4f4_size_28&quot;,&quot;special_id&quot;:&quot;size_8_color_17&quot;,&quot;attribute_name&quot;:&quot;28 - N\u00e2u&quot;,&quot;attributes&quot;:[{&quot;code&quot;:&quot;color&quot;,&quot;attribute_id&quot;:2,&quot;input_type&quot;:&quot;special_select_item&quot;,&quot;value&quot;:&quot;17&quot;},{&quot;code&quot;:&quot;size&quot;,&quot;attribute_id&quot;:1,&quot;input_type&quot;:&quot;special_select_item&quot;,&quot;value&quot;:&quot;8&quot;}],&quot;extend_name&quot;:&quot;N\u00e2u - 28&quot;,&quot;attributes_normal&quot;:[]},&quot;color_f4f4f4f4_size_30&quot;:{&quot;id&quot;:43,&quot;product_id&quot;:9,&quot;code&quot;:&quot;I31CYRB8NM&quot;,&quot;barcode&quot;:null,&quot;price&quot;:579000,&quot;discount_percent&quot;:&quot;17.00&quot;,&quot;price_special&quot;:479000,&quot;time_start_special&quot;:null,&quot;time_end_special&quot;:null,&quot;images&quot;:[&quot;\/media\/san-pham\/9\/20240606_xk4jppuumt.webp&quot;,&quot;\/media\/san-pham\/9\/20240606_44jqjywhx2.webp&quot;,&quot;\/media\/san-pham\/9\/20240606_wfc99e5eqy.webp&quot;,&quot;\/media\/san-pham\/9\/20240606_tfqusqlmvc.webp&quot;],&quot;quantity_available&quot;:null,&quot;kiotviet_id&quot;:null,&quot;kiotviet_code&quot;:null,&quot;position&quot;:5,&quot;status&quot;:1,&quot;product_item_id&quot;:43,&quot;date_special&quot;:null,&quot;time_special&quot;:null,&quot;apply_special&quot;:true,&quot;special_code&quot;:&quot;color_f4f4f4f4_size_30&quot;,&quot;special_id&quot;:&quot;size_6_color_17&quot;,&quot;attribute_name&quot;:&quot;30 - N\u00e2u&quot;,&quot;attributes&quot;:[{&quot;code&quot;:&quot;color&quot;,&quot;attribute_id&quot;:2,&quot;input_type&quot;:&quot;special_select_item&quot;,&quot;value&quot;:&quot;17&quot;},{&quot;code&quot;:&quot;size&quot;,&quot;attribute_id&quot;:1,&quot;input_type&quot;:&quot;special_select_item&quot;,&quot;value&quot;:&quot;6&quot;}],&quot;extend_name&quot;:&quot;N\u00e2u - 30&quot;,&quot;attributes_normal&quot;:[]},&quot;color_f4f4f4f4_size_32&quot;:{&quot;id&quot;:44,&quot;product_id&quot;:9,&quot;code&quot;:&quot;RMAN5H4D21&quot;,&quot;barcode&quot;:null,&quot;price&quot;:579000,&quot;discount_percent&quot;:&quot;17.00&quot;,&quot;price_special&quot;:479000,&quot;time_start_special&quot;:null,&quot;time_end_special&quot;:null,&quot;images&quot;:[&quot;\/media\/san-pham\/9\/20240606_xk4jppuumt.webp&quot;,&quot;\/media\/san-pham\/9\/20240606_44jqjywhx2.webp&quot;,&quot;\/media\/san-pham\/9\/20240606_wfc99e5eqy.webp&quot;,&quot;\/media\/san-pham\/9\/20240606_tfqusqlmvc.webp&quot;],&quot;quantity_available&quot;:null,&quot;kiotviet_id&quot;:null,&quot;kiotviet_code&quot;:null,&quot;position&quot;:6,&quot;status&quot;:1,&quot;product_item_id&quot;:44,&quot;date_special&quot;:null,&quot;time_special&quot;:null,&quot;apply_special&quot;:true,&quot;special_code&quot;:&quot;color_f4f4f4f4_size_32&quot;,&quot;special_id&quot;:&quot;size_4_color_17&quot;,&quot;attribute_name&quot;:&quot;32 - N\u00e2u&quot;,&quot;attributes&quot;:[{&quot;code&quot;:&quot;color&quot;,&quot;attribute_id&quot;:2,&quot;input_type&quot;:&quot;special_select_item&quot;,&quot;value&quot;:&quot;17&quot;},{&quot;code&quot;:&quot;size&quot;,&quot;attribute_id&quot;:1,&quot;input_type&quot;:&quot;special_select_item&quot;,&quot;value&quot;:&quot;4&quot;}],&quot;extend_name&quot;:&quot;N\u00e2u - 32&quot;,&quot;attributes_normal&quot;:[]},&quot;color_000_size_28&quot;:{&quot;id&quot;:45,&quot;product_id&quot;:9,&quot;code&quot;:&quot;CZ9URWPV0K&quot;,&quot;barcode&quot;:null,&quot;price&quot;:579000,&quot;discount_percent&quot;:&quot;17.00&quot;,&quot;price_special&quot;:479000,&quot;time_start_special&quot;:null,&quot;time_end_special&quot;:null,&quot;images&quot;:[&quot;\/media\/san-pham\/9\/20240627_tkd3sdpyas.webp&quot;,&quot;\/media\/san-pham\/9\/20240702_74ic6jgwek.webp&quot;,&quot;\/media\/san-pham\/9\/20240702_aqohzgk0yj.webp&quot;,&quot;\/media\/san-pham\/9\/20240702_noh7zfcpwo.webp&quot;,&quot;\/media\/san-pham\/9\/20240702_q99dhzdhj1.webp&quot;,&quot;\/media\/san-pham\/9\/20240702_vohjucylok.webp&quot;],&quot;quantity_available&quot;:null,&quot;kiotviet_id&quot;:null,&quot;kiotviet_code&quot;:null,&quot;position&quot;:7,&quot;status&quot;:1,&quot;product_item_id&quot;:45,&quot;date_special&quot;:null,&quot;time_special&quot;:null,&quot;apply_special&quot;:true,&quot;special_code&quot;:&quot;color_000_size_28&quot;,&quot;special_id&quot;:&quot;size_8_color_9&quot;,&quot;attribute_name&quot;:&quot;28 - \u0110en&quot;,&quot;attributes&quot;:[{&quot;code&quot;:&quot;color&quot;,&quot;attribute_id&quot;:2,&quot;input_type&quot;:&quot;special_select_item&quot;,&quot;value&quot;:&quot;9&quot;},{&quot;code&quot;:&quot;size&quot;,&quot;attribute_id&quot;:1,&quot;input_type&quot;:&quot;special_select_item&quot;,&quot;value&quot;:&quot;8&quot;}],&quot;extend_name&quot;:&quot;\u0110en - 28&quot;,&quot;attributes_normal&quot;:[]},&quot;color_000_size_30&quot;:{&quot;id&quot;:46,&quot;product_id&quot;:9,&quot;code&quot;:&quot;F9GZCJMO0V&quot;,&quot;barcode&quot;:null,&quot;price&quot;:579000,&quot;discount_percent&quot;:&quot;17.00&quot;,&quot;price_special&quot;:479000,&quot;time_start_special&quot;:null,&quot;time_end_special&quot;:null,&quot;images&quot;:[&quot;\/media\/san-pham\/9\/20240627_tkd3sdpyas.webp&quot;,&quot;\/media\/san-pham\/9\/20240702_74ic6jgwek.webp&quot;,&quot;\/media\/san-pham\/9\/20240702_aqohzgk0yj.webp&quot;,&quot;\/media\/san-pham\/9\/20240702_noh7zfcpwo.webp&quot;,&quot;\/media\/san-pham\/9\/20240702_q99dhzdhj1.webp&quot;,&quot;\/media\/san-pham\/9\/20240702_vohjucylok.webp&quot;],&quot;quantity_available&quot;:null,&quot;kiotviet_id&quot;:null,&quot;kiotviet_code&quot;:null,&quot;position&quot;:8,&quot;status&quot;:1,&quot;product_item_id&quot;:46,&quot;date_special&quot;:null,&quot;time_special&quot;:null,&quot;apply_special&quot;:true,&quot;special_code&quot;:&quot;color_000_size_30&quot;,&quot;special_id&quot;:&quot;size_6_color_9&quot;,&quot;attribute_name&quot;:&quot;30 - \u0110en&quot;,&quot;attributes&quot;:[{&quot;code&quot;:&quot;color&quot;,&quot;attribute_id&quot;:2,&quot;input_type&quot;:&quot;special_select_item&quot;,&quot;value&quot;:&quot;9&quot;},{&quot;code&quot;:&quot;size&quot;,&quot;attribute_id&quot;:1,&quot;input_type&quot;:&quot;special_select_item&quot;,&quot;value&quot;:&quot;6&quot;}],&quot;extend_name&quot;:&quot;\u0110en - 30&quot;,&quot;attributes_normal&quot;:[]},&quot;color_000_size_32&quot;:{&quot;id&quot;:47,&quot;product_id&quot;:9,&quot;code&quot;:&quot;UFYEKWQ9N7&quot;,&quot;barcode&quot;:null,&quot;price&quot;:579000,&quot;discount_percent&quot;:&quot;17.00&quot;,&quot;price_special&quot;:479000,&quot;time_start_special&quot;:null,&quot;time_end_special&quot;:null,&quot;images&quot;:[&quot;\/media\/san-pham\/9\/20240627_tkd3sdpyas.webp&quot;,&quot;\/media\/san-pham\/9\/20240702_74ic6jgwek.webp&quot;,&quot;\/media\/san-pham\/9\/20240702_aqohzgk0yj.webp&quot;,&quot;\/media\/san-pham\/9\/20240702_noh7zfcpwo.webp&quot;,&quot;\/media\/san-pham\/9\/20240702_q99dhzdhj1.webp&quot;,&quot;\/media\/san-pham\/9\/20240702_vohjucylok.webp&quot;],&quot;quantity_available&quot;:null,&quot;kiotviet_id&quot;:null,&quot;kiotviet_code&quot;:null,&quot;position&quot;:9,&quot;status&quot;:1,&quot;product_item_id&quot;:47,&quot;date_special&quot;:null,&quot;time_special&quot;:null,&quot;apply_special&quot;:true,&quot;special_code&quot;:&quot;color_000_size_32&quot;,&quot;special_id&quot;:&quot;size_4_color_9&quot;,&quot;attribute_name&quot;:&quot;32 - \u0110en&quot;,&quot;attributes&quot;:[{&quot;code&quot;:&quot;color&quot;,&quot;attribute_id&quot;:2,&quot;input_type&quot;:&quot;special_select_item&quot;,&quot;value&quot;:&quot;9&quot;},{&quot;code&quot;:&quot;size&quot;,&quot;attribute_id&quot;:1,&quot;input_type&quot;:&quot;special_select_item&quot;,&quot;value&quot;:&quot;4&quot;}],&quot;extend_name&quot;:&quot;\u0110en - 32&quot;,&quot;attributes_normal&quot;:[]}}" class="product-content-detail">
 
                                             <h1 class="product-title-detail mb-lg-4 mb-3">
-                                            <?= htmlspecialchars($product['name']) ?>
+                                                <?= htmlspecialchars($product['name']) ?>
                                             </h1>
 
                                             <div class="d-flex align-items-center flex-nowrap mb-4">
@@ -413,7 +465,7 @@
                                                 </span>
 
                                                 <span nh-label-price="479000" class="price-amount">
-                                                <?= number_format($product['price'], 0, ',', '.') ?>
+                                                    <?= number_format($product['price'], 0, ',', '.') ?>
                                                     <span class="currency-symbol">VND</span>
                                                 </span>
 
@@ -434,301 +486,287 @@
 
                                                 <div nh-attribute="color" class="mb-2 list-attribute d-flex flex-column">
                                                     <div class="mb-2">
-                                                        <label>
-                                                            Màu sắc:
-                                                        </label>
-                                                    </div>
-                                                    <div class="product-attribute-switch d-flex flex-wrap justify-content-start image-switch">
-
-
-
-                                                        <div nh-attribute-option="aeaaa7" data-trigger="https://cdn3533.cdn-template-4s.com/thumbs/san-pham/9/20240702_rwwtbtwbno_thumb_150.webp" class="inner-product-attribute" style="background-image: url('https://cdn3533.cdn-template-4s.com/thumbs/san-pham/9/20240702_rwwtbtwbno_thumb_50.webp'); background-color: #fff; background-repeat: no-repeat; background-size: contain;">
-                                                        </div>
-
-
-
-                                                        <div nh-attribute-option="f4f4f4f4" data-trigger="https://cdn3533.cdn-template-4s.com/thumbs/san-pham/9/20240606_xk4jppuumt_thumb_150.webp" class="inner-product-attribute" style="background-image: url('https://cdn3533.cdn-template-4s.com/thumbs/san-pham/9/20240606_xk4jppuumt_thumb_50.webp'); background-color: #fff; background-repeat: no-repeat; background-size: contain;">
-                                                        </div>
-
-
-
-                                                        <div nh-attribute-option="000" data-trigger="https://cdn3533.cdn-template-4s.com/thumbs/san-pham/9/20240627_tkd3sdpyas_thumb_150.webp" class="inner-product-attribute" style="background-image: url('https://cdn3533.cdn-template-4s.com/thumbs/san-pham/9/20240627_tkd3sdpyas_thumb_50.webp'); background-color: #fff; background-repeat: no-repeat; background-size: contain;">
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-
-
-
-                                                <div nh-attribute="size" class="mb-2 list-attribute d-flex flex-column">
-                                                    <div class="mb-2">
-                                                        <label>
-                                                            Kích cỡ:
-                                                        </label>
-                                                    </div>
-                                                    <div class="product-attribute-switch d-flex flex-wrap justify-content-start text-switch">
-
-
-
-                                                        <div nh-attribute-option="28" class="inner-product-attribute">
-                                                            28
-                                                        </div>
-
-
-
-                                                        <div nh-attribute-option="30" class="inner-product-attribute">
-                                                            30
-                                                        </div>
-
-
-
-                                                        <div nh-attribute-option="32" class="inner-product-attribute">
-                                                            32
-                                                        </div>
+                                                        <?php if (!empty($colors)) : ?>
+                                                            <div>
+                                                                <label>Chọn màu sắc:</label>
+                                                                <select name="color">
+                                                                    <?php foreach ($colors as $color_id => $color_name) : ?>
+                                                                        <option value="<?= htmlspecialchars($color_id) ?>">
+                                                                            <?= htmlspecialchars($color_name) ?>
+                                                                        </option>
+                                                                    <?php endforeach; ?>
+                                                                </select>
+                                                            </div>
+                                                        <?php else : ?>
+                                                            <p>Không có biến thể màu sắc.</p>
+                                                        <?php endif; ?>
                                                     </div>
 
                                                 </div>
                                             </div>
-
-                                            <div class="quantity-cart-buy">
-                                                <div class="title-quantity">
-                                                    Số lượng
+                                            <div nh-attribute="size" class="mb-2 list-attribute d-flex flex-column">
+                                                <div class="mb-2">
+                                                    <!-- Hiển thị kích thước -->
+                                                    <?php if (!empty($sizes)) : ?>
+                                                        <div>
+                                                            <label>Chọn kích thước:</label>
+                                                            <select name="size">
+                                                                <?php foreach ($sizes as $size_id => $size_name) : ?>
+                                                                    <option value="<?= htmlspecialchars($size_id) ?>">
+                                                                        <?= htmlspecialchars($size_name) ?>
+                                                                    </option>
+                                                                <?php endforeach; ?>
+                                                            </select>
+                                                        </div>
+                                                    <?php else : ?>
+                                                        <p>Không có biến thể kích thước.</p>
+                                                    <?php endif; ?>
                                                 </div>
-                                                <div class="btn-quantity-cart">
-                                                    <div nh-quantity-product="wrap" class="product-quantity ">
-                                                        <span nh-quantity-product="subtract" class="btn-quantity quantity-subtract">
+
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="quantity-cart-buy">
+                                            <div class="title-quantity">
+                                                Số lượng
+                                            </div>
+                                            <div class="btn-quantity-cart">
+                                                <div nh-quantity-product="wrap" class="product-quantity ">
+                                                    <span nh-quantity-product="subtract" class="btn-quantity quantity-subtract">
+                                                        <i class="fa-light fa-minus"></i>
+                                                    </span>
+
+                                                    <input nh-quantity-product="quantity" value="1" class="text-center number-input" type="text" maxlength="3" />
+
+                                                    <span nh-quantity-product="add" class="btn-quantity quantity-add">
+                                                        <i class="fa-light fa-plus"></i>
+                                                    </span>
+                                                </div>
+                                                <div class="btn-cart-buy d-flex flex-wrap">
+                                                    <li>
+                                                        <a classb nh-btn-action="add-cart" href="javascript:;" class="add-to-cart ">
+                                                            Thêm giỏ hàng
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a nh-btn-action="add-cart" nh-redirect="/order/info" href="javascript:;" class="add-to-cart add-to-cart-buy">
+                                                            Thanh toán ngay
+                                                        </a>
+                                                    </li>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div nh-quantity-product="out-stock" class="out-of-stock mb-4 d-none">
+                                            Sản phẩm hết hàng
+                                        </div>
+
+                                        <div class="product-detail-description">
+
+                                            <div id="accordion">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <div class="btn btn-link" data-toggle="collapse" data-target="#description01" aria-expanded="true" aria-controls="collapseOne">
+                                                            Thông tin sản phẩm
                                                             <i class="fa-light fa-minus"></i>
-                                                        </span>
-
-                                                        <input nh-quantity-product="quantity" value="1" class="text-center number-input" type="text" maxlength="3" />
-
-                                                        <span nh-quantity-product="add" class="btn-quantity quantity-add">
-                                                            <i class="fa-light fa-plus"></i>
-                                                        </span>
+                                                        </div>
                                                     </div>
-                                                    <div class="btn-cart-buy d-flex flex-wrap">
-                                                        <li>
-                                                            <a nh-btn-action="add-cart" href="javascript:;" class="add-to-cart ">
-                                                                Thêm giỏ hàng
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a nh-btn-action="add-cart" nh-redirect="/order/info" href="javascript:;" class="add-to-cart add-to-cart-buy">
-                                                                Thanh toán ngay
-                                                            </a>
-                                                        </li>
+
+                                                    <div id="description01" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                                                        <div class="card-body">
+                                                            <p><?= htmlspecialchars($product['description']) ?></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#description02" aria-expanded="false" aria-controls="collapseTwo">
+                                                            Chính sách
+                                                            <i class="fa-light fa-minus"></i>
+                                                        </button>
+                                                    </div>
+                                                    <div id="description02" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                                                        <div class="card-body">
+                                                            <p>
+                                                                <i class="fa-sharp fa-solid fa-caret-right"></i> Đổi hàng trong vòng 15 ngày.
+                                                            </p>
+                                                            <p>
+                                                                <i class="fa-sharp fa-solid fa-caret-right"></i> Giảm đến 15% trên tổng hóa đơn khi mua hàng ( tại cửa hàng ) vào tháng sinh nhật.
+                                                            </p>
+                                                            <p>
+                                                                <i class="fa-sharp fa-solid fa-caret-right"></i> Giao hàng nội thành Hà Nội chỉ từ 15.000đ trong vòng 24 giờ.
+                                                            </p>
+                                                            <p>
+                                                                <i class="fa-sharp fa-solid fa-caret-right"></i> Tích điểm 3-8% giá trị đơn hàng cho mỗi lần mua và trừ tiền vào lần mua tiếp theo.
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                            Hướng dẫn bảo quản
+                                                            <i class="fa-light fa-minus"></i>
+                                                        </button>
+                                                    </div>
+                                                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                                                        <div class="card-body">
+                                                            <p>
+                                                                <i class="fa-sharp fa-solid fa-caret-right"></i> Có thể giặt tay hay giặt máy đều được (ưu tiên giặt tay để tăng tuổi thọ của sản phẩm)
+                                                            </p>
+                                                            <p>
+                                                                <i class="fa-sharp fa-solid fa-caret-right"></i> Lộn trái sản phẩm khi giặt, không giặt chung sản phẩm trắng với quần áo tối màu.
+                                                            </p>
+                                                            <p>
+                                                                <i class="fa-sharp fa-solid fa-caret-right"></i> Sử dụng xà phòng trung tính,không sử dụng xà phòng có chất tẩy mạnh.
+                                                            </p>
+                                                            <p>
+                                                                <i class="fa-sharp fa-solid fa-caret-right"></i> Không sử dụng chất tẩy, không ngâm sản phẩm.
+                                                            </p>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
 
-                                            <div nh-quantity-product="out-stock" class="out-of-stock mb-4 d-none">
-                                                Sản phẩm hết hàng
-                                            </div>
+                                        </div>
 
-                                            <div class="product-detail-description">
+                                        <div class="social-share d-flex align-items-center flex-wrap mt-5">
+                                            <span class="share-title">
+                                                <label class="mb-0">
+                                                    Chia sẻ:
+                                                </label>
+                                            </span>
 
-                                                <div id="accordion">
-                                                    <div class="card">
-                                                        <div class="card-header">
-                                                            <div class="btn btn-link" data-toggle="collapse" data-target="#description01" aria-expanded="true" aria-controls="collapseOne">
-                                                                Thông tin sản phẩm
-                                                                <i class="fa-light fa-minus"></i>
-                                                            </div>
-                                                        </div>
-
-                                                        <div id="description01" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                                                            <div class="card-body">
-                                                                <p><?= htmlspecialchars($product['description']) ?></p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="card">
-                                                        <div class="card-header">
-                                                            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#description02" aria-expanded="false" aria-controls="collapseTwo">
-                                                                Chính sách
-                                                                <i class="fa-light fa-minus"></i>
-                                                            </button>
-                                                        </div>
-                                                        <div id="description02" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-                                                            <div class="card-body">
-                                                                <p>
-                                                                    <i class="fa-sharp fa-solid fa-caret-right"></i> Đổi hàng trong vòng 15 ngày.
-                                                                </p>
-                                                                <p>
-                                                                    <i class="fa-sharp fa-solid fa-caret-right"></i> Giảm đến 15% trên tổng hóa đơn khi mua hàng ( tại cửa hàng ) vào tháng sinh nhật.
-                                                                </p>
-                                                                <p>
-                                                                    <i class="fa-sharp fa-solid fa-caret-right"></i> Giao hàng nội thành Hà Nội chỉ từ 15.000đ trong vòng 24 giờ.
-                                                                </p>
-                                                                <p>
-                                                                    <i class="fa-sharp fa-solid fa-caret-right"></i> Tích điểm 3-8% giá trị đơn hàng cho mỗi lần mua và trừ tiền vào lần mua tiếp theo.
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="card">
-                                                        <div class="card-header">
-                                                            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                                                Hướng dẫn bảo quản
-                                                                <i class="fa-light fa-minus"></i>
-                                                            </button>
-                                                        </div>
-                                                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-                                                            <div class="card-body">
-                                                                <p>
-                                                                    <i class="fa-sharp fa-solid fa-caret-right"></i> Có thể giặt tay hay giặt máy đều được (ưu tiên giặt tay để tăng tuổi thọ của sản phẩm)
-                                                                </p>
-                                                                <p>
-                                                                    <i class="fa-sharp fa-solid fa-caret-right"></i> Lộn trái sản phẩm khi giặt, không giặt chung sản phẩm trắng với quần áo tối màu.
-                                                                </p>
-                                                                <p>
-                                                                    <i class="fa-sharp fa-solid fa-caret-right"></i> Sử dụng xà phòng trung tính,không sử dụng xà phòng có chất tẩy mạnh.
-                                                                </p>
-                                                                <p>
-                                                                    <i class="fa-sharp fa-solid fa-caret-right"></i> Không sử dụng chất tẩy, không ngâm sản phẩm.
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                            <div class="list-social">
+                                                <div class="btn-social">
+                                                    <a href="javascript:;" nh-link-redirect="https://www.facebook.com/sharer/sharer.php?u=https://thoitrang09.themeweb4s.com/quan-au-carrot-polyester-7054" nh-link-redirect-blank title="Facebook">
+                                                        <i class="fa-brands fa-facebook-f"></i>
+                                                    </a>
                                                 </div>
 
-                                            </div>
+                                                <div class="btn-social">
+                                                    <a href="javascript:;" nh-link-redirect="https://twitter.com/share?url=https://thoitrang09.themeweb4s.com/quan-au-carrot-polyester-7054" nh-link-redirect-blank title="Twitter">
+                                                        <i class="fa-brands fa-twitter"></i>
+                                                    </a>
+                                                </div>
 
-                                            <div class="social-share d-flex align-items-center flex-wrap mt-5">
-                                                <span class="share-title">
-                                                    <label class="mb-0">
-                                                        Chia sẻ:
-                                                    </label>
-                                                </span>
+                                                <div class="btn-social">
+                                                    <a href="javascript:;" nh-link-redirect="https://plus.google.com/share?url=https://thoitrang09.themeweb4s.com/quan-au-carrot-polyester-7054" nh-link-redirect-blank title="Google+">
+                                                        <i class="fa-brands fa-google-plus-g"></i>
+                                                    </a>
+                                                </div>
 
-                                                <div class="list-social">
-                                                    <div class="btn-social">
-                                                        <a href="javascript:;" nh-link-redirect="https://www.facebook.com/sharer/sharer.php?u=https://thoitrang09.themeweb4s.com/quan-au-carrot-polyester-7054" nh-link-redirect-blank title="Facebook">
-                                                            <i class="fa-brands fa-facebook-f"></i>
-                                                        </a>
-                                                    </div>
+                                                <div class="btn-social">
+                                                    <a href="javascript:;" nh-link-redirect="https://pinterest.com/pin/create/button/?url=https://thoitrang09.themeweb4s.com/quan-au-carrot-polyester-7054" nh-link-redirect-blank title="Pinterest">
+                                                        <i class="fa-brands fa-pinterest-p"></i>
+                                                    </a>
+                                                </div>
 
-                                                    <div class="btn-social">
-                                                        <a href="javascript:;" nh-link-redirect="https://twitter.com/share?url=https://thoitrang09.themeweb4s.com/quan-au-carrot-polyester-7054" nh-link-redirect-blank title="Twitter">
-                                                            <i class="fa-brands fa-twitter"></i>
-                                                        </a>
-                                                    </div>
-
-                                                    <div class="btn-social">
-                                                        <a href="javascript:;" nh-link-redirect="https://plus.google.com/share?url=https://thoitrang09.themeweb4s.com/quan-au-carrot-polyester-7054" nh-link-redirect-blank title="Google+">
-                                                            <i class="fa-brands fa-google-plus-g"></i>
-                                                        </a>
-                                                    </div>
-
-                                                    <div class="btn-social">
-                                                        <a href="javascript:;" nh-link-redirect="https://pinterest.com/pin/create/button/?url=https://thoitrang09.themeweb4s.com/quan-au-carrot-polyester-7054" nh-link-redirect-blank title="Pinterest">
-                                                            <i class="fa-brands fa-pinterest-p"></i>
-                                                        </a>
-                                                    </div>
-
-                                                    <div class="btn-social">
-                                                        <a href="javascript:;" nh-link-redirect="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://thoitrang09.themeweb4s.com/quan-au-carrot-polyester-7054" nh-link-redirect-blank title="LinkedIn">
-                                                            <i class="fa-brands fa-linkedin-in"></i>
-                                                        </a>
-                                                    </div>
+                                                <div class="btn-social">
+                                                    <a href="javascript:;" nh-link-redirect="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://thoitrang09.themeweb4s.com/quan-au-carrot-polyester-7054" nh-link-redirect-blank title="LinkedIn">
+                                                        <i class="fa-brands fa-linkedin-in"></i>
+                                                    </a>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="product-detail-footer">
-                            <div class="title-content-detail">
-                                Thông tin sản phẩm
-                            </div>
-
-                            <div class="warp-content-detail">
-                                <div>
-                                    <div class="content-detail content-text">
-                                        <p><img alt="" width="500" height="500" nh-lazy="image" data-src="https://cdn3533.cdn-template-4s.com/media/san-pham/z4341084428964_6bcba3cca07c771573358b745683b763_c311a7db83914ef09dfbb7592641adce_grande.webp" /></p>
-                                    </div>
-                                </div>
-
-
                             </div>
                         </div>
                     </div>
-                    <div nh-block="erit8cp" nh-block-cache="false" class="">
-                        <div nh-rating="{&quot;class&quot;:&quot;&quot;,&quot;cache&quot;:&quot;0&quot;,&quot;number_record&quot;:5,&quot;sort_field&quot;:&quot;&quot;,&quot;login_required&quot;:&quot;0&quot;,&quot;awaiting_approval&quot;:&quot;0&quot;,&quot;block_code&quot;:&quot;erit8cp&quot;}" nh-anchor="rating">
-                            <div class="title-rating-comment">Khách hàng đánh giá</div>
-                            <div class="overall-rating ">
-                                <div class="row">
-                                    <div class="rating-average col-lg-3 col-5">
-                                        <div class="point-comment"><span>5.0</span></div>
-                                        <div class="star-rating"><span class="star-lg" style="width:100%"></span></div>
-                                    </div>
-                                    <div class="col-lg-6 col-7">
-                                        <div class="percent-bar">
-                                            <div class="rating-num">5 <i class="fa-solid fa-star"></i></div>
-                                            <div class="progress">
-                                                <div style="width: 0%;" class="progress-bar progress-bar-warning"></div>
-                                            </div>
-                                            <div class="star-percent"><span>0</span>%</div>
-                                        </div>
-                                        <div class="percent-bar">
-                                            <div class="rating-num">4 <i class="fa-solid fa-star"></i></div>
-                                            <div class="progress">
-                                                <div style="width: 0%;" class="progress-bar progress-bar-warning"></div>
-                                            </div>
-                                            <div class="star-percent"><span>0</span>%</div>
-                                        </div>
-                                        <div class="percent-bar">
-                                            <div class="rating-num">3 <i class="fa-solid fa-star"></i></div>
-                                            <div class="progress">
-                                                <div style="width: 0%;" class="progress-bar progress-bar-warning"></div>
-                                            </div>
-                                            <div class="star-percent"><span>0</span>%</div>
-                                        </div>
-                                        <div class="percent-bar">
-                                            <div class="rating-num">2 <i class="fa-solid fa-star"></i></div>
-                                            <div class="progress">
-                                                <div style="width: 0%;" class="progress-bar progress-bar-warning"></div>
-                                            </div>
-                                            <div class="star-percent"><span>0</span>%</div>
-                                        </div>
-                                        <div class="percent-bar">
-                                            <div class="rating-num">1 <i class="fa-solid fa-star"></i></div>
-                                            <div class="progress">
-                                                <div style="width: 0%;" class="progress-bar progress-bar-warning"></div>
-                                            </div>
-                                            <div class="star-percent"><span>0</span>%</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-12">
-                                        <p class="d-none d-lg-block mb-0">Chia sẻ nhận xét về sản phẩm</p>
-                                        <div nh-btn-show-rating class="btn btn-submit mt-3 w-100">Đánh giá và nhận xét</div>
-                                    </div>
+                    <div class="product-detail-footer">
+                        <div class="title-content-detail">
+                            Thông tin sản phẩm
+                        </div>
+
+                        <div class="warp-content-detail">
+                            <div>
+                                <div class="content-detail content-text">
+                                    <p><img alt="" width="500" height="500" nh-lazy="image" data-src="https://cdn3533.cdn-template-4s.com/media/san-pham/z4341084428964_6bcba3cca07c771573358b745683b763_c311a7db83914ef09dfbb7592641adce_grande.webp" /></p>
                                 </div>
                             </div>
-                            <form nh-form-rating id="rating-form" method="POST" class="rating-form collapse" autocomplete="off">
-                                <div class="form-group">
-                                    <h3><b>Gửi nhận xét của bạn</b></h3><label>1. Đánh giá của bạn về sản phẩm này:</label>
-                                    <div nh-review-star class="review-star"><input id="star5" name="rating" value="5" type="radio" /><label for="star5" title="Tuyệt vời"></label><input id="star4" name="rating" value="4" type="radio" /><label for="star4" title="Khá tốt"></label><input id="star3" name="rating" value="3" type="radio" /><label for="star3" title="Khá"></label><input id="star2" name="rating" value="2" type="radio" /><label for="star2" title="Hơi tệ"></label><input id="star1" name="rating" value="1" type="radio" /><label for="star1" title="Thật tệ"></label></div>
-                                </div>
-                                <div class="form-group"><label>2. Viết nhận xét của bạn vào bên dưới:</label><textarea nh-input-rating name="content" cols="45" rows="8" placeholder="Nhận xét của bạn về sản phẩm này" class="required form-control"></textarea></div><label>3. Thông tin cá nhân của bạn:</label>
-                                <div class="form-group"><label>Họ và tên:<span class="required">*</span></label><input name="full_name" type="text" value="" class="form-control required" autocomplete="off"></div>
-                                <div class="row">
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group"><label>Số điện thoại:<span class="required">*</span></label><input name="phone" type="text" value="" class="form-control required" autocomplete="off"></div>
-                                    </div>
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group"><label>Email</label><input name="email" type="text" value="" class="form-control" autocomplete="off"></div>
-                                    </div>
-                                </div>
-                                <ul class="comment-images"></ul><input nh-input-rating-images name="files[]" type="file" class="d-none" accept="image/*" multiple="multiple"><span class="mb-0 btn btn-submit" nh-trigger-upload><i class="fa-light fa-camera"></i></span><button nh-btn-send-rating class="btn btn-submit ml-3">Gửi đánh giá</button>
-                            </form>
-                            <ul nh-list-rating class="rating-list"></ul>
+
+
                         </div>
+                    </div>
+                </div>
+                <div nh-block="erit8cp" nh-block-cache="false" class="">
+                    <div nh-rating="{&quot;class&quot;:&quot;&quot;,&quot;cache&quot;:&quot;0&quot;,&quot;number_record&quot;:5,&quot;sort_field&quot;:&quot;&quot;,&quot;login_required&quot;:&quot;0&quot;,&quot;awaiting_approval&quot;:&quot;0&quot;,&quot;block_code&quot;:&quot;erit8cp&quot;}" nh-anchor="rating">
+                        <div class="title-rating-comment">Khách hàng đánh giá</div>
+                        <div class="overall-rating ">
+                            <div class="row">
+                                <div class="rating-average col-lg-3 col-5">
+                                    <div class="point-comment"><span>5.0</span></div>
+                                    <div class="star-rating"><span class="star-lg" style="width:100%"></span></div>
+                                </div>
+                                <div class="col-lg-6 col-7">
+                                    <div class="percent-bar">
+                                        <div class="rating-num">5 <i class="fa-solid fa-star"></i></div>
+                                        <div class="progress">
+                                            <div style="width: 0%;" class="progress-bar progress-bar-warning"></div>
+                                        </div>
+                                        <div class="star-percent"><span>0</span>%</div>
+                                    </div>
+                                    <div class="percent-bar">
+                                        <div class="rating-num">4 <i class="fa-solid fa-star"></i></div>
+                                        <div class="progress">
+                                            <div style="width: 0%;" class="progress-bar progress-bar-warning"></div>
+                                        </div>
+                                        <div class="star-percent"><span>0</span>%</div>
+                                    </div>
+                                    <div class="percent-bar">
+                                        <div class="rating-num">3 <i class="fa-solid fa-star"></i></div>
+                                        <div class="progress">
+                                            <div style="width: 0%;" class="progress-bar progress-bar-warning"></div>
+                                        </div>
+                                        <div class="star-percent"><span>0</span>%</div>
+                                    </div>
+                                    <div class="percent-bar">
+                                        <div class="rating-num">2 <i class="fa-solid fa-star"></i></div>
+                                        <div class="progress">
+                                            <div style="width: 0%;" class="progress-bar progress-bar-warning"></div>
+                                        </div>
+                                        <div class="star-percent"><span>0</span>%</div>
+                                    </div>
+                                    <div class="percent-bar">
+                                        <div class="rating-num">1 <i class="fa-solid fa-star"></i></div>
+                                        <div class="progress">
+                                            <div style="width: 0%;" class="progress-bar progress-bar-warning"></div>
+                                        </div>
+                                        <div class="star-percent"><span>0</span>%</div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-12">
+                                    <p class="d-none d-lg-block mb-0">Chia sẻ nhận xét về sản phẩm</p>
+                                    <div nh-btn-show-rating class="btn btn-submit mt-3 w-100">Đánh giá và nhận xét</div>
+                                </div>
+                            </div>
+                        </div>
+                        <form nh-form-rating id="rating-form" method="POST" class="rating-form collapse" autocomplete="off">
+                            <div class="form-group">
+                                <h3><b>Gửi nhận xét của bạn</b></h3><label>1. Đánh giá của bạn về sản phẩm này:</label>
+                                <div nh-review-star class="review-star"><input id="star5" name="rating" value="5" type="radio" /><label for="star5" title="Tuyệt vời"></label><input id="star4" name="rating" value="4" type="radio" /><label for="star4" title="Khá tốt"></label><input id="star3" name="rating" value="3" type="radio" /><label for="star3" title="Khá"></label><input id="star2" name="rating" value="2" type="radio" /><label for="star2" title="Hơi tệ"></label><input id="star1" name="rating" value="1" type="radio" /><label for="star1" title="Thật tệ"></label></div>
+                            </div>
+                            <div class="form-group"><label>2. Viết nhận xét của bạn vào bên dưới:</label><textarea nh-input-rating name="content" cols="45" rows="8" placeholder="Nhận xét của bạn về sản phẩm này" class="required form-control"></textarea></div><label>3. Thông tin cá nhân của bạn:</label>
+                            <div class="form-group"><label>Họ và tên:<span class="required">*</span></label><input name="full_name" type="text" value="" class="form-control required" autocomplete="off"></div>
+                            <div class="row">
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group"><label>Số điện thoại:<span class="required">*</span></label><input name="phone" type="text" value="" class="form-control required" autocomplete="off"></div>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group"><label>Email</label><input name="email" type="text" value="" class="form-control" autocomplete="off"></div>
+                                </div>
+                            </div>
+                            <ul class="comment-images"></ul><input nh-input-rating-images name="files[]" type="file" class="d-none" accept="image/*" multiple="multiple"><span class="mb-0 btn btn-submit" nh-trigger-upload><i class="fa-light fa-camera"></i></span><button nh-btn-send-rating class="btn btn-submit ml-3">Gửi đánh giá</button>
+                        </form>
+                        <ul nh-list-rating class="rating-list"></ul>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
     <div nh-row="zch06od" class="box-article-detail-02">
         <div class="container">

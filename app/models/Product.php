@@ -11,9 +11,23 @@ class Product
     }
 
     public function getAllProducts() {
-        $query = "SELECT * FROM products ORDER BY created_at DESC";
+        $query = "SELECT * FROM products ORDER BY id DESC";
         return $this->db->runQuery($query);
     }
+    public function getVariantsByProductId($product_id) {
+        $query = "
+            SELECT pv.id AS variant_id, pv.product_id, 
+                   s.id AS size_id, s.name AS size_name, 
+                   c.id AS color_id, c.color_code AS color_name
+            FROM product_variants pv
+            LEFT JOIN sizes s ON pv.size_id = s.id
+            LEFT JOIN colors c ON pv.color_id = c.id
+            WHERE pv.product_id = ?
+        ";
+        return $this->db->runQuery($query, [$product_id])->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+    
 
     public function getProductById($id) {
         $sql = "SELECT * FROM products WHERE id = ?";

@@ -71,7 +71,7 @@
             font-style: normal;
             font-weight: 300;
             font-display: block;
-            src: url("templates/thoitrang05/assets/fonts/fa-light-300.html") format("woff2"), url("templates/thoitrang05/assets/fonts/fa-light-300.ttf") format("truetype");
+            src: url("assets/templates/thoitrang05/assets/fonts/fa-light-300.html") format("woff2"), url("assets/templates/thoitrang05/assets/fonts/fa-light-300.ttf") format("truetype");
             font-display: swap;
         }
 
@@ -80,7 +80,7 @@
             font-style: normal;
             font-weight: 900;
             font-display: block;
-            src: url("templates/thoitrang05/assets/fonts/fa-solid-900.html") format("woff2"), url("templates/thoitrang05/assets/fonts/fa-solid-900.ttf") format("truetype");
+            src: url("assets/templates/thoitrang05/assets/fonts/fa-solid-900.html") format("woff2"), url("assets/templates/thoitrang05/assets/fonts/fa-solid-900.ttf") format("truetype");
             font-display: swap;
         }
 
@@ -89,7 +89,7 @@
             font-style: normal;
             font-weight: 400;
             font-display: block;
-            src: url("templates/thoitrang05/assets/fonts/fa-brands-400.html") format("woff2"), url("templates/thoitrang05/assets/fonts/fonts/fa-brands-400.html") format("truetype");
+            src: url("assets/templates/thoitrang05/assets/fonts/fa-brands-400.html") format("woff2"), url("assets/templates/thoitrang05/assets/fonts/fonts/fa-brands-400.html") format("truetype");
             font-display: swap;
         }
 
@@ -129,15 +129,15 @@
                 </div>
                 <div class="col-md-4 col-12">
                     <div nh-block="qhdw2uy" nh-block-cache="true" class="">
-                        <div class="logo-section "><a href="index.html"><img class="img-fluid" src="templates/thoitrang05/assets/media/logo/logo_black.png" alt="logo"></a></div>
+                        <div class="logo-section "><a href="index.html"><img class="img-fluid" src="assets/templates/thoitrang05/assets/media/logo/logo_black.png" alt="logo"></a></div>
                     </div>
                 </div>
                 <div class="col-md-4 col-12">
                     <div nh-block="8bxkyf0" nh-block-cache="true" class="">
-                        <div class="entire-action-header entire-action-search"><span class="btn-action-header btn-mini-search"><img src="templates/thoitrang05/assets/media/icon/search.svg" class="icon"></span>
+                        <div class="entire-action-header entire-action-search"><span class="btn-action-header btn-mini-search"><img src="assets/templates/thoitrang05/assets/media/icon/search.svg" class="icon"></span>
                             <form class="form-search position-relative" action="https://thoitrang09.themeweb4s.com/tim-kiem" method="get" autocomplete="off">
                                 <div class="input-group">
-                                    <div class="input-group-append"><button nh-btn-submit class="btn btn-submit" type="submit"><img src="templates/thoitrang05/assets/media/icon/search.svg" class="icon"></button></div><input nh-auto-suggest="product" name="keyword" placeholder="Từ khóa tìm kiếm" type="text" class="form-control" value="">
+                                    <div class="input-group-append"><button nh-btn-submit class="btn btn-submit" type="submit"><img src="assets/templates/thoitrang05/assets/media/icon/search.svg" class="icon"></button></div><input nh-auto-suggest="product" name="keyword" placeholder="Từ khóa tìm kiếm" type="text" class="form-control" value="">
                                 </div>
                             </form>
                         </div>
@@ -334,15 +334,6 @@
                                 <p class="text-center">Không có sản phẩm nào trong danh mục này.</p>
                             <?php endif; ?>
                         </div>
-
-
-
-
-
-
-
-
-
                     </div>
                     <div nh-block="smvnbel" nh-block-cache="true" class="">
                             <div class="load-more text-center" id="btn-ct-category"><a class="btn-view-all btn-show rounded" rel="nofolow">Xem thêm</a><a class="btn-view-all btn-hide rounded" rel="nofolow">Thu gọn</a></div>
@@ -358,7 +349,7 @@
                 <div class="row ">
                     <div class="col-md-6 col-12">
                         <div nh-block="qhdw2uy" nh-block-cache="true" class="">
-                            <div class="logo-section "><a href="index.html"><img class="img-fluid" src="templates/thoitrang05/assets/media/logo/logo_black.png" alt="logo"></a></div>
+                            <div class="logo-section "><a href="index.html"><img class="img-fluid" src="assets/templates/thoitrang05/assets/media/logo/logo_black.png" alt="logo"></a></div>
                         </div>
                     </div>
                     <div class="col-md-6 col-12">

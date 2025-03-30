@@ -1,3 +1,18 @@
+<?php
+session_start();
+$errors = $_SESSION['registration_errors'] ?? [];
+unset($_SESSION['registration_errors']);
+?>
+
+<?php if (!empty($errors)): ?>
+<div style="color: red;">
+    <ul>
+        <?php foreach ($errors as $error): ?>
+        <li><?php echo htmlspecialchars($error); ?></li>
+        <?php endforeach; ?>
+    </ul>
+</div>
+<?php endif; ?>
 <!DOCTYPE html>
 <html lang="vi" csrf-token="/9cYz/A43T0KLBmaetmo68GkaiVl16B9wvgsUI36k9bnNHxX7aZ78On3+KHpeZDe1FiZJ/76YG4IjkwTG0Ell++UtobvNr0J95BZFwHmwk/0zEo2vpjy4tMNTGHUwkLB38GalNAb8+eyPKwXxsMGCg==">
 
@@ -37,32 +52,32 @@
     <meta http-equiv="x-dns-prefetch-control" content="on">
     <link rel="dns-prefetch" href="https://cdn3533.cdn-template-4s.com/">
 
-    <link href="assets/favicon.ico" rel="icon" type="image/x-icon" />
+    <link href="/duan11/assets/favicon.ico" rel="icon" type="image/x-icon" />
 
-    <link href="assets/templates/thoitrang05/assets/css/bootstrap.css" rel="stylesheet" type="text/css" />
-    <link href="assets/templates/thoitrang05/assets/css/swiper.css" rel="stylesheet" type="text/css" />
-    <link href="assets/templates/thoitrang05/assets/lib/fontawesome/css/fontawesome.css" rel="stylesheet" type="text/css" />
-    <link href="assets/templates/thoitrang05/assets/lib/fontawesome/css/light.css" rel="stylesheet" type="text/css" />
-    <link href="assets/templates/thoitrang05/assets/lib/fontawesome/css/solid.css" rel="stylesheet" type="text/css" />
-    <link href="assets/templates/thoitrang05/assets/lib/fontawesome/css/brands.css" rel="stylesheet" type="text/css" />
-    <link href="assets/templates/thoitrang05/assets/css/lightgallery.css" rel="stylesheet" type="text/css" />
-
-
-    <link href="assets/templates/thoitrang05/assets/css/variable.css" rel="stylesheet" type="text/css" />
-    <link href="assets/templates/thoitrang05/assets/lib/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
-    <link href="assets/templates/thoitrang05/assets/lib/bootstrap-select/bootstrap-select.css" rel="stylesheet" type="text/css" />
-    <link href="assets/templates/thoitrang05/assets/lib/jquery-ui/jquery-ui.min.css" rel="stylesheet" type="text/css" />
-    <link href="assets/templates/thoitrang05/assets/css/catalogue.css" rel="stylesheet" type="text/css" />
-    <link href="assets/templates/thoitrang05/assets/css/comment-rating.css" rel="stylesheet" type="text/css" />
-    <link href="assets/templates/thoitrang05/assets/css/member.css" rel="stylesheet" type="text/css" />
-    <link href="assets/templates/thoitrang05/assets/css/order.css" rel="stylesheet" type="text/css" />
+    <link href="/duan11/assets/templates/thoitrang05/assets/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="/duan11/assets/templates/thoitrang05/assets/css/swiper.css" rel="stylesheet" type="text/css" />
+    <link href="/duan11/assets/templates/thoitrang05/assets/lib/fontawesome/css/fontawesome.css" rel="stylesheet" type="text/css" />
+    <link href="/duan11/assets/templates/thoitrang05/assets/lib/fontawesome/css/light.css" rel="stylesheet" type="text/css" />
+    <link href="/duan11/assets/templates/thoitrang05/assets/lib/fontawesome/css/solid.css" rel="stylesheet" type="text/css" />
+    <link href="/duan11/assets/templates/thoitrang05/assets/lib/fontawesome/css/brands.css" rel="stylesheet" type="text/css" />
+    <link href="/duan11/assets/templates/thoitrang05/assets/css/lightgallery.css" rel="stylesheet" type="text/css" />
 
 
-    <link href="assets/templates/thoitrang05/assets/css/variable.css" rel="stylesheet" type="text/css" />
-    <link href="assets/templates/thoitrang05/assets/css/compare.css" rel="stylesheet" type="text/css" />
-    <link href="assets/templates/thoitrang05/assets/css/page.css" rel="stylesheet" type="text/css" />
-    <link href="assets/templates/thoitrang05/assets/css/utilities.css" rel="stylesheet" type="text/css" />
-    <link href="assets/templates/thoitrang05/assets/css/custom.css" rel="stylesheet" type="text/css" />
+    <link href="/duan11/assets/templates/thoitrang05/assets/css/variable.css" rel="stylesheet" type="text/css" />
+    <link href="/duan11/assets/templates/thoitrang05/assets/lib/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
+    <link href="/duan11/assets/templates/thoitrang05/assets/lib/bootstrap-select/bootstrap-select.css" rel="stylesheet" type="text/css" />
+    <link href="/duan11/assets/templates/thoitrang05/assets/lib/jquery-ui/jquery-ui.min.css" rel="stylesheet" type="text/css" />
+    <link href="/duan11/assets/templates/thoitrang05/assets/css/catalogue.css" rel="stylesheet" type="text/css" />
+    <link href="/duan11/assets/templates/thoitrang05/assets/css/comment-rating.css" rel="stylesheet" type="text/css" />
+    <link href="/duan11/assets/templates/thoitrang05/assets/css/member.css" rel="stylesheet" type="text/css" />
+    <link href="/duan11/assets/templates/thoitrang05/assets/css/order.css" rel="stylesheet" type="text/css" />
+
+
+    <link href="/duan11/assets/templates/thoitrang05/assets/css/variable.css" rel="stylesheet" type="text/css" />
+    <link href="/duan11/assets/templates/thoitrang05/assets/css/compare.css" rel="stylesheet" type="text/css" />
+    <link href="/duan11/assets/templates/thoitrang05/assets/css/page.css" rel="stylesheet" type="text/css" />
+    <link href="/duan11/assets/templates/thoitrang05/assets/css/utilities.css" rel="stylesheet" type="text/css" />
+    <link href="/duan11/assets/templates/thoitrang05/assets/css/custom.css" rel="stylesheet" type="text/css" />
 
     <style type='text/css'>
         /* <![CDATA[ */
@@ -171,17 +186,12 @@
                                     <div class="h2 text-uppercase text-center font-weight-bold pt-5">
                                         Đăng ký
                                     </div>
-                                    <form nh-form="member-register" class="input-form-member form-member-register" id="member-register" action="https://thoitrang09.themeweb4s.com/member/ajax-register" method="post" autocomplete="off">
+                                    <form nh-form="member-register" class="input-form-member form-member-register" id="member-register" action="/duan11/routes/User.php?action=register" method="POST" autocomplete="off">
                                         <div class="p-5">
                                             <div class="row">
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group ">
-                                                        <input name="full_name" type="text" class="form-control required" placeholder="Họ và tên *">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6 col-12">
-                                                    <div class="form-group ">
-                                                        <input name="username" type="text" class="form-control required" placeholder="Tài khoản *">
+                                                        <input name="name" type="text" class="form-control required" placeholder="Họ và tên *">
                                                     </div>
                                                 </div>
                                             </div>
@@ -192,11 +202,11 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-6 col-12">
+                                                <!-- <div class="col-md-6 col-12">
                                                     <div class="form-group ">
                                                         <input name="verify_password" type="password" class="form-control required" placeholder="Xác nhận mật khẩu *">
                                                     </div>
-                                                </div>
+                                                </div> -->
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-6 col-12">
@@ -212,7 +222,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="row">
+                                            <!-- <div class="row">
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <select name="city_id" id="city_id" class="form-control selectpicker" data-size="10" data-live-search="1">
@@ -300,7 +310,7 @@
                                                             <option value="" selected="selected">-- Phường xã --</option>
                                                         </select>
                                                     </div>
-                                                </div>
+                                                </div> -->
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <input name="address" type="text" class="form-control required" placeholder="Địa chỉ *">
@@ -308,12 +318,12 @@
                                                 </div>
                                             </div>
 
-                                            <button nh-btn-action="submit" class="btn btn-submit w-100 mb-4">
+                                            <button  type="submit" class="btn btn-submit w-100 mb-4">
                                                 Đăng ký
                                             </button>
                                             <div class="text-center">
                                                 Bạn đã có tài khoản?
-                                                <a href="login.html" class="font-weight-bold text-dark ml-2">
+                                                <a href="login.php" class="font-weight-bold text-dark ml-2">
                                                     Đăng nhập
                                                 </a>
                                             </div>
@@ -432,7 +442,7 @@
                     <div class="modal-title h2 text-uppercase text-center font-weight-bold pt-5">
                         Đăng nhập
                     </div>
-                    <form nh-form="member-login" action="https://thoitrang09.themeweb4s.com/member/ajax-login" class="input-form-member" method="post" autocomplete="off">
+                    <form nh-form="member-login" action="/duan11/routes/User.php?action=login" class="input-form-member" method="post" autocomplete="off">
                         <div class="p-5">
                             <div class="row mx-n2">
                                 <div class="col-md-6 col-12 px-2">
@@ -541,103 +551,54 @@
 
 
 
-    <script type="application/ld+json">
-        {
-            "@context": "https:\/\/schema.org",
-            "@type": "Organization",
-            "name": "Web4s Company",
-            "legalName": "C\u00d4NG TY C\u1ed4 PH\u1ea6N GI\u1ea2I PH\u00c1P C\u00d4NG NGH\u1ec6 4S",
-            "url": "https:\/\/thoitrang09.themeweb4s.com\/",
-            "logo": "https:\/\/cdn3533.cdn-template-4s.com\/media\/logo\/logo-1970.png"
-        }
-    </script>
-
-
-
-    <script type="application/ld+json">
-        {
-            "@context": "https:\/\/schema.org",
-            "@type": "WebSite",
-            "url": "https:\/\/thoitrang09.themeweb4s.com",
-            "potentialAction": {
-                "@type": "SearchAction",
-                "target": "https:\/\/thoitrang09.themeweb4s.com\/tim-kiem?keyword={query}",
-                "query-input": "required name=query"
-            }
-        }
-    </script>
+    
 
 
 
 
 
 
-    <script type="application/ld+json">
-        {
-            "@context": "https:\/\/schema.org",
-            "@type": "BreadcrumbList",
-            "itemListElement": [{
-                "@type": "ListItem",
-                "position": 1,
-                "item": {
-                    "@id": "https:\/\/thoitrang09.themeweb4s.com",
-                    "name": "Web4s Company"
-                }
-            }, {
-                "@type": "ListItem",
-                "position": 2,
-                "item": {
-                    "@id": "https:\/\/thoitrang09.themeweb4s.com\/member\/register",
-                    "name": "T\u00e0i kho\u1ea3n th\u00e0nh vi\u00ean"
-                }
-            }]
-        }
-    </script>
+
+    <script src="/duan11/assets/templates/thoitrang05/assets/lib/jquery/jquery-3.6.0.min.js" type="text/javascript"></script>
+    <script src="/duan11/assets/templates/thoitrang05/assets/lib/jquery-lazy/jquery.lazy.min.js" type="text/javascript"></script>
+    <script src="/duan11/assets/templates/thoitrang05/assets/lib/jquery-lazy/jquery.lazy.plugins.min.js" type="text/javascript"></script>
+    <script src="/duan11/assets/templates/thoitrang05/assets/lib/jquery/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="/duan11/assets/templates/thoitrang05/assets/lib/jquery/jquery.cookie.min.js" type="text/javascript"></script>
+    <script src="/duan11/assets/templates/thoitrang05/assets/lib/bootstrap/popper.min.js" type="text/javascript"></script>
+    <script src="/duan11/assets/templates/thoitrang05/assets/lib/bootstrap/util.js" type="text/javascript"></script>
+    <script src="/duan11/assets/templates/thoitrang05/assets/lib/bootstrap/dropdown.js" type="text/javascript"></script>
+    <script src="/duan11/assets/templates/thoitrang05/assets/lib/bootstrap/collapse.js" type="text/javascript"></script>
+    <script src="/duan11/assets/templates/thoitrang05/assets/lib/bootstrap/modal.js" type="text/javascript"></script>
+    <script src="/duan11/assets/templates/thoitrang05/assets/lib/bootstrap/toast.js" type="text/javascript"></script>
+    <script src="/duan11/assets/templates/thoitrang05/assets/lib/bootstrap/tab.js" type="text/javascript"></script>
+    <script src="/duan11/assets/templates/thoitrang05/assets/lib/swiper/swiper-bundle.min.js" type="text/javascript"></script>
+    <script src="/duan11/assets/templates/thoitrang05/assets/js/constants.js" type="text/javascript"></script>
+    <script src="/duan11/assets/templates/thoitrang05/assets/js/locales/vi.js" type="text/javascript"></script>
+    <script src="/duan11/assets/templates/thoitrang05/assets/js/lazy.js" type="text/javascript"></script>
 
 
+    <script src="/duan11/assets/templates/thoitrang05/assets/lib/inputmask/jquery.inputmask.min.js" type="text/javascript"></script>
+    <script src="/duan11/assets/templates/thoitrang05/assets/lib/lightgallery-all.min.js" type="text/javascript"></script>
+    <script src="/duan11/assets/templates/thoitrang05/assets/lib/bootstrap-select/bootstrap-select.min.js" type="text/javascript"></script>
+    <script src="/duan11/assets/templates/thoitrang05/assets/lib/bootstrap-datepicker/bootstrap-datepicker.min.js" type="text/javascript"></script>
+    <script src="/duan11/assets/templates/thoitrang05/assets/lib/bootstrap-datepicker/locales/vi.js" type="text/javascript"></script>
+    <script src="/duan11/assets/templates/thoitrang05/assets/lib/tocbot/tocbot.min.js" type="text/javascript"></script>
 
 
-
-    <script src="assets/templates/thoitrang05/assets/lib/jquery/jquery-3.6.0.min.js" type="text/javascript"></script>
-    <script src="assets/templates/thoitrang05/assets/lib/jquery-lazy/jquery.lazy.min.js" type="text/javascript"></script>
-    <script src="assets/templates/thoitrang05/assets/lib/jquery-lazy/jquery.lazy.plugins.min.js" type="text/javascript"></script>
-    <script src="assets/templates/thoitrang05/assets/lib/jquery/jquery.validate.min.js" type="text/javascript"></script>
-    <script src="assets/templates/thoitrang05/assets/lib/jquery/jquery.cookie.min.js" type="text/javascript"></script>
-    <script src="assets/templates/thoitrang05/assets/lib/bootstrap/popper.min.js" type="text/javascript"></script>
-    <script src="assets/templates/thoitrang05/assets/lib/bootstrap/util.js" type="text/javascript"></script>
-    <script src="assets/templates/thoitrang05/assets/lib/bootstrap/dropdown.js" type="text/javascript"></script>
-    <script src="assets/templates/thoitrang05/assets/lib/bootstrap/collapse.js" type="text/javascript"></script>
-    <script src="assets/templates/thoitrang05/assets/lib/bootstrap/modal.js" type="text/javascript"></script>
-    <script src="assets/templates/thoitrang05/assets/lib/bootstrap/toast.js" type="text/javascript"></script>
-    <script src="assets/templates/thoitrang05/assets/lib/bootstrap/tab.js" type="text/javascript"></script>
-    <script src="assets/templates/thoitrang05/assets/lib/swiper/swiper-bundle.min.js" type="text/javascript"></script>
-    <script src="assets/templates/thoitrang05/assets/js/constants.js" type="text/javascript"></script>
-    <script src="assets/templates/thoitrang05/assets/js/locales/vi.js" type="text/javascript"></script>
-    <script src="assets/templates/thoitrang05/assets/js/lazy.js" type="text/javascript"></script>
+    <script src="/duan11/assets/templates/thoitrang05/assets/js/main.js" type="text/javascript"></script>
+    <script src="/duan11/assets/templates/thoitrang05/assets/js/menu.js" type="text/javascript"></script>
+    <script src="/duan11/assets/templates/thoitrang05/assets/js/search.js" type="text/javascript"></script>
+    <script src="/duan11/assets/templates/thoitrang05/assets/js/product.js" type="text/javascript"></script>
+    <script src="/duan11/assets/templates/thoitrang05/assets/js/order.js" type="text/javascript"></script>
+    <script src="/duan11/assets/templates/thoitrang05/assets/js/wishlist.js" type="text/javascript"></script>
+    <script src="/duan11/assets/templates/thoitrang05/assets/js/compare.js" type="text/javascript"></script>
+    <script src="/duan11/assets/templates/thoitrang05/assets/js/member.js" type="text/javascript"></script>
+    <script src="/duan11/assets/templates/thoitrang05/assets/js/contact.js" type="text/javascript"></script>
+    <script src="/duan11/assets/templates/thoitrang05/assets/js/custom.js" type="text/javascript"></script>
 
 
-    <script src="assets/templates/thoitrang05/assets/lib/inputmask/jquery.inputmask.min.js" type="text/javascript"></script>
-    <script src="assets/templates/thoitrang05/assets/lib/lightgallery-all.min.js" type="text/javascript"></script>
-    <script src="assets/templates/thoitrang05/assets/lib/bootstrap-select/bootstrap-select.min.js" type="text/javascript"></script>
-    <script src="assets/templates/thoitrang05/assets/lib/bootstrap-datepicker/bootstrap-datepicker.min.js" type="text/javascript"></script>
-    <script src="assets/templates/thoitrang05/assets/lib/bootstrap-datepicker/locales/vi.js" type="text/javascript"></script>
-    <script src="assets/templates/thoitrang05/assets/lib/tocbot/tocbot.min.js" type="text/javascript"></script>
-
-
-    <script src="assets/templates/thoitrang05/assets/js/main.js" type="text/javascript"></script>
-    <script src="assets/templates/thoitrang05/assets/js/menu.js" type="text/javascript"></script>
-    <script src="assets/templates/thoitrang05/assets/js/search.js" type="text/javascript"></script>
-    <script src="assets/templates/thoitrang05/assets/js/product.js" type="text/javascript"></script>
-    <script src="assets/templates/thoitrang05/assets/js/order.js" type="text/javascript"></script>
-    <script src="assets/templates/thoitrang05/assets/js/wishlist.js" type="text/javascript"></script>
-    <script src="assets/templates/thoitrang05/assets/js/compare.js" type="text/javascript"></script>
-    <script src="assets/templates/thoitrang05/assets/js/member.js" type="text/javascript"></script>
-    <script src="assets/templates/thoitrang05/assets/js/contact.js" type="text/javascript"></script>
-    <script src="assets/templates/thoitrang05/assets/js/custom.js" type="text/javascript"></script>
-
-
-    <script src="assets/templates/thoitrang05/assets/js/catalogue.js" type="text/javascript"></script>
-    <script src="assets/templates/thoitrang05/assets/js/comment.js" type="text/javascript"></script>
+    <script src="/duan11/assets/templates/thoitrang05/assets/js/catalogue.js" type="text/javascript"></script>
+    <script src="/duan11/assets/templates/thoitrang05/assets/js/comment.js" type="text/javascript"></script>
 
 
 
