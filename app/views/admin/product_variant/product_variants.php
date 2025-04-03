@@ -140,9 +140,9 @@ $variants = $db->runQuery($query);
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="index.php?page=user" class="nav-link">
-                                <i class="nav-icon fas fa-tree"></i>
-                                <p>Tài khoản</p>
+                            <a href="/duan11/routes/User.php?action=logout" class="nav-link">
+                                <i class="nav-icon fas fa-sign-out-alt"></i>
+                                <p>Đăng xuất</p>
                             </a>
                         </li>
                     </ul>

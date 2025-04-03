@@ -203,9 +203,10 @@
                   class="icon" /></span>
               <form
                 class="form-search position-relative"
-                action="https://thoitrang09.themeweb4s.com/tim-kiem"
+                action="index.php"
                 method="get"
                 autocomplete="off">
+                <input type="hidden" name="page" value="search">
                 <div class="input-group">
                   <div class="input-group-append">
                     <button
@@ -219,7 +220,7 @@
                   </div>
                   <input
                     nh-auto-suggest="product"
-                    name="keyword"
+                    name="q"
                     placeholder="Từ khóa tìm kiếm"
                     type="text"
                     class="form-control"
@@ -320,6 +321,7 @@
                 'Áo Thun' => 'https://cdn3533.cdn-template-4s.com/thumbs/danh-muc/17_thumb_720.jpg',
                 'Quần Jean' => 'https://cdn3533.cdn-template-4s.com/thumbs/danh-muc/ao-so-mi-trang-nam-nu-form-rong-jbagy-js02-2_thumb_720.jpg',
                 'Giày Dép' => 'https://cdn3533.cdn-template-4s.com/thumbs/danh-muc/ao-so-mi-nam-jbagy-js02_thumb_720.jpg',
+                'Phụ Kiện' => 'https://flexhouse.vn/wp-content/uploads/2019/09/phu%CC%A3-kie%CC%A3%CC%82n-tu%CC%89-qua%CC%82%CC%80n-a%CC%81o.png',
               ];
 
               // Ảnh mặc định nếu không tìm thấy danh mục

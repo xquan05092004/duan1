@@ -236,13 +236,11 @@
           </li>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-search"></i>
-              <p>
-                Search
-              </p>
-            </a>
-          </li>
+              <a href="/duan11/routes/User.php?action=logout" class="nav-link">
+                <i class="nav-icon fas fa-sign-out-alt"></i>
+                <p>Đăng xuất</p>
+              </a>
+            </li>
           </li>
         </ul>
       </nav>

@@ -187,11 +187,32 @@
                 <div class="col-md-4 col-12">
                     <div nh-block="8bxkyf0" nh-block-cache="true" class="">
                         <div class="entire-action-header entire-action-search"><span class="btn-action-header btn-mini-search"><img src="assets/templates/thoitrang05/assets/media/icon/search.svg" class="icon"></span>
-                            <form class="form-search position-relative" action="https://thoitrang09.themeweb4s.com/tim-kiem" method="get" autocomplete="off">
-                                <div class="input-group">
-                                    <div class="input-group-append"><button nh-btn-submit class="btn btn-submit" type="submit"><img src="assets/templates/thoitrang05/assets/media/icon/search.svg" class="icon"></button></div><input nh-auto-suggest="product" name="keyword" placeholder="Từ khóa tìm kiếm" type="text" class="form-control" value="">
-                                </div>
-                            </form>
+                        <form
+                class="form-search position-relative"
+                action="index.php"
+                method="get"
+                autocomplete="off">
+                <input type="hidden" name="page" value="search">
+                <div class="input-group">
+                  <div class="input-group-append">
+                    <button
+                      nh-btn-submit
+                      class="btn btn-submit"
+                      type="submit">
+                      <img
+                        src="assets/templates/thoitrang05/assets/media/icon/search.svg"
+                        class="icon" />
+                    </button>
+                  </div>
+                  <input
+                    nh-auto-suggest="product"
+                    name="q"
+                    placeholder="Từ khóa tìm kiếm"
+                    type="text"
+                    class="form-control"
+                    value="" />
+                </div>
+              </form>
                         </div>
                     </div>
                     <div nh-block="g1syznh" nh-block-cache="true" class="float-lg-right">

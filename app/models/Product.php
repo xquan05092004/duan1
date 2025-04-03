@@ -79,4 +79,9 @@ class Product
         $sql = "DELETE FROM products WHERE id = ?";
         return $this->db->runQuery($sql, [$id]);
     }
+    public function searchProducts($keyword) {
+        $query = "SELECT * FROM products WHERE name LIKE :keyword";
+        return $this->db->runQuery($query, [':keyword' => "%$keyword%"]);
+    }
+    
 }

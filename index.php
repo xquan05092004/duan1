@@ -21,13 +21,16 @@ $role = $user['role'] ?? 'user';
 
 if ($role === 'admin') {
     $page = $_GET['page'] ?? 'dashboard';
-    
+
     switch ($page) {
         case 'home':
             $userController->home();
             break;
         case 'chitiet':
             $userController->showProductDetail($_GET['id']);
+            break;
+        case 'search':
+            $userController->search();
             break;
         case 'showCategory':
             $userController->showCategory($_GET['id']);
@@ -83,7 +86,12 @@ if ($role === 'admin') {
         case 'user':
             include 'app/views/admin/user.php'; // tài khoản
             break;
-
+        case 'edit_customer':
+            $userController->editCustomer();  // Gọi phương thức editCustomer() trong UserController
+            break;
+        case 'delete_customer':
+            $userController->deleteCustomer(); // Gọi phương thức xóa trong controller
+            break;
         case 'donhang':
             include 'app/views/admin/donhang.php'; // đơn hàng
             break;
@@ -101,6 +109,9 @@ if ($role === 'admin') {
     switch ($page) {
         case 'home':
             $userController->home(); // ✅ để có products & categories
+            break;
+        case 'search':
+            $userController->search();
             break;
         case 'chitiet':
             isset($_GET['id']) ? $userController->showProductDetail($_GET['id']) : print("Không có sản phẩm!");
