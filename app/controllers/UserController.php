@@ -74,10 +74,18 @@ class UserController
 
     public function showCategory($categoryId)
     {
+        $categoryId = intval($categoryId);
+        $allCategories = $this->categoriesModel->getAllCategories();
+
+        // Lấy tất cả sản phẩm thuộc danh mục
         $products = $this->productModel->getProductsByCategoryId($categoryId);
-        $categories = $this->categoriesModel->getCategoriesById($categoryId);
+        
+        // Lấy 1 danh mục
+        $category = $this->categoriesModel->getCategoriesById($categoryId); // nên đặt lại tên thành getCategoryById
+        
         include __DIR__ . "/../views/guest/danhmuc.php";
     }
+    
     public function updateUser($id, $name, $phone, $email, $address)
     {
         if (empty($name) || empty($email)) {
@@ -163,6 +171,23 @@ class UserController
         $keyword = $_GET['q'] ?? ''; // Lấy từ khóa từ URL
         $products = $this->productModel->searchProducts($keyword); // Gọi model để tìm sản phẩm
         include __DIR__ . '/../views/guest/timkiem.php'; // Load trang hiển thị kết quả
+    }
+    public function index()
+    {
+        // Lấy danh mục được chọn từ URL (nếu có)
+        $category_id = isset($_GET['category']) ? $_GET['category'] : null;
+
+        // Gọi dữ liệu từ model
+        $products = $this->productModel->getAllProducts($category_id);
+        $categories = $this->categoriesModel->getAllCategories();
+
+        // Xử lý trường hợp không có sản phẩm
+        if ($products === null || $products === false) {
+            $products = [];
+        }
+
+        // Gọi view hiển thị sản phẩm người dùng
+        include 'app/views/guest/sanpham.php';
     }
     public function addToCart($product_id, $quantity, $color, $size)
     {
@@ -378,6 +403,24 @@ class UserController
         header("Location: index.php?page=view_cart");
         exit;
     }
+    public function update_cart()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['page']) && $_GET['page'] === 'update_cart') {
+            $input = json_decode(file_get_contents("php://input"), true);
+
+            if (isset($input['index'], $input['quantity'], $input['color'], $input['size'])) {
+                $index = $input['index'];
+                $_SESSION['cart'][$index]['quantity'] = (int)$input['quantity'];
+                $_SESSION['cart'][$index]['color_id'] = $input['color'];
+                $_SESSION['cart'][$index]['size_id'] = $input['size'];
+
+                echo json_encode(['status' => 'success']);
+            } else {
+                echo json_encode(['status' => 'error', 'message' => 'Thiếu dữ liệu']);
+            }
+            exit;
+        }
+    }
     public function createOrder()
     {
         $user_id = $_SESSION['user']['id'];
@@ -410,24 +453,7 @@ class UserController
         header('Location: /order/confirmation');
         exit;
     }
-    public function update_cart()
-    {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['page']) && $_GET['page'] === 'update_cart') {
-            $input = json_decode(file_get_contents("php://input"), true);
-
-            if (isset($input['index'], $input['quantity'], $input['color'], $input['size'])) {
-                $index = $input['index'];
-                $_SESSION['cart'][$index]['quantity'] = (int)$input['quantity'];
-                $_SESSION['cart'][$index]['color_id'] = $input['color'];
-                $_SESSION['cart'][$index]['size_id'] = $input['size'];
-
-                echo json_encode(['status' => 'success']);
-            } else {
-                echo json_encode(['status' => 'error', 'message' => 'Thiếu dữ liệu']);
-            }
-            exit;
-        }
-    }
+    
     public function logout()
     {
         session_start();

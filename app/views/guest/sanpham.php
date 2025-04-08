@@ -277,7 +277,7 @@
                         <div class="categories">
                             <div class="border-bottom text-uppercase h5 font-weight-bold border-gray pb-4 mb-4">Danh mục</div>
                             <div nh-menu="active">
-                            <?php foreach ($allCategories as $category): ?>
+                            <?php foreach ($categories as $category): ?>
                                 <ul class="categories-section list-unstyled mb-0">
                                     <li class="has-child"><a href="index.php?page=showCategory&id=<?= $category['id'] ?>"><?= htmlspecialchars($category['name']) ?></a><span nh-toggle="child-category-32" class="dropdown-toggle"></span>
                                     </li>

@@ -178,7 +178,7 @@
     }
 </script>
 
-<body>
+<body class=" product">
     <header>
         <div nh-row="p7fsjoq" class="align-row-center header-main py-4">
             <div class="row no-gutters">
@@ -192,10 +192,10 @@
                                         nh-menu="btn-close" class="close-sidebar effect-rotate icon-close"><i
                                             class="fa-light fa-xmark"></i></a></div>
                                 <ul>
-                                    <li class=""><a href="index.php"> Trang chủ<span
+                                    <li class=""><a href="index.php?page=home"> Trang chủ<span
                                                 class="fa-light fa-chevron-down"></span></a></li>
                                     <li class="position-relative has-child">
-                                        <a href="san-pham.html">Sản phẩm<span
+                                        <a href="index.php?page=sanpham">Sản phẩm<span
                                                 class="fa-light fa-chevron-down"></span></a><span class="grower"
                                             nh-toggle="th47ce3fyn"></span>
                                         <ul nh-toggle-element="th47ce3fyn" class="entry-menu dropdown">
@@ -464,6 +464,124 @@
             </div>
         </div>
     </footer>
+    <script type="application/ld+json">
+    {
+      "@context": "https:\/\/schema.org",
+      "@type": "Organization",
+      "name": "Web4s Company",
+      "legalName": "C\u00d4NG TY C\u1ed4 PH\u1ea6N GI\u1ea2I PH\u00c1P C\u00d4NG NGH\u1ec6 4S",
+      "url": "https:\/\/thoitrang09.themeweb4s.com\/",
+      "logo": "https:\/\/cdn3533.cdn-template-4s.com\/media\/logo\/logo-1970.png"
+    }
+  </script>
+
+  <script type="application/ld+json">
+    {
+      "@context": "https:\/\/schema.org",
+      "@type": "WebSite",
+      "url": "https:\/\/thoitrang09.themeweb4s.com",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https:\/\/thoitrang09.themeweb4s.com\/tim-kiem?keyword={query}",
+        "query-input": "required name=query"
+      }
+    }
+  </script>
+
+  <script
+    src="assets/templates/thoitrang05/assets/lib/jquery/jquery-3.6.0.min.js"
+    type="text/javascript"></script>
+  <script
+    src="assets/templates/thoitrang05/assets/lib/jquery-lazy/jquery.lazy.min.js"
+    type="text/javascript"></script>
+  <script
+    src="assets/templates/thoitrang05/assets/lib/jquery-lazy/jquery.lazy.plugins.min.js"
+    type="text/javascript"></script>
+  <script
+    src="assets/templates/thoitrang05/assets/lib/jquery/jquery.validate.min.js"
+    type="text/javascript"></script>
+  <script
+    src="assets/templates/thoitrang05/assets/lib/jquery/jquery.cookie.min.js"
+    type="text/javascript"></script>
+  <script
+    src="assets/templates/thoitrang05/assets/lib/bootstrap/popper.min.js"
+    type="text/javascript"></script>
+  <script
+    src="assets/templates/thoitrang05/assets/lib/bootstrap/util.js"
+    type="text/javascript"></script>
+  <script
+    src="assets/templates/thoitrang05/assets/lib/bootstrap/dropdown.js"
+    type="text/javascript"></script>
+  <script
+    src="assets/templates/thoitrang05/assets/lib/bootstrap/collapse.js"
+    type="text/javascript"></script>
+  <script
+    src="assets/templates/thoitrang05/assets/lib/bootstrap/modal.js"
+    type="text/javascript"></script>
+  <script
+    src="assets/templates/thoitrang05/assets/lib/bootstrap/toast.js"
+    type="text/javascript"></script>
+  <script
+    src="assets/templates/thoitrang05/assets/lib/bootstrap/tab.js"
+    type="text/javascript"></script>
+  <script
+    src="assets/templates/thoitrang05/assets/lib/swiper/swiper-bundle.min.js"
+    type="text/javascript"></script>
+  <script
+    src="assets/templates/thoitrang05/assets/js/constants.js"
+    type="text/javascript"></script>
+  <script
+    src="assets/templates/thoitrang05/assets/js/locales/vi.js"
+    type="text/javascript"></script>
+  <script
+    src="assets/templates/thoitrang05/assets/js/lazy.js"
+    type="text/javascript"></script>
+
+  <script
+    src="assets/templates/thoitrang05/assets/js/main.js"
+    type="text/javascript"></script>
+  <script
+    src="assets/templates/thoitrang05/assets/js/menu.js"
+    type="text/javascript"></script>
+  <script
+    src="assets/templates/thoitrang05/assets/js/search.js"
+    type="text/javascript"></script>
+  <script
+    src="assets/templates/thoitrang05/assets/js/product.js"
+    type="text/javascript"></script>
+  <script
+    src="assets/templates/thoitrang05/assets/js/order.js"
+    type="text/javascript"></script>
+  <script
+    src="assets/templates/thoitrang05/assets/js/wishlist.js"
+    type="text/javascript"></script>
+  <script
+    src="assets/templates/thoitrang05/assets/js/compare.js"
+    type="text/javascript"></script>
+  <script
+    src="assets/templates/thoitrang05/assets/js/member.js"
+    type="text/javascript"></script>
+  <script
+    src="assets/templates/thoitrang05/assets/js/contact.js"
+    type="text/javascript"></script>
+  <script
+    src="assets/templates/thoitrang05/assets/js/custom.js"
+    type="text/javascript"></script>
+  <script>
+    function toggleDropdown() {
+      const dropdown = document.getElementById("dropdownUser");
+      dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+    }
+
+    // Tự động ẩn nếu click ra ngoài
+    document.addEventListener("click", function(event) {
+      const dropdown = document.getElementById("dropdownUser");
+      const toggle = document.querySelector(".user-toggle");
+      if (!toggle.contains(event.target) && !dropdown.contains(event.target)) {
+        dropdown.style.display = "none";
+      }
+    });
+  </script>
 </body>
 
 </html>

@@ -65,6 +65,7 @@ class AdminController
         }
     }
 
+    
 
 
     public function deleteCategories()

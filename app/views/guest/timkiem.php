@@ -114,7 +114,7 @@
                                 <div class="menu-top"><span class="menu-header">Menu</span><a href="javascript:;" nh-menu="btn-close" class="close-sidebar effect-rotate icon-close"><i class="fa-light fa-xmark"></i></a></div>
                                 <ul>
                                     <li class=""><a href="index.html"> Trang chủ<span class="fa-light fa-chevron-down"></span></a></li>
-                                    <li class="position-relative has-child "><a href="san-pham.html">Sản phẩm<span class="fa-light fa-chevron-down"></span></a><span class="grower" nh-toggle="x6ncflqm90"></span>
+                                    <li class="position-relative has-child "><a href="index.php?page=sanpham">Sản phẩm<span class="fa-light fa-chevron-down"></span></a><span class="grower" nh-toggle="x6ncflqm90"></span>
                                         <ul nh-toggle-element="x6ncflqm90" class="entry-menu dropdown">
                                             <li class=" "><a class="menu-link" href="ao-nam.html">Áo Nam</a></li>
                                             <li class=" "><a class="menu-link" href="quan-nam.html">Quần Nam</a></li>
@@ -164,7 +164,21 @@
                         </div>
                     </div>
                     <div nh-block="g1syznh" nh-block-cache="true" class="float-lg-right">
-                        <div nh-mini-member class="entire-action-header"><a class="btn-action-header" title="Tài khoản" href="javascript:;" data-toggle="modal" data-target="#login-modal"><i class="fa-light fa-user"></i></a></div>
+                    <?php if (isset($_SESSION['user'])): ?>
+              <div class="user-dropdown-wrapper">
+                <div class="user-toggle" onclick="toggleDropdown()">
+                  <i class="fa-light fa-user"></i>
+                </div>
+                <div class="dropdown-user" id="dropdownUser">
+                  <a class="nav-link">👋 Xin chào, <strong><?= $_SESSION['user']['name'] ?></strong></a>
+                  <a class="nav-link logout-zoom" href="/duan11/routes/User.php?action=logout">Đăng xuất</a>
+                </div>
+              </div>
+            <?php else: ?>
+              <a class="btn-action-header" title="Tài khoản" href="app/views/users/login.php">
+                <i class="fa-light fa-user"></i>
+              </a>
+            <?php endif; ?>
                     </div>
                     <div nh-block="mgqafzd" nh-block-cache="true" class="float-right">
                         <div class="entire-action-header"><a class="btn-action-header btn-mini-wishlist" title="Yêu thích" href="yeu-thich.html"><i class="fa-light fa-heart"></i><span wishlist-total="all" class="items-number">0</span> </a></div>

@@ -46,6 +46,7 @@
   <link rel="dns-prefetch" href="https://cdn3533.cdn-template-4s.com/" />
 
   <link href="favicon.ico" rel="icon" type="image/x-icon" />
+  <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 
   <link
     href="assets/templates/thoitrang05/assets/css/bootstrap.css"
@@ -129,6 +130,66 @@
       font-display: swap;
     }
 
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .user-dropdown-wrapper {
+      position: relative;
+    }
+
+    .user-toggle {
+      cursor: pointer;
+      font-size: 20px;
+      color: white;
+    }
+
+    .dropdown-user {
+      position: absolute;
+      top: 120%;
+      right: 0;
+      background-color: #1a1a1a;
+      color: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      padding: 10px;
+      min-width: 180px;
+      display: none;
+      z-index: 999;
+      font-family: 'Arial', sans-serif;
+    }
+
+    .dropdown-user .nav-link {
+      display: block;
+      padding: 6px 10px;
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .dropdown-user .nav-link:hover {
+      background-color: #2a2a2a;
+      border-radius: 4px;
+    }
+
+    .logout-zoom:active {
+      transform: scale(1.1);
+    }
+
+    /* Icon button style */
+    .btn-action-header {
+      font-size: 20px;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 32px;
+      width: 32px;
+      transition: 0.2s;
+    }
+
     /* ]]> */
   </style>
 </head>
@@ -147,7 +208,7 @@
                 href="javascript:;"><i class="fa-light fa-bars-staggered"></i></a>
               <div class="back-drop"></div>
               <nav class="menu-section" nh-menu="sidebar" menu-type="main">
-              
+
                 <div class="menu-top">
                   <span class="menu-header">Menu</span><a
                     href="javascript:;"
@@ -160,16 +221,16 @@
                       Trang chủ<span class="fa-light fa-chevron-down"></span></a>
                   </li>
                   <li class="position-relative has-child">
-                    <a href="san-pham.html">Sản phẩm<span
+                    <a href="index.php?page=sanpham">Sản phẩm<span
                         class="fa-light fa-chevron-down"></span></a><span class="grower" nh-toggle="th47ce3fyn"></span>
                     <ul
                       nh-toggle-element="th47ce3fyn"
                       class="entry-menu dropdown">
                       <?php foreach ($categories as $category): ?>
-                      <li class=" ">
-                        <a class="menu-link" href="index.php?page=showCategory&id=<?= $category['id'] ?>"><?= htmlspecialchars($category['name']) ?></a>
-                      </li>
-                      
+                        <li class=" ">
+                          <a class="menu-link" href="index.php?page=showCategory&id=<?= $category['id'] ?>"><?= htmlspecialchars($category['name']) ?></a>
+                        </li>
+
                       <?php endforeach; ?>
                     </ul>
                   </li>
@@ -180,7 +241,7 @@
                     <a href="lien-he.html">Liên hệ<span class="fa-light fa-chevron-down"></span></a>
                   </li>
                 </ul>
-              
+
               </nav>
             </div>
           </div>
@@ -229,46 +290,30 @@
               </form>
             </div>
           </div>
-          <div
-            nh-block="g1syznh"
-            nh-block-cache="true"
-            class="float-lg-right">
-            <div nh-mini-member class="entire-action-header">
+          <div class="header-actions">
             <?php if (isset($_SESSION['user'])): ?>
-              <li class="nav-item">
-                        <a class="nav-link">👋 Xin chào, <strong><?= $_SESSION['user']['name'] ?></strong></a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/duan11/routes/User.php?action=logout">Đăng xuất</a>
-                    </li>
-                <?php else: ?>
-                <a
-                  class="btn-action-header"
-                  title="Tài khoản"
-                  href="app/views/users/login.php"
-                  ><i class="fa-light fa-user"></i
-                ></a>
-                <?php endif; ?>
+              <div class="user-dropdown-wrapper">
+                <div class="user-toggle" onclick="toggleDropdown()">
+                  <i class="fa-light fa-user"></i>
+                </div>
+                <div class="dropdown-user" id="dropdownUser">
+                  <a class="nav-link">👋 Xin chào, <strong><?= $_SESSION['user']['name'] ?></strong></a>
+                  <a class="nav-link logout-zoom" href="/duan11/routes/User.php?action=logout">Đăng xuất</a>
+                </div>
               </div>
-          </div>
-          <div nh-block="mgqafzd" nh-block-cache="true" class="float-right">
-            <div class="entire-action-header">
-              <a
-                class="btn-action-header btn-mini-wishlist"
-                title="Yêu thích"
-                href="yeu-thich.html"><i class="fa-light fa-heart"></i><span wishlist-total="all" class="items-number">0</span>
+            <?php else: ?>
+              <a class="btn-action-header" title="Tài khoản" href="app/views/users/login.php">
+                <i class="fa-light fa-user"></i>
               </a>
-            </div>
+            <?php endif; ?>
+
+            <!-- Icon giỏ hàng -->
+            <a class="btn-action-header" title="Giỏ hàng" href="index.php?page=view_cart">
+              <i class="fa-light fa-basket-shopping"></i>
+              <span nh-total-quantity-mini-cart></span>
+            </a>
           </div>
-          <div nh-block="i57yxn3" nh-block-cache="true" class="float-right">
-            <div class="entire-action-header">
-              <a
-                class="btn-mini-cart btn-action-header"
-                
-                title="Giỏ hàng"
-                href="index.php?page=view_cart"><i class="fa-light fa-basket-shopping"></i><span nh-total-quantity-mini-cart class="items-number">0</span></a>
-            </div>
-          </div>
+
         </div>
       </div>
     </div>
@@ -338,11 +383,11 @@
                   <div class="col-md-4 col-12 mb-md-0 mb-4">
                     <div class="item">
                       <div class="inter-img">
-                      <div class="img ratio-1-1">
-                        <a href="/products?category_id=<?= htmlspecialchars($category['id']) ?>" title="<?= htmlspecialchars($category['name']) ?>">
+                        <div class="img ratio-1-1">
+                          <a href="/products?category_id=<?= htmlspecialchars($category['id']) ?>" title="<?= htmlspecialchars($category['name']) ?>">
                             <img nh-lazy="image" class="img-fluid" data-src="<?= $categoryImage ?>" alt="<?= htmlspecialchars($category['name']) ?>" />
-                        </a>
-                    </div>
+                          </a>
+                        </div>
                       </div>
                       <div class="inter-content">
                         <div class="name">
@@ -395,7 +440,7 @@
                       <div class="product-action">
                         <a
                           class="btn-product-action"
-                          href="index.php?page=add_to_cart&id=<?= $product['id'] ?>"
+                          href="index.php?page=chitiet&id=<?= $product['id'] ?>"
                           title="Xem chi tiết"><i class="fa-light fa-cart-shopping"></i> Thêm giỏ
                           hàng</a><a
                           class="btn-product-action"
@@ -418,7 +463,7 @@
               <p>Không có sản phẩm nào!</p>
             <?php endif; ?>
 
-            
+
 
           </div>
         </div>
@@ -995,6 +1040,22 @@
   <script
     src="assets/templates/thoitrang05/assets/js/custom.js"
     type="text/javascript"></script>
+  <script>
+    function toggleDropdown() {
+      const dropdown = document.getElementById("dropdownUser");
+      dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+    }
+
+    // Tự động ẩn nếu click ra ngoài
+    document.addEventListener("click", function(event) {
+      const dropdown = document.getElementById("dropdownUser");
+      const toggle = document.querySelector(".user-toggle");
+      if (!toggle.contains(event.target) && !dropdown.contains(event.target)) {
+        dropdown.style.display = "none";
+      }
+    });
+  </script>
+
 </body>
 
 <!-- Mirrored from thoitrang09.themeweb4s.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Mar 2025 08:45:04 GMT -->

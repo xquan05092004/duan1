@@ -38,6 +38,9 @@ if ($role === 'admin') {
         case 'product':
             $adminController->listProducts();
             break;
+        case 'sanpham':
+            $userController->index();
+            break;
         case 'products':
             if (isset($_GET['id'])) {
                 $adminController->viewProduct($_GET['id']);
@@ -107,6 +110,28 @@ if ($role === 'admin') {
         case 'xoabinhluan':
             $adminController->deleteComment();
             break;
+        case 'add_to_cart':
+            if (isset($_GET['product_id'], $_GET['quantity'], $_GET['color'], $_GET['size'])) {
+                $product_id = $_GET['product_id'];
+                $quantity = $_GET['quantity'];
+                $color = $_GET['color'];
+                $size = $_GET['size'];
+                $userController->addToCart($product_id, $quantity, $color, $size);
+            } else {
+                echo "Vui lòng chọn đủ thông tin sản phẩm!";
+            }
+            break;
+
+        case 'view_cart':
+            $userController->viewCart();
+            break;
+        case 'update_cart_variant':
+            $userController->updateCartVariant();
+            break;
+        case 'delete_cart':
+            $userController->deleteCartItem();
+            break;
+
         default:
             include 'app/views/guest/list.php'; // Trang chủ
             break;
@@ -122,6 +147,7 @@ if ($role === 'admin') {
         case 'search':
             $userController->search();
             break;
+        
         case 'chitiet':
             isset($_GET['id']) ? $userController->showProductDetail($_GET['id']) : print("Không có sản phẩm!");
             break;
@@ -136,7 +162,9 @@ if ($role === 'admin') {
                 echo "Vui lòng chọn đủ thông tin sản phẩm!";
             }
             break;
-
+            case 'sanpham':
+                $userController->index();
+                break;
         case 'view_cart':
             $userController->viewCart();
             break;
