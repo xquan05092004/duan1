@@ -2,33 +2,43 @@
 <?php
 require_once __DIR__ . '/../models/Categories.php';
 require_once __DIR__ . '/../models/Product.php';
+require_once __DIR__ . '/../models/Order.php';
+require_once __DIR__ . '/../models/comment.php';
 
 ob_start(); // Bắt đầu bộ đệm đầu ra
 
-class AdminController{
+class AdminController
+{
     private $categoriesModel;
     private $productModel;
+    private $orderModel;
 
-    public function __construct(){
-            $this->categoriesModel = new Categories();
-            $this->productModel = new Product();
+
+    public function __construct()
+    {
+        $this->categoriesModel = new Categories();
+        $this->productModel = new Product();
+        $this->orderModel = new Order();
     }
-    public function listCategories() {
+    public function listCategories()
+    {
         $categories = $this->categoriesModel->getAllCategories();
         include "app/views/admin/categories.php";
     }
-    
-    public function addCategories(){
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+    public function addCategories()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $name = $_POST['name'];
-            if($this->categoriesModel->addCategories($name)){
+            if ($this->categoriesModel->addCategories($name)) {
                 header("Location: index.php?page=categories");
-            }else{
+            } else {
                 echo "Không thể thêm categories";
             }
         }
     }
-    public function editCategories() {
+    public function editCategories()
+    {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Nhận dữ liệu từ form
             $id = $_POST['id'] ?? null;
@@ -44,7 +54,7 @@ class AdminController{
             // Lấy dữ liệu danh mục để hiển thị trong form
             $id = $_GET['id'];
             $category = $this->categoriesModel->getCategoriesById($id);
-    
+
             if ($category) {
                 include __DIR__ . "/../views/admin/edit_category.php";
             } else {
@@ -54,16 +64,17 @@ class AdminController{
             echo "❌ Không có ID danh mục!";
         }
     }
-    
-    
-    
-    public function deleteCategories() {
+
+
+
+    public function deleteCategories()
+    {
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
-    
+
             $categoriesModel = new Categories(); // Đảm bảo khởi tạo model
-    
-            if ($categoriesModel->deleteCategories($id)) { 
+
+            if ($categoriesModel->deleteCategories($id)) {
                 header("Location: index.php?page=categories");
                 exit();
             } else {
@@ -88,14 +99,15 @@ class AdminController{
     }
 
     // Xem chi tiết sản phẩm
-    public function viewProduct($id) {
+    public function viewProduct($id)
+    {
         $product = $this->productModel->getProductById($id);
         if (!$product) {
             die("Sản phẩm không tồn tại trong database!");
         }
         // Hiển thị sản phẩm
     }
-    
+
     // Thêm sản phẩm mới
     public function createProduct()
     {
@@ -229,11 +241,54 @@ class AdminController{
         } else {
             $message = "Lỗi khi xóa sản phẩm!";
         }
-        
+
         header("Location: index.php?page=product");
         exit;
     }
-    
+    public function listOrder()
+    {
+        $status = isset($_GET['status']) ? $_GET['status'] : null;
+        $orders = $this->orderModel->getOrders($status);
+        include 'app/views/admin/donhang.php';
+    }
+    public function updateStatus()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'], $_POST['status'])) {
+            $id = $_POST['id'];
+            $status = $_POST['status'];
+
+            if ($this->orderModel->updateStatusOrder($id, $status)) {
+                header("Location: index.php?page=donhang");
+                exit();
+            }
+        } else {
+            echo "Lỗi cập nhật trạng thái";
+        }
+    }
+    public function listComments()
+    {
+        $commentModel = new Comment();
+        $status = $_GET['status'] ?? null;
+        $comments = $commentModel->getAllComments($status);
+
+        include 'app/views/admin/binhluan.php'; // Phải nằm sau khi gán $comments
+    }
+
+    public function updateCommentStatus()
+    {
+        $id = $_POST['id'];
+        $status = $_POST['status'];
+        $commentModel = new comment();
+        $commentModel->updateComment($id, $status);
+        header("Location: index.php?page=binhluan");
+    }
+    public function deleteComment()
+    {
+        $id = $_GET['id'];
+        $commentModel = new comment();
+        $commentModel->delete($id);
+        header("Location: index.php?page=binhluan");
+    }
 }
 ob_end_flush(); // Xuất nội dung ra trình duyệt
 

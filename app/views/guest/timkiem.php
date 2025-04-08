@@ -129,7 +129,7 @@
                 </div>
                 <div class="col-md-4 col-12">
                     <div nh-block="qhdw2uy" nh-block-cache="true" class="">
-                        <div class="logo-section "><a href="index.html"><img class="img-fluid" src="assets/templates/thoitrang05/assets/media/logo/logo_black.png" alt="logo"></a></div>
+                        <div class="logo-section "><a href="index.php?page=home"><img class="img-fluid" src="assets/templates/thoitrang05/assets/media/logo/logo.png" alt="logo"></a></div>
                     </div>
                 </div>
                 <div class="col-md-4 col-12">
@@ -370,7 +370,7 @@
                 <div class="row ">
                     <div class="col-md-6 col-12">
                         <div nh-block="qhdw2uy" nh-block-cache="true" class="">
-                            <div class="logo-section "><a href="index.html"><img class="img-fluid" src="assets/templates/thoitrang05/assets/media/logo/logo_black.png" alt="logo"></a></div>
+                            <div class="logo-section "><a href="index.php?page=home"><img class="img-fluid" src="assets/templates/thoitrang05/assets/media/logo.png" alt="logo"></a></div>
                         </div>
                     </div>
                     <div class="col-md-6 col-12">

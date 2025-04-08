@@ -16,5 +16,8 @@ class database {
         $stmt->execute($params);              // Thực thi với tham số
         return $stmt;                         // Trả về đối tượng Statement
     }
+    public function getConnection() {
+        return $this->pdo;
+    }
     
 }

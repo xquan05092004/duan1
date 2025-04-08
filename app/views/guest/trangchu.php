@@ -188,7 +188,7 @@
         <div class="col-md-4 col-12">
           <div nh-block="qhdw2uy" nh-block-cache="true" class="">
             <div class="logo-section">
-              <a href="index.html"><img
+              <a href="index.php?page=home"><img
                   class="img-fluid"
                   src="assets/templates/thoitrang05/assets/media/logo/logo.png"
                   alt="logo" /></a>
@@ -264,9 +264,9 @@
             <div class="entire-action-header">
               <a
                 class="btn-mini-cart btn-action-header"
-                nh-mini-cart="open"
+                
                 title="Giỏ hàng"
-                href="javascript:;"><i class="fa-light fa-basket-shopping"></i><span nh-total-quantity-mini-cart class="items-number">0</span></a>
+                href="index.php?page=view_cart"><i class="fa-light fa-basket-shopping"></i><span nh-total-quantity-mini-cart class="items-number">0</span></a>
             </div>
           </div>
         </div>
@@ -395,7 +395,7 @@
                       <div class="product-action">
                         <a
                           class="btn-product-action"
-                          href="index.php?page=chitiet&id=<?= $product['id'] ?>"
+                          href="index.php?page=add_to_cart&id=<?= $product['id'] ?>"
                           title="Xem chi tiết"><i class="fa-light fa-cart-shopping"></i> Thêm giỏ
                           hàng</a><a
                           class="btn-product-action"
@@ -418,48 +418,7 @@
               <p>Không có sản phẩm nào!</p>
             <?php endif; ?>
 
-            <div class="col-lg-3 col-md-4 col-6 mb-lg-5 mb-lg-4 mb-3">
-              <div
-                nh-product="15"
-                nh-product-item-id="67"
-                nh-product-attribute-special='{"size_28":{"id":67,"product_id":15,"code":"B27US386GP","barcode":null,"price":650000,"discount_percent":"25.00","price_special":490000,"time_start_special":null,"time_end_special":null,"images":["\/media\/san-pham\/15\/20240921_iztstx1yyh.webp","\/media\/san-pham\/15\/20240921_jecfo5a5xs.webp","\/media\/san-pham\/15\/20240921_1limstxdc3.webp","\/media\/san-pham\/15\/20240921_aw3t7np3lf.webp","\/media\/san-pham\/15\/20240921_sskpeurhgk.webp","\/media\/san-pham\/15\/20240921_60g9dil3eq.webp","\/media\/san-pham\/15\/20240921_wb7nmkdjwt.webp"],"quantity_available":null,"kiotviet_id":null,"kiotviet_code":null,"position":1,"status":1,"product_item_id":67,"date_special":null,"time_special":null,"apply_special":true,"special_code":"size_28","special_id":"size_8","attribute_name":"28","attributes":[{"code":"size","attribute_id":1,"input_type":"special_select_item","value":"8"}],"extend_name":"28","attributes_normal":[]},"size_29":{"id":68,"product_id":15,"code":"C3VLJBDM0W","barcode":null,"price":650000,"discount_percent":"25.00","price_special":490000,"time_start_special":null,"time_end_special":null,"images":["\/media\/san-pham\/15\/20240921_iztstx1yyh.webp","\/media\/san-pham\/15\/20240921_jecfo5a5xs.webp","\/media\/san-pham\/15\/20240921_1limstxdc3.webp","\/media\/san-pham\/15\/20240921_aw3t7np3lf.webp","\/media\/san-pham\/15\/20240921_sskpeurhgk.webp","\/media\/san-pham\/15\/20240921_60g9dil3eq.webp","\/media\/san-pham\/15\/20240921_wb7nmkdjwt.webp"],"quantity_available":null,"kiotviet_id":null,"kiotviet_code":null,"position":2,"status":1,"product_item_id":68,"date_special":null,"time_special":null,"apply_special":true,"special_code":"size_29","special_id":"size_7","attribute_name":"29","attributes":[{"code":"size","attribute_id":1,"input_type":"special_select_item","value":"7"}],"extend_name":"29","attributes_normal":[]},"size_30":{"id":69,"product_id":15,"code":"EZMOXNY7B5","barcode":null,"price":650000,"discount_percent":"25.00","price_special":490000,"time_start_special":null,"time_end_special":null,"images":["\/media\/san-pham\/15\/20240921_iztstx1yyh.webp","\/media\/san-pham\/15\/20240921_jecfo5a5xs.webp","\/media\/san-pham\/15\/20240921_1limstxdc3.webp","\/media\/san-pham\/15\/20240921_aw3t7np3lf.webp","\/media\/san-pham\/15\/20240921_sskpeurhgk.webp","\/media\/san-pham\/15\/20240921_60g9dil3eq.webp","\/media\/san-pham\/15\/20240921_wb7nmkdjwt.webp"],"quantity_available":null,"kiotviet_id":null,"kiotviet_code":null,"position":3,"status":1,"product_item_id":69,"date_special":null,"time_special":null,"apply_special":true,"special_code":"size_30","special_id":"size_6","attribute_name":"30","attributes":[{"code":"size","attribute_id":1,"input_type":"special_select_item","value":"6"}],"extend_name":"30","attributes_normal":[]},"size_31":{"id":70,"product_id":15,"code":"N19Q0B7EJ5","barcode":null,"price":650000,"discount_percent":"25.00","price_special":490000,"time_start_special":null,"time_end_special":null,"images":["\/media\/san-pham\/15\/20240921_iztstx1yyh.webp","\/media\/san-pham\/15\/20240921_jecfo5a5xs.webp","\/media\/san-pham\/15\/20240921_1limstxdc3.webp","\/media\/san-pham\/15\/20240921_aw3t7np3lf.webp","\/media\/san-pham\/15\/20240921_sskpeurhgk.webp","\/media\/san-pham\/15\/20240921_60g9dil3eq.webp","\/media\/san-pham\/15\/20240921_wb7nmkdjwt.webp"],"quantity_available":null,"kiotviet_id":null,"kiotviet_code":null,"position":4,"status":1,"product_item_id":70,"date_special":null,"time_special":null,"apply_special":true,"special_code":"size_31","special_id":"size_5","attribute_name":"31","attributes":[{"code":"size","attribute_id":1,"input_type":"special_select_item","value":"5"}],"extend_name":"31","attributes_normal":[]}}'
-                class="product-item swiper-slide">
-                <div class="inner-image mb-3">
-                  <div class="product-status">
-                    <span class="onsale">-25%</span>
-                  </div>
-                  <div class="ratio-custome">
-                    <a
-                      href="quan-jeans-baggy-cotton-6116.html"
-                      title="Quần Jeans Baggy Cotton 6116"><img
-                        nh-lazy="image"
-                        class="img-fluid"
-                        data-src="https://cdn3533.cdn-template-4s.com/thumbs/san-pham/15/20240921_iztstx1yyh_thumb_350.webp"
-                        alt="Quần Jeans Baggy Cotton 6116"
-                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" /></a>
-                  </div>
-                  <div class="product-action">
-                    <a
-                      class="btn-product-action"
-                      href="quan-jeans-baggy-cotton-6116.html"
-                      title="Xem chi tiết"><i class="fa-light fa-cart-shopping"></i> Thêm giỏ
-                      hàng</a><a
-                      class="btn-product-action"
-                      href="quan-jeans-baggy-cotton-6116.html"
-                      title="Xem chi tiết"><i class="fa-light fa-eye"></i> Xem chi tiết</a>
-                  </div>
-                </div>
-                <div class="inner-content text-center">
-                  <h4 class="product-title">
-                    <a href="quan-jeans-baggy-cotton-6116.html">Quần Jeans Baggy Cotton 6116</a>
-                  </h4>
-                  <div class="product-code">Mã sản phẩm: B27US386GP</div>
-                  <div class="price mt-2">
-                    <span class="price-amount">490,000<span class="currency-symbol">VND</span></span><span class="price-amount old-price">650,000<span class="currency-symbol">VND</span></span>
-                  </div>
-                </div>
-              </div>
-            </div>
+            
 
           </div>
         </div>
@@ -624,9 +583,9 @@
           <div class="col-md-6 col-12">
             <div nh-block="qhdw2uy" nh-block-cache="true" class="">
               <div class="logo-section">
-                <a href="index.html"><img
+                <a href="index.php"><img
                     class="img-fluid"
-                    src="templates/thoitrang05/assets/media/logo/logo.png"
+                    src="assets/templates/thoitrang05/assets/media/logo/logo.png"
                     alt="logo" /></a>
               </div>
             </div>

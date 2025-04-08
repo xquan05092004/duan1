@@ -93,10 +93,19 @@ if ($role === 'admin') {
             $userController->deleteCustomer(); // Gọi phương thức xóa trong controller
             break;
         case 'donhang':
-            include 'app/views/admin/donhang.php'; // đơn hàng
+            $adminController->listOrder();
+            break;
+        case 'capnhatorder':
+            $adminController->updateStatus();
             break;
         case 'binhluan':
-            include 'app/views/admin/binhluan.php'; // bình luận
+            $adminController->listComments();
+            break;
+        case 'ttbinhluan':
+            $adminController->updateCommentStatus();
+            break;
+        case 'xoabinhluan':
+            $adminController->deleteComment();
             break;
         default:
             include 'app/views/guest/list.php'; // Trang chủ
@@ -116,6 +125,28 @@ if ($role === 'admin') {
         case 'chitiet':
             isset($_GET['id']) ? $userController->showProductDetail($_GET['id']) : print("Không có sản phẩm!");
             break;
+        case 'add_to_cart':
+            if (isset($_GET['product_id'], $_GET['quantity'], $_GET['color'], $_GET['size'])) {
+                $product_id = $_GET['product_id'];
+                $quantity = $_GET['quantity'];
+                $color = $_GET['color'];
+                $size = $_GET['size'];
+                $userController->addToCart($product_id, $quantity, $color, $size);
+            } else {
+                echo "Vui lòng chọn đủ thông tin sản phẩm!";
+            }
+            break;
+
+        case 'view_cart':
+            $userController->viewCart();
+            break;
+        case 'update_cart_variant':
+            $userController->updateCartVariant();
+            break;
+        case 'delete_cart':
+            $userController->deleteCartItem();
+            break;
+
         case 'showCategory':
             isset($_GET['id']) ? $userController->showCategory($_GET['id']) : print("Không có danh mục!");
             break;

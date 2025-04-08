@@ -61,8 +61,6 @@ class Product
 
         return [];
     }
-    
-    
 
     public function createProduct($name, $price, $description, $image, $quantity, $category_id) {
         $sql = "INSERT INTO products (name, price, description, image, quantity, category_id) 
@@ -83,5 +81,4 @@ class Product
         $query = "SELECT * FROM products WHERE name LIKE :keyword";
         return $this->db->runQuery($query, [':keyword' => "%$keyword%"]);
     }
-    
 }
