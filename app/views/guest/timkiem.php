@@ -93,10 +93,94 @@
             font-display: swap;
         }
 
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .user-dropdown-wrapper {
+            position: relative;
+        }
+
+        .user-toggle {
+            cursor: pointer;
+            font-size: 20px;
+            color: white;
+        }
+
+        .user-dropdown-wrapper {
+            position: relative;
+        }
+
+        .user-toggle {
+            cursor: pointer;
+            font-size: 20px;
+            color: white;
+        }
+
+        .dropdown-user {
+            position: absolute;
+            top: 120%;
+            right: 0;
+            background-color: #1a1a1a;
+            color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            padding: 10px;
+            min-width: 180px;
+            display: none;
+            z-index: 999;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .dropdown-user .nav-link {
+            display: block;
+            padding: 6px 10px;
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .dropdown-user .nav-link:hover {
+            background-color: #2a2a2a;
+            border-radius: 4px;
+        }
+
+        .logout-zoom:active {
+            transform: scale(1.1);
+        }
+
+        /* Icon button style */
+        .btn-action-header {
+            font-size: 20px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 32px;
+            width: 32px;
+            transition: 0.2s;
+        }
+
         /* ]]> */
     </style>
 
+    <script>
+        function toggleDropdown() {
+            const dropdown = document.getElementById("dropdownUser");
+            dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+        }
 
+        // Tự động ẩn nếu click ra ngoài
+        document.addEventListener("click", function(event) {
+            const dropdown = document.getElementById("dropdownUser");
+            const toggle = document.querySelector(".user-toggle");
+            if (!toggle.contains(event.target) && !dropdown.contains(event.target)) {
+                dropdown.style.display = "none";
+            }
+        });
+    </script>
 
 </head>
 
@@ -135,56 +219,60 @@
                 <div class="col-md-4 col-12">
                     <div nh-block="8bxkyf0" nh-block-cache="true" class="">
                         <div class="entire-action-header entire-action-search"><span class="btn-action-header btn-mini-search"><img src="assets/templates/thoitrang05/assets/media/icon/search.svg" class="icon"></span>
-                        <form
-                class="form-search position-relative"
-                action="index.php"
-                method="get"
-                autocomplete="off">
-                <input type="hidden" name="page" value="search">
-                <div class="input-group">
-                  <div class="input-group-append">
-                    <button
-                      nh-btn-submit
-                      class="btn btn-submit"
-                      type="submit">
-                      <img
-                        src="assets/templates/thoitrang05/assets/media/icon/search.svg"
-                        class="icon" />
-                    </button>
-                  </div>
-                  <input
-                    nh-auto-suggest="product"
-                    name="q"
-                    placeholder="Từ khóa tìm kiếm"
-                    type="text"
-                    class="form-control"
-                    value="" />
-                </div>
-              </form>
+                            <form
+                                class="form-search position-relative"
+                                action="index.php"
+                                method="get"
+                                autocomplete="off">
+                                <input type="hidden" name="page" value="search">
+                                <div class="input-group">
+                                    <div class="input-group-append">
+                                        <button
+                                            nh-btn-submit
+                                            class="btn btn-submit"
+                                            type="submit">
+                                            <img
+                                                src="assets/templates/thoitrang05/assets/media/icon/search.svg"
+                                                class="icon" />
+                                        </button>
+                                    </div>
+                                    <input
+                                        nh-auto-suggest="product"
+                                        name="q"
+                                        placeholder="Từ khóa tìm kiếm"
+                                        type="text"
+                                        class="form-control"
+                                        value="" />
+                                </div>
+                            </form>
                         </div>
                     </div>
-                    <div nh-block="g1syznh" nh-block-cache="true" class="float-lg-right">
-                    <?php if (isset($_SESSION['user'])): ?>
-              <div class="user-dropdown-wrapper">
-                <div class="user-toggle" onclick="toggleDropdown()">
-                  <i class="fa-light fa-user"></i>
-                </div>
-                <div class="dropdown-user" id="dropdownUser">
-                  <a class="nav-link">👋 Xin chào, <strong><?= $_SESSION['user']['name'] ?></strong></a>
-                  <a class="nav-link logout-zoom" href="/duan11/routes/User.php?action=logout">Đăng xuất</a>
-                </div>
-              </div>
-            <?php else: ?>
-              <a class="btn-action-header" title="Tài khoản" href="app/views/users/login.php">
-                <i class="fa-light fa-user"></i>
-              </a>
-            <?php endif; ?>
-                    </div>
-                    <div nh-block="mgqafzd" nh-block-cache="true" class="float-right">
-                        <div class="entire-action-header"><a class="btn-action-header btn-mini-wishlist" title="Yêu thích" href="yeu-thich.html"><i class="fa-light fa-heart"></i><span wishlist-total="all" class="items-number">0</span> </a></div>
-                    </div>
-                    <div nh-block="i57yxn3" nh-block-cache="true" class="float-right">
-                        <div class="entire-action-header"><a class="btn-mini-cart btn-action-header" nh-mini-cart="open" title="Giỏ hàng" href="javascript:;"><i class="fa-light fa-basket-shopping"></i><span nh-total-quantity-mini-cart class="items-number">0</span></a></div>
+                    <div class="header-actions">
+                        <?php if (isset($_SESSION['user'])): ?>
+                            <div class="user-dropdown-wrapper">
+                                <div class="user-toggle" onclick="toggleDropdown()">
+                                    <i class="fa-light fa-user"></i>
+                                </div>
+                                <div class="dropdown-user" id="dropdownUser">
+                                    <a class="nav-link">👋 Xin chào, <strong><?= $_SESSION['user']['name'] ?></strong></a>
+                                    <a class="nav-link logout-zoom" href="/duan11/routes/User.php?action=logout">Đăng xuất</a>
+                                </div>
+                            </div>
+                        <?php else: ?>
+                            <a class="btn-action-header" title="Tài khoản" href="app/views/users/login.php">
+                                <i class="fa-light fa-user"></i>
+                            </a>
+                        <?php endif; ?>
+
+                        <!-- Icon giỏ hàng -->
+                        <a class="btn-action-header" title="Giỏ hàng" href="index.php?page=view_cart">
+                            <i class="fa-light fa-basket-shopping"></i>
+                            <span nh-total-quantity-mini-cart></span>
+                        </a>
+                        <a class="btn-action-header" title="Giỏ hàng" href="index.php?page=manage_orders">
+                            <i class="fa fa-address-book"></i>
+                            <span nh-total-quantity-mini-cart></span>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -355,10 +443,10 @@
                                             <div class="inner-image mb-3">
                                                 <div class="product-status"><span class="onsale">-4%</span></div>
                                                 <div class="ratio-custome"> <img src="public/uploads/<?= htmlspecialchars($product['image']) ?>" alt="<?= htmlspecialchars($product['name']) ?>" width="150"></div>
-                                                <div class="product-action"><a class="btn-product-action"   title="Xem chi tiết"><i class="fa-light fa-cart-shopping"></i> Thêm giỏ hàng</a><a class="btn-product-action" href="index.php?page=chitiet&id=<?= $product['id'] ?>" title="Xem chi tiết"><i class="fa-light fa-eye"></i> Xem chi tiết</a></div>
+                                                <div class="product-action"><a class="btn-product-action" title="Xem chi tiết"><i class="fa-light fa-cart-shopping"></i> Thêm giỏ hàng</a><a class="btn-product-action" href="index.php?page=chitiet&id=<?= $product['id'] ?>" title="Xem chi tiết"><i class="fa-light fa-eye"></i> Xem chi tiết</a></div>
                                             </div>
                                             <div class="inner-content text-center">
-                                                <h4 class="product-title"><a  href="index.php?page=chitiet&id=<?= $product['id'] ?>"><?= htmlspecialchars($product['name']) ?></a></h4>
+                                                <h4 class="product-title"><a href="index.php?page=chitiet&id=<?= $product['id'] ?>"><?= htmlspecialchars($product['name']) ?></a></h4>
                                                 <div class="price mt-2"><span class="price-amount"><?= htmlspecialchars($product['price']) ?><span class="currency-symbol">VND</span></span><span class="price-amount old-price">680,000<span class="currency-symbol">VND</span></span></div>
                                             </div>
                                         </div>
@@ -371,12 +459,12 @@
                         </div>
                     </div>
                     <div nh-block="smvnbel" nh-block-cache="true" class="">
-                            <div class="load-more text-center" id="btn-ct-category"><a class="btn-view-all btn-show rounded" rel="nofolow">Xem thêm</a><a class="btn-view-all btn-hide rounded" rel="nofolow">Thu gọn</a></div>
-                        </div>
+                        <div class="load-more text-center" id="btn-ct-category"><a class="btn-view-all btn-show rounded" rel="nofolow">Xem thêm</a><a class="btn-view-all btn-hide rounded" rel="nofolow">Thu gọn</a></div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
     <footer>
         <div nh-row="601bgio" class="border-bottom-footer">

@@ -151,7 +151,7 @@
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
-      <a href="../../index3.html" class="brand-link">
+      <a href="index.php?page=home" class="brand-link">
         <img src="assets/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">AdminLTE 3</span>
       </a>
@@ -182,69 +182,49 @@
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
-          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
+          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+            data-accordion="false">
             <div class="nav-item menu-open">
               <a href="index.php" class="nav-link active">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
-                <p>
-                  Trang Chủ
-                </p>
+                <p>Trang Chủ</p>
               </a>
-
             </div>
             <li class="nav-item">
               <a href="index.php?page=categories" class="nav-link">
                 <i class="nav-icon fas fa-th"></i>
-                <p>
-                  Danh Mục
-                </p>
+                <p>Danh Mục</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="index.php?page=product" class="nav-link">
                 <i class="nav-icon fas fa-copy"></i>
-                <p>
-                  Sản phẩm
-                </p>
+                <p>Sản phẩm</p>
               </a>
-
             </li>
             <li class="nav-item">
               <a href="index.php?page=donhang" class="nav-link">
                 <i class="nav-icon fas fa-chart-pie"></i>
-                <p>
-                  Đơn hàng
-
-                </p>
+                <p>Đơn hàng</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="index.php?page=user" class="nav-link">
                 <i class="nav-icon fas fa-tree"></i>
-                <p>
-                  Tài khoản
-                </p>
+                <p>Tài khoản</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="index.php?page=binhluan" class="nav-link">
                 <i class="nav-icon fas fa-edit"></i>
-                <p>
-                  Bình luận
-                </p>
+                <p>Bình luận</p>
               </a>
-            </li>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-search"></i>
-                <p>
-                  Search
-                </p>
+              <a href="/duan11/routes/User.php?action=logout" class="nav-link">
+                <i class="nav-icon fas fa-sign-out-alt"></i>
+                <p>Đăng xuất</p>
               </a>
-            </li>
             </li>
           </ul>
         </nav>
@@ -279,7 +259,6 @@
             <div class="col-12">
               <div class="card">
                 <div class="card-header">
-                <?php foreach ($orders as $order): ?>
                 <form method="GET" action="index.php">
                 <input type="hidden" name="page" value="donhang">
                     <label>Chọn trạng thái:</label>
@@ -303,15 +282,18 @@
                         <th>Khách hàng</th>
                         <th>Trạng thái</th>
                         <th>Thanh toán</th>
+                        <th>Tổng tiền</th>
                         <th>Hành động</th>
                       </tr>
                     </thead>
                     <tbody>
+                <?php foreach ($orders as $order): ?>
                       <tr>
                         <td><?=$order['id'] ?></td>
                         <td><?=$order['user_id'] ?></td>
                         <td><?=$order['status'] ?></td>
                         <td><?=$order['payment_status'] ?></td>
+                        <td><?=$order['total_amount'] ?></td>
                         <td>
                     <?php if ($order['status'] != 'completed' && $order['status'] != 'canceled'): ?>
                         <form action="index.php?page=capnhatorder" method="POST">
@@ -333,15 +315,7 @@
                       </tr>
 
                     </tbody>
-                    <tfoot>
-                      <tr>
-                        <th>Rendering engine</th>
-                        <th>Browser</th>
-                        <th>Platform(s)</th>
-                        <th>Engine version</th>
-                        <th>CSS grade</th>
-                      </tr>
-                    </tfoot>
+                   
                   </table>
                 </div>
                 <!-- /.card-body -->

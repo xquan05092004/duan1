@@ -121,7 +121,21 @@ if ($role === 'admin') {
                 echo "Vui lòng chọn đủ thông tin sản phẩm!";
             }
             break;
-
+            case 'checkout':
+                $userController->checkout();
+                break;
+            case 'process_checkout':
+                $userController->processCheckout();
+                break;
+            case 'order_success':
+                include 'app/views/guest/order_success.php';
+                break;
+            case 'manage_orders':
+                $userController->manageOrders();
+                break;
+            case 'cancel_order':
+                $userController->cancelOrder();
+                break;
         case 'view_cart':
             $userController->viewCart();
             break;
@@ -147,7 +161,7 @@ if ($role === 'admin') {
         case 'search':
             $userController->search();
             break;
-        
+
         case 'chitiet':
             isset($_GET['id']) ? $userController->showProductDetail($_GET['id']) : print("Không có sản phẩm!");
             break;
@@ -162,9 +176,9 @@ if ($role === 'admin') {
                 echo "Vui lòng chọn đủ thông tin sản phẩm!";
             }
             break;
-            case 'sanpham':
-                $userController->index();
-                break;
+        case 'sanpham':
+            $userController->index();
+            break;
         case 'view_cart':
             $userController->viewCart();
             break;
@@ -174,7 +188,21 @@ if ($role === 'admin') {
         case 'delete_cart':
             $userController->deleteCartItem();
             break;
-
+        case 'checkout':
+            $userController->checkout();
+            break;
+        case 'process_checkout':
+            $userController->processCheckout();
+            break;
+        case 'order_success':
+            include 'app/views/guest/order_success.php';
+            break;
+        case 'manage_orders':
+            $userController->manageOrders();
+            break;
+        case 'cancel_order':
+            $userController->cancelOrder();
+            break;
         case 'showCategory':
             isset($_GET['id']) ? $userController->showCategory($_GET['id']) : print("Không có danh mục!");
             break;

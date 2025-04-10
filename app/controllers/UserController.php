@@ -28,14 +28,21 @@ class UserController
         $this->productModel = new Product($this->conn);
     }
 
-    // Đóng kết nối khi kết thúc
     public function __destruct()
     {
         if ($this->conn) {
             $this->conn->close();
         }
     }
-
+     private function ensureConnection()
+    {
+        if ($this->conn->ping() === false) {
+            $this->conn = new mysqli("localhost", "root", "", "clothing_store");
+            if ($this->conn->connect_error) {
+                die("Kết nối cơ sở dữ liệu thất bại: " . $this->conn->connect_error);
+            }
+        }
+    }
     // Hiển thị trang chủ với danh sách sản phẩm
     public function home()
     {
@@ -79,13 +86,13 @@ class UserController
 
         // Lấy tất cả sản phẩm thuộc danh mục
         $products = $this->productModel->getProductsByCategoryId($categoryId);
-        
+
         // Lấy 1 danh mục
-        $category = $this->categoriesModel->getCategoriesById($categoryId); // nên đặt lại tên thành getCategoryById
-        
+        $category = $this->categoriesModel->getCategoriesById($categoryId);
+
         include __DIR__ . "/../views/guest/danhmuc.php";
     }
-    
+
     public function updateUser($id, $name, $phone, $email, $address)
     {
         if (empty($name) || empty($email)) {
@@ -191,72 +198,85 @@ class UserController
     }
     public function addToCart($product_id, $quantity, $color, $size)
     {
-        // Kiểm tra thông tin đầu vào
+        $this->ensureConnection();
+        if (!isset($_SESSION['user'])) {
+            $_SESSION['error'] = "Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng!";
+            header("Location: index.php?page=login");
+            exit;
+        }
+
         if (empty($product_id) || empty($quantity) || empty($color) || empty($size)) {
-            echo "Thiếu thông tin cần thiết!";
-            return;
+            $_SESSION['error'] = "Thiếu thông tin cần thiết để thêm vào giỏ hàng!";
+            header("Location: index.php?page=view_cart");
+            exit;
         }
 
-        // Đảm bảo phiên đã được khởi động
-        if (session_status() == PHP_SESSION_NONE) {
-            session_start();
-        }
+        $user_id = $_SESSION['user']['id'];
 
-        // Lấy thông tin sản phẩm từ cơ sở dữ liệu
         $query = "SELECT name, image, price FROM products WHERE id = ?";
         $stmt = $this->conn->prepare($query);
+        if (!$stmt) {
+            die("Lỗi prepare: " . $this->conn->error);
+        }
         $stmt->bind_param("i", $product_id);
         $stmt->execute();
         $result = $stmt->get_result();
         $product = $result->fetch_assoc();
 
         if (!$product) {
-            echo "Sản phẩm không tồn tại!";
-            return;
+            $_SESSION['error'] = "Sản phẩm không tồn tại!";
+            header("Location: index.php?page=view_cart");
+            exit;
         }
 
         $product_image = $product['image'] ?? '';
         $product_name = $product['name'] ?? '';
         $product_price = $product['price'] ?? 0;
 
-        // Tạo mục giỏ hàng
-        $item = [
-            'product_id' => $product_id,
-            'product_name' => $product_name,
-            'quantity' => $quantity,
-            'color' => $color,
-            'size' => $size,
-            'image' => $product_image,
-            'price' => $product_price
-        ];
-
-        // Khởi tạo giỏ hàng nếu chưa tồn tại
-        if (!isset($_SESSION['cart'])) {
-            $_SESSION['cart'] = [];
+        $query = "SELECT cart_id, quantity FROM cart WHERE user_id = ? AND product_id = ? AND color = ? AND size = ? AND status = 'active'";
+        $stmt = $this->conn->prepare($query);
+        if (!$stmt) {
+            die("Lỗi prepare: " . $this->conn->error);
         }
+        $stmt->bind_param("iiii", $user_id, $product_id, $color, $size);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $existing_item = $result->fetch_assoc();
 
-        // Thêm vào giỏ hàng trong phiên
-        $_SESSION['cart'][] = $item;
-
-        // Lưu vào cơ sở dữ liệu nếu người dùng đã đăng nhập
-        if (isset($_SESSION['user']) && isset($_SESSION['user']['id'])) {
-            $user_id = $_SESSION['user']['id'];
-
-            $query = "INSERT INTO cart (user_id, product_id, quantity, color, size, image, added_at, status) 
-                 VALUES (?, ?, ?, ?, ?, ?, NOW(), 'active')";
+        if ($existing_item) {
+            $new_quantity = $existing_item['quantity'] + $quantity;
+            $query = "UPDATE cart SET quantity = ? WHERE cart_id = ?";
             $stmt = $this->conn->prepare($query);
+            if (!$stmt) {
+                die("Lỗi prepare: " . $this->conn->error);
+            }
+            $stmt->bind_param("ii", $new_quantity, $existing_item['cart_id']);
+            $stmt->execute();
+        } else {
+            $query = "INSERT INTO cart (user_id, product_id, quantity, color, size, image, added_at, status) 
+                     VALUES (?, ?, ?, ?, ?, ?, NOW(), 'active')";
+            $stmt = $this->conn->prepare($query);
+            if (!$stmt) {
+                die("Lỗi prepare: " . $this->conn->error);
+            }
             $stmt->bind_param("iiiiis", $user_id, $product_id, $quantity, $color, $size, $product_image);
             $stmt->execute();
         }
 
-        // Chuyển hướng đến trang giỏ hàng
+        $_SESSION['message'] = "Sản phẩm đã được thêm vào giỏ hàng!";
         header("Location: index.php?page=view_cart");
         exit;
     }
 
     public function viewCart()
     {
-        // Lấy danh sách tất cả màu và size để hiển thị trong dropdown
+        $this->ensureConnection();
+        if (!isset($_SESSION['user'])) {
+            $_SESSION['error'] = "Vui lòng đăng nhập để xem giỏ hàng!";
+            header("Location: index.php?page=login");
+            exit;
+        }
+
         $available_colors = [];
         $available_sizes = [];
 
@@ -272,78 +292,35 @@ class UserController
             $available_sizes = $result->fetch_all(MYSQLI_ASSOC);
         }
 
-
-
-        // Đảm bảo phiên đã được khởi động
-        if (session_status() == PHP_SESSION_NONE) {
-            session_start();
+        $user_id = $_SESSION['user']['id'];
+        $query = "SELECT c.*, p.name as product_name, p.image as product_image, p.price,
+                 cl.color_code as color_name, s.name as size_name
+                 FROM cart c
+                 JOIN products p ON c.product_id = p.id
+                 LEFT JOIN colors cl ON c.color = cl.id
+                 LEFT JOIN sizes s ON c.size = s.id
+                 WHERE c.user_id = ? AND c.status = 'active'";
+        $stmt = $this->conn->prepare($query);
+        if (!$stmt) {
+            die("Lỗi prepare: " . $this->conn->error);
         }
+        $stmt->bind_param("i", $user_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $cart_items = $result->fetch_all(MYSQLI_ASSOC);
 
-        $cart_items = [];
-
-        if (isset($_SESSION['user']) && isset($_SESSION['user']['id'])) {
-            $user_id = $_SESSION['user']['id'];
-
-            // Lấy các mục giỏ hàng từ cơ sở dữ liệu cho người dùng đã đăng nhập
-            $query = "SELECT c.*, p.name as product_name, p.image as product_image, p.price,
-                  cl.color_code as color_name, s.name as size_name
-                  FROM cart c
-                  JOIN products p ON c.product_id = p.id
-                  LEFT JOIN colors cl ON c.color = cl.id
-                  LEFT JOIN sizes s ON c.size = s.id
-                  WHERE c.user_id = ? AND c.status = 'active'";
-
-            $stmt = $this->conn->prepare($query);
-            $stmt->bind_param("i", $user_id);
-            $stmt->execute();
-
-            $result = $stmt->get_result();
-            $cart_items = $result->fetch_all(MYSQLI_ASSOC);
-        } else {
-            // Sử dụng giỏ hàng trong phiên cho khách
-            $cart_items = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
-
-            // Lấy thông tin bổ sung cho các mục giỏ hàng trong phiên nếu cần
-            // Sử dụng giỏ hàng trong phiên cho khách
-            $cart_items = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
-
-            if (!empty($cart_items)) {
-                foreach ($cart_items as $key => $item) {
-                    // Lấy tên màu
-                    if (isset($item['color']) && is_numeric($item['color'])) {
-                        $query = "SELECT color_code FROM colors WHERE id = ?";
-                        $stmt = $this->conn->prepare($query);
-                        $stmt->bind_param("i", $item['color']);
-                        $stmt->execute();
-                        $result = $stmt->get_result();
-                        if ($color = $result->fetch_assoc()) {
-                            $cart_items[$key]['color_name'] = $color['color_code'];
-                        }
-                    }
-
-                    // Lấy tên kích thước
-                    if (isset($item['size']) && is_numeric($item['size'])) {
-                        $query = "SELECT name FROM sizes WHERE id = ?";
-                        $stmt = $this->conn->prepare($query);
-                        $stmt->bind_param("i", $item['size']);
-                        $stmt->execute();
-                        $result = $stmt->get_result();
-                        if ($size = $result->fetch_assoc()) {
-                            $cart_items[$key]['size_name'] = $size['name'];
-                        }
-                    }
-                }
-
-                // ✅ Cập nhật lại session để phản ánh dữ liệu mới
-                $_SESSION['cart'] = $cart_items;
-            }
-        }
-
-        // Hiển thị trang giỏ hàng
         include __DIR__ . '/../views/guest/cart_view.php';
     }
+
     public function updateCartVariant()
     {
+        $this->ensureConnection();
+        if (!isset($_SESSION['user'])) {
+            $_SESSION['error'] = "Vui lòng đăng nhập để cập nhật giỏ hàng!";
+            header("Location: index.php?page=login");
+            exit;
+        }
+
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
@@ -351,109 +328,329 @@ class UserController
         $color = $_POST['color'];
         $size = $_POST['size'];
         $quantity = isset($_POST['quantity']) ? intval($_POST['quantity']) : 1;
-        $cart_id_or_index = $_POST['cart_id'];
+        $cart_id = $_POST['cart_id'];
 
-        if (isset($_SESSION['user'])) {
-            // Người dùng đã đăng nhập → cập nhật DB
-            $query = "UPDATE cart SET color = ?, size = ?, quantity = ? WHERE cart_id = ?";
-            $stmt = $this->conn->prepare($query);
-            $stmt->bind_param("iiii", $color, $size, $quantity, $cart_id_or_index);
-            $stmt->execute();
-        } else {
-            // Người dùng chưa đăng nhập → cập nhật trong session
-            if (isset($_SESSION['cart'][$cart_id_or_index])) {
-                $_SESSION['cart'][$cart_id_or_index]['color'] = $color;
-                $_SESSION['cart'][$cart_id_or_index]['size'] = $size;
-                $_SESSION['cart'][$cart_id_or_index]['quantity'] = $quantity;
-            }
+        $query = "UPDATE cart SET color = ?, size = ?, quantity = ? WHERE cart_id = ?";
+        $stmt = $this->conn->prepare($query);
+        if (!$stmt) {
+            die("Lỗi prepare: " . $this->conn->error);
         }
+        $stmt->bind_param("iiii", $color, $size, $quantity, $cart_id);
+        $stmt->execute();
 
-
+        $_SESSION['message'] = "Giỏ hàng đã được cập nhật!";
         header("Location: index.php?page=view_cart");
         exit;
     }
 
     public function deleteCartItem()
     {
-        // Đảm bảo phiên đã được khởi động
-        if (session_status() == PHP_SESSION_NONE) {
-            session_start();
+        $this->ensureConnection();
+        if (!isset($_SESSION['user'])) {
+            $_SESSION['error'] = "Vui lòng đăng nhập để xóa sản phẩm khỏi giỏ hàng!";
+            header("Location: index.php?page=login");
+            exit;
         }
 
-        if (isset($_SESSION['user']) && isset($_SESSION['user']['id'])) {
-            // Đối với người dùng đã đăng nhập - xóa từ cơ sở dữ liệu
-            if (isset($_GET['id'])) {
-                $cart_id = $_GET['id'];
-                $user_id = $_SESSION['user']['id'];
+        if (isset($_GET['id'])) {
+            $cart_id = $_GET['id'];
+            $user_id = $_SESSION['user']['id'];
 
-                $query = "DELETE FROM cart WHERE cart_id = ? AND user_id = ?";
-                $stmt = $this->conn->prepare($query);
-                $stmt->bind_param("ii", $cart_id, $user_id);
-                $stmt->execute();
+            $query = "DELETE FROM cart WHERE cart_id = ? AND user_id = ?";
+            $stmt = $this->conn->prepare($query);
+            if (!$stmt) {
+                die("Lỗi prepare: " . $this->conn->error);
             }
-        } else {
-            // Đối với khách - xóa từ phiên
-            if (isset($_GET['index']) && isset($_SESSION['cart'][$_GET['index']])) {
-                unset($_SESSION['cart'][$_GET['index']]);
-                $_SESSION['cart'] = array_values($_SESSION['cart']); // Đặt lại các khóa mảng
-            }
+            $stmt->bind_param("ii", $cart_id, $user_id);
+            $stmt->execute();
+
+            $_SESSION['message'] = "Sản phẩm đã được xóa khỏi giỏ hàng!";
         }
 
-        // Chuyển hướng về trang giỏ hàng
         header("Location: index.php?page=view_cart");
         exit;
     }
-    public function update_cart()
+
+    public function checkout()
     {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['page']) && $_GET['page'] === 'update_cart') {
-            $input = json_decode(file_get_contents("php://input"), true);
-
-            if (isset($input['index'], $input['quantity'], $input['color'], $input['size'])) {
-                $index = $input['index'];
-                $_SESSION['cart'][$index]['quantity'] = (int)$input['quantity'];
-                $_SESSION['cart'][$index]['color_id'] = $input['color'];
-                $_SESSION['cart'][$index]['size_id'] = $input['size'];
-
-                echo json_encode(['status' => 'success']);
-            } else {
-                echo json_encode(['status' => 'error', 'message' => 'Thiếu dữ liệu']);
-            }
+        $this->ensureConnection();
+        if (!isset($_SESSION['user'])) {
+            header("Location: index.php?page=login");
             exit;
         }
+        include __DIR__ . '/../views/guest/checkout.php';
     }
-    public function createOrder()
+
+    public function processCheckout()
     {
-        $user_id = $_SESSION['user']['id'];
-
-        $query = "INSERT INTO orders (user_id, status, payment_status) VALUES (?, 'chưa xác nhận', 'chưa thanh toán')";
-        $stmt = $this->conn->prepare($query);
-        $stmt->bind_param("i", $user_id);
-        $stmt->execute();
-        $order_id = $this->conn->insert_id;
-
-        $query = "SELECT * FROM cart WHERE user_id = ? AND status = 'active'";
-        $stmt = $this->conn->prepare($query);
-        $stmt->bind_param("i", $user_id);
-        $stmt->execute();
-        $cartItems = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-
-        foreach ($cartItems as $item) {
-            $query = "INSERT INTO order_items (order_id, product_variant_id, quantity, price) 
-                      VALUES (?, ?, ?, ?)";
-            $stmt = $this->conn->prepare($query);
-            $stmt->bind_param("iiid", $order_id, $item['product_id'], $item['quantity'], $item['price']);
-            $stmt->execute();
+        $this->ensureConnection();
+        if (!isset($_SESSION['user'])) {
+            $_SESSION['error'] = "Vui lòng đăng nhập để thanh toán!";
+            header("Location: index.php?page=login");
+            exit;
         }
 
-        $query = "UPDATE cart SET status = 'ordered' WHERE user_id = ?";
+        $user_id = $_SESSION['user']['id'];
+
+        // Lấy dữ liệu từ bảng cart
+        $query = "SELECT c.*, p.price FROM cart c JOIN products p ON c.product_id = p.id WHERE c.user_id = ? AND c.status = 'active'";
         $stmt = $this->conn->prepare($query);
+        if ($stmt === false) {
+            error_log("Lỗi prepare (lấy dữ liệu giỏ hàng): " . $this->conn->error);
+            die("Lỗi prepare (lấy dữ liệu giỏ hàng): " . $this->conn->error);
+        }
         $stmt->bind_param("i", $user_id);
         $stmt->execute();
+        $result = $stmt->get_result();
+        $cart_items = $result->fetch_all(MYSQLI_ASSOC);
+        $stmt->close();
 
-        header('Location: /order/confirmation');
+        // Kiểm tra giỏ hàng
+        if (empty($cart_items)) {
+            $_SESSION['error'] = "Giỏ hàng của bạn đang trống!";
+            header("Location: index.php?page=view_cart");
+            exit;
+        }
+
+        // Ghi log dữ liệu giỏ hàng để kiểm tra
+        error_log("Cart items: " . json_encode($cart_items));
+
+        // Tính tổng số tiền
+        $total_amount = 0;
+        foreach ($cart_items as $item) {
+            if (!isset($item['price']) || !isset($item['quantity'])) {
+                error_log("Lỗi: Dữ liệu giỏ hàng không hợp lệ: " . json_encode($item));
+                $_SESSION['error'] = "Dữ liệu giỏ hàng không hợp lệ!";
+                header("Location: index.php?page=checkout");
+                exit;
+            }
+            $total_amount += $item['price'] * $item['quantity'];
+        }
+
+        // Thêm đơn hàng vào bảng orders
+        $street_address = $_POST['street_address'] ?? '';
+        $ward = $_POST['ward'] ?? '';
+        $district = $_POST['district'] ?? '';
+        $city = $_POST['city'] ?? '';
+        $address = "$street_address, $ward, $district, $city";
+        $payment_method = $_POST['payment_method'] ?? 1;
+
+        $query = "INSERT INTO orders (user_id, address, payment_method, status, payment_status, total_amount, created_at) 
+          VALUES (?, ?, ?, 'chưa xác nhận', 'chưa thanh toán', ?, NOW())";
+        $stmt = $this->conn->prepare($query);
+        if ($stmt === false) {
+            error_log("Lỗi prepare (thêm đơn hàng): " . $this->conn->error);
+            $_SESSION['error'] = "Lỗi hệ thống khi tạo đơn hàng: " . $this->conn->error;
+            header("Location: index.php?page=checkout");
+            exit;
+        }
+        $stmt->bind_param("isid", $user_id, $address, $payment_method, $total_amount);
+        if (!$stmt->execute()) {
+            error_log("Lỗi execute (thêm đơn hàng): " . $stmt->error);
+            $_SESSION['error'] = "Lỗi hệ thống khi tạo đơn hàng: " . $stmt->error;
+            header("Location: index.php?page=checkout");
+            exit;
+        }
+        $order_id = $stmt->insert_id;
+        $stmt->close();
+
+        // Thêm chi tiết đơn hàng vào bảng order_items
+        foreach ($cart_items as $item) {
+            // Lấy product_variant_id dựa trên product_id, color và size
+            $query = "SELECT pv.id FROM product_variants pv 
+                 WHERE pv.product_id = ? AND pv.color_id = ? AND pv.size_id = ? LIMIT 1";
+            $stmt = $this->conn->prepare($query);
+            if (!$stmt) {
+                error_log("Lỗi prepare (tìm variant): " . $this->conn->error);
+                die("Lỗi prepare (tìm variant): " . $this->conn->error);
+            }
+            $stmt->bind_param("iii", $item['product_id'], $item['color'], $item['size']);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $variant = $result->fetch_assoc();
+            $stmt->close();
+
+            if (!$variant || !isset($variant['id'])) {
+                error_log("Không tìm thấy variant cho sản phẩm: " . $item['product_id'] .
+                    ", màu: " . $item['color'] . ", size: " . $item['size']);
+                continue; // Bỏ qua item này nếu không tìm thấy variant
+            }
+
+            $product_variant_id = $variant['id'];
+
+            // Thêm vào bảng order_items với product_variant_id đúng
+            $query = "INSERT INTO order_items (order_id, product_variant_id, quantity, price) 
+                VALUES (?, ?, ?, ?)";
+            $stmt = $this->conn->prepare($query);
+            if (!$stmt) {
+                error_log("Lỗi prepare (thêm chi tiết đơn hàng): " . $this->conn->error);
+                die("Lỗi prepare (thêm chi tiết đơn hàng): " . $this->conn->error);
+            }
+            $stmt->bind_param("iiid", $order_id, $product_variant_id, $item['quantity'], $item['price']);
+            if (!$stmt->execute()) {
+                error_log("Lỗi execute (thêm chi tiết đơn hàng): " . $stmt->error);
+                die("Lỗi execute (thêm chi tiết đơn hàng): " . $stmt->error);
+            }
+            $stmt->close();
+        }
+
+        // Xóa giỏ hàng
+        $query = "DELETE FROM cart WHERE user_id = ? AND status = 'active'";
+        $stmt = $this->conn->prepare($query);
+        if (!$stmt) {
+            error_log("Lỗi prepare (xóa giỏ hàng): " . $this->conn->error);
+            die("Lỗi prepare (xóa giỏ hàng): " . $this->conn->error);
+        }
+        $stmt->bind_param("i", $user_id);
+        $stmt->execute();
+        $stmt->close();
+
+        unset($_SESSION['cart']);
+        $_SESSION['message'] = "Đơn hàng đã được đặt thành công!";
+        $_SESSION['last_order_id'] = $order_id;
+        header("Location: index.php?page=order_success");
         exit;
     }
-    
+
+    public function manageOrders()
+    {
+        $this->ensureConnection();
+        if (!isset($_SESSION['user'])) {
+            header("Location: index.php?page=login");
+            exit;
+        }
+
+        $user_id = $_SESSION['user']['id'];
+
+        // Lấy danh sách đơn hàng
+        $query = "SELECT o.id, o.created_at, o.total_amount, o.status, o.payment_status, o.payment_method, pm.name as payment_method_name 
+      FROM orders o 
+      LEFT JOIN payment_methods pm ON o.payment_method = pm.id 
+      WHERE o.user_id = ? 
+      ORDER BY o.created_at DESC";
+        $stmt = $this->conn->prepare($query);
+        if ($stmt === false) {
+            error_log("Lỗi prepare (truy vấn đơn hàng): " . $this->conn->error);
+            die("Lỗi prepare (truy vấn đơn hàng): " . $this->conn->error);
+        }
+        $stmt->bind_param("i", $user_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $orders = $result->fetch_all(MYSQLI_ASSOC);
+        $stmt->close();
+
+        // Nếu không có đơn hàng, trả về sớm
+        if (empty($orders)) {
+            include __DIR__ . '/../views/guest/manage_orders.php';
+            return;
+        }
+
+        // Lấy danh sách order_id để truy vấn chi tiết đơn hàng
+        $order_ids = array_column($orders, 'id');
+
+        // Kiểm tra xem $order_ids có rỗng hay không
+        if (empty($order_ids)) {
+            error_log("Không có order_ids để truy vấn chi tiết đơn hàng.");
+            foreach ($orders as &$order) {
+                $order['items'] = [];
+            }
+            include __DIR__ . '/../views/guest/manage_orders.php';
+            return;
+        }
+
+        // Truy vấn chi tiết đơn hàng
+        $placeholders = implode(',', array_fill(0, count($order_ids), '?'));
+
+        // Ghi log để kiểm tra
+        error_log("Order IDs: " . json_encode($order_ids));
+        error_log("Placeholders: " . $placeholders);
+
+        // Sửa lại truy vấn để lấy đúng dữ liệu
+        $query = "SELECT oi.order_id, oi.quantity, oi.price, p.name as product_name,
+              s.name as size_name, c.color_code as color
+              FROM order_items oi 
+              JOIN product_variants pv ON oi.product_variant_id = pv.id
+              JOIN products p ON pv.product_id = p.id 
+              LEFT JOIN sizes s ON pv.size_id = s.id
+              LEFT JOIN colors c ON pv.color_id = c.id
+              WHERE oi.order_id IN ($placeholders)";
+
+        $stmt = $this->conn->prepare($query);
+        if ($stmt === false) {
+            error_log("Lỗi prepare (truy vấn chi tiết đơn hàng): " . $this->conn->error);
+            die("Lỗi prepare (truy vấn chi tiết đơn hàng): " . $this->conn->error);
+        }
+
+        // Chuẩn bị các tham số cho bind_param
+        $types = str_repeat('i', count($order_ids));
+        $stmt->bind_param($types, ...$order_ids);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $order_items = $result->fetch_all(MYSQLI_ASSOC);
+        $stmt->close();
+
+        // Gắn chi tiết đơn hàng vào từng order và đảm bảo không trùng lặp
+        foreach ($orders as &$order) {
+            $order['items'] = [];
+        }
+
+        foreach ($order_items as $item) {
+            foreach ($orders as &$order) {
+                if ($item['order_id'] == $order['id']) {
+                    $order['items'][] = $item;
+                    break; // Thoát sau khi thêm vào đơn hàng phù hợp
+                }
+            }
+        }
+
+        include __DIR__ . '/../views/guest/manage_orders.php';
+    }
+    public function cancelOrder()
+    {
+        $this->ensureConnection();
+        if (!isset($_SESSION['user'])) {
+            header("Location: index.php?page=login");
+            exit;
+        }
+
+        if (!isset($_GET['id'])) {
+            echo "Không tìm thấy đơn hàng!";
+            return;
+        }
+
+        $order_id = (int)$_GET['id'];
+        $user_id = $_SESSION['user']['id'];
+
+        $query = "SELECT * FROM orders WHERE id = ? AND user_id = ? AND status = 'chưa xác nhận'";
+        $stmt = $this->conn->prepare($query);
+        if (!$stmt) {
+            die("Lỗi prepare: " . $this->conn->error);
+        }
+        $stmt->bind_param("ii", $order_id, $user_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $order = $result->fetch_assoc();
+
+        if (!$order) {
+            $_SESSION['error'] = "Đơn hàng không tồn tại hoặc không thể hủy!";
+            header("Location: index.php?page=manage_orders");
+            exit;
+        }
+
+        $query = "UPDATE orders SET status = 'hủy' WHERE id = ?";
+        $stmt = $this->conn->prepare($query);
+        if (!$stmt) {
+            die("Lỗi prepare: " . $this->conn->error);
+        }
+        $stmt->bind_param("i", $order_id);
+        $stmt->execute();
+
+        $_SESSION['message'] = "Đơn hàng đã được hủy thành công!";
+        header("Location: index.php?page=manage_orders");
+        exit;
+    }
+
+
     public function logout()
     {
         session_start();

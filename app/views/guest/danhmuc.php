@@ -244,6 +244,10 @@
                             <i class="fa-light fa-basket-shopping"></i>
                             <span nh-total-quantity-mini-cart></span>
                         </a>
+                        <a class="btn-action-header" title="Giỏ hàng" href="index.php?page=manage_orders">
+                            <i class="fa fa-address-book"></i>
+                            <span nh-total-quantity-mini-cart></span>
+                        </a>
                     </div>
                 </div>
             </div>

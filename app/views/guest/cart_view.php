@@ -142,6 +142,66 @@
             font-display: swap;
         }
 
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .user-dropdown-wrapper {
+            position: relative;
+        }
+
+        .user-toggle {
+            cursor: pointer;
+            font-size: 20px;
+            color: white;
+        }
+
+        .dropdown-user {
+            position: absolute;
+            top: 120%;
+            right: 0;
+            background-color: #1a1a1a;
+            color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            padding: 10px;
+            min-width: 180px;
+            display: none;
+            z-index: 999;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .dropdown-user .nav-link {
+            display: block;
+            padding: 6px 10px;
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .dropdown-user .nav-link:hover {
+            background-color: #2a2a2a;
+            border-radius: 4px;
+        }
+
+        .logout-zoom:active {
+            transform: scale(1.1);
+        }
+
+        /* Icon button style */
+        .btn-action-header {
+            font-size: 20px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 32px;
+            width: 32px;
+            transition: 0.2s;
+        }
+
         /* ]]> */
     </style>
 
@@ -176,6 +236,19 @@
                 console.error('Lỗi cập nhật:', error);
             });
     }
+    function toggleDropdown() {
+      const dropdown = document.getElementById("dropdownUser");
+      dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+    }
+
+    // Tự động ẩn nếu click ra ngoài
+    document.addEventListener("click", function(event) {
+      const dropdown = document.getElementById("dropdownUser");
+      const toggle = document.querySelector(".user-toggle");
+      if (!toggle.contains(event.target) && !dropdown.contains(event.target)) {
+        dropdown.style.display = "none";
+      }
+    });
 </script>
 
 <body class=" product">
@@ -219,7 +292,7 @@
                 </div>
                 <div class="col-md-4 col-12">
                     <div nh-block="qhdw2uy" nh-block-cache="true" class="">
-                        <div class="logo-section "><a href="index.html"><img class="img-fluid"
+                        <div class="logo-section "><a href="index.php?page=home"><img class="img-fluid"
                                     src="assets/templates/thoitrang05/assets/media/logo/logo.png" alt="logo"></a>
                         </div>
                     </div>
@@ -244,24 +317,32 @@
                             </form>
                         </div>
                     </div>
-                    <div nh-block="g1syznh" nh-block-cache="true" class="float-lg-right">
-                        <div nh-mini-member class="entire-action-header"><a class="btn-action-header"
-                                title="Tài khoản" href="javascript:;" data-toggle="modal"
-                                data-target="#login-modal"><i class="fa-light fa-user"></i></a></div>
-                    </div>
-                    <div nh-block="mgqafzd" nh-block-cache="true" class="float-right">
-                        <div class="entire-action-header"><a class="btn-action-header btn-mini-wishlist"
-                                title="Yêu thích" href="yeu-thich.html"><i class="fa-light fa-heart"></i><span
-                                    wishlist-total="all" class="items-number">0</span> </a></div>
-                    </div>
-                    <div nh-block="i57yxn3" nh-block-cache="true" class="float-right">
-                        <div class="entire-action-header">
-                            <a class="btn-mini-cart btn-action-header" title="Giỏ hàng"
-                                href="index.php?page=view_cart">
-                                <i class="fa-light fa-basket-shopping"></i>
-                                <span nh-total-quantity-mini-cart class="items-number">0</span>
+                    <div class="header-actions">
+                        <?php if (isset($_SESSION['user'])): ?>
+                            <div class="user-dropdown-wrapper">
+                                <div class="user-toggle" onclick="toggleDropdown()">
+                                    <i class="fa-light fa-user"></i>
+                                </div>
+                                <div class="dropdown-user" id="dropdownUser">
+                                    <a class="nav-link">👋 Xin chào, <strong><?= $_SESSION['user']['name'] ?></strong></a>
+                                    <a class="nav-link logout-zoom" href="/duan11/routes/User.php?action=logout">Đăng xuất</a>
+                                </div>
+                            </div>
+                        <?php else: ?>
+                            <a class="btn-action-header" title="Tài khoản" href="app/views/users/login.php">
+                                <i class="fa-light fa-user"></i>
                             </a>
-                        </div>
+                        <?php endif; ?>
+
+                        <!-- Icon giỏ hàng -->
+                        <a class="btn-action-header" title="Giỏ hàng" href="index.php?page=view_cart">
+                            <i class="fa-light fa-basket-shopping"></i>
+                            <span nh-total-quantity-mini-cart></span>
+                        </a>
+                        <a class="btn-action-header" title="Giỏ hàng" href="index.php?page=manage_orders">
+                            <i class="fa fa-address-book"></i>
+                            <span nh-total-quantity-mini-cart></span>
+                        </a>
                     </div>
 
                 </div>
@@ -465,123 +546,123 @@
         </div>
     </footer>
     <script type="application/ld+json">
-    {
-      "@context": "https:\/\/schema.org",
-      "@type": "Organization",
-      "name": "Web4s Company",
-      "legalName": "C\u00d4NG TY C\u1ed4 PH\u1ea6N GI\u1ea2I PH\u00c1P C\u00d4NG NGH\u1ec6 4S",
-      "url": "https:\/\/thoitrang09.themeweb4s.com\/",
-      "logo": "https:\/\/cdn3533.cdn-template-4s.com\/media\/logo\/logo-1970.png"
-    }
-  </script>
+        {
+            "@context": "https:\/\/schema.org",
+            "@type": "Organization",
+            "name": "Web4s Company",
+            "legalName": "C\u00d4NG TY C\u1ed4 PH\u1ea6N GI\u1ea2I PH\u00c1P C\u00d4NG NGH\u1ec6 4S",
+            "url": "https:\/\/thoitrang09.themeweb4s.com\/",
+            "logo": "https:\/\/cdn3533.cdn-template-4s.com\/media\/logo\/logo-1970.png"
+        }
+    </script>
 
-  <script type="application/ld+json">
-    {
-      "@context": "https:\/\/schema.org",
-      "@type": "WebSite",
-      "url": "https:\/\/thoitrang09.themeweb4s.com",
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https:\/\/thoitrang09.themeweb4s.com\/tim-kiem?keyword={query}",
-        "query-input": "required name=query"
-      }
-    }
-  </script>
+    <script type="application/ld+json">
+        {
+            "@context": "https:\/\/schema.org",
+            "@type": "WebSite",
+            "url": "https:\/\/thoitrang09.themeweb4s.com",
+            "potentialAction": {
+                "@type": "SearchAction",
+                "target": "https:\/\/thoitrang09.themeweb4s.com\/tim-kiem?keyword={query}",
+                "query-input": "required name=query"
+            }
+        }
+    </script>
 
-  <script
-    src="assets/templates/thoitrang05/assets/lib/jquery/jquery-3.6.0.min.js"
-    type="text/javascript"></script>
-  <script
-    src="assets/templates/thoitrang05/assets/lib/jquery-lazy/jquery.lazy.min.js"
-    type="text/javascript"></script>
-  <script
-    src="assets/templates/thoitrang05/assets/lib/jquery-lazy/jquery.lazy.plugins.min.js"
-    type="text/javascript"></script>
-  <script
-    src="assets/templates/thoitrang05/assets/lib/jquery/jquery.validate.min.js"
-    type="text/javascript"></script>
-  <script
-    src="assets/templates/thoitrang05/assets/lib/jquery/jquery.cookie.min.js"
-    type="text/javascript"></script>
-  <script
-    src="assets/templates/thoitrang05/assets/lib/bootstrap/popper.min.js"
-    type="text/javascript"></script>
-  <script
-    src="assets/templates/thoitrang05/assets/lib/bootstrap/util.js"
-    type="text/javascript"></script>
-  <script
-    src="assets/templates/thoitrang05/assets/lib/bootstrap/dropdown.js"
-    type="text/javascript"></script>
-  <script
-    src="assets/templates/thoitrang05/assets/lib/bootstrap/collapse.js"
-    type="text/javascript"></script>
-  <script
-    src="assets/templates/thoitrang05/assets/lib/bootstrap/modal.js"
-    type="text/javascript"></script>
-  <script
-    src="assets/templates/thoitrang05/assets/lib/bootstrap/toast.js"
-    type="text/javascript"></script>
-  <script
-    src="assets/templates/thoitrang05/assets/lib/bootstrap/tab.js"
-    type="text/javascript"></script>
-  <script
-    src="assets/templates/thoitrang05/assets/lib/swiper/swiper-bundle.min.js"
-    type="text/javascript"></script>
-  <script
-    src="assets/templates/thoitrang05/assets/js/constants.js"
-    type="text/javascript"></script>
-  <script
-    src="assets/templates/thoitrang05/assets/js/locales/vi.js"
-    type="text/javascript"></script>
-  <script
-    src="assets/templates/thoitrang05/assets/js/lazy.js"
-    type="text/javascript"></script>
+    <script
+        src="assets/templates/thoitrang05/assets/lib/jquery/jquery-3.6.0.min.js"
+        type="text/javascript"></script>
+    <script
+        src="assets/templates/thoitrang05/assets/lib/jquery-lazy/jquery.lazy.min.js"
+        type="text/javascript"></script>
+    <script
+        src="assets/templates/thoitrang05/assets/lib/jquery-lazy/jquery.lazy.plugins.min.js"
+        type="text/javascript"></script>
+    <script
+        src="assets/templates/thoitrang05/assets/lib/jquery/jquery.validate.min.js"
+        type="text/javascript"></script>
+    <script
+        src="assets/templates/thoitrang05/assets/lib/jquery/jquery.cookie.min.js"
+        type="text/javascript"></script>
+    <script
+        src="assets/templates/thoitrang05/assets/lib/bootstrap/popper.min.js"
+        type="text/javascript"></script>
+    <script
+        src="assets/templates/thoitrang05/assets/lib/bootstrap/util.js"
+        type="text/javascript"></script>
+    <script
+        src="assets/templates/thoitrang05/assets/lib/bootstrap/dropdown.js"
+        type="text/javascript"></script>
+    <script
+        src="assets/templates/thoitrang05/assets/lib/bootstrap/collapse.js"
+        type="text/javascript"></script>
+    <script
+        src="assets/templates/thoitrang05/assets/lib/bootstrap/modal.js"
+        type="text/javascript"></script>
+    <script
+        src="assets/templates/thoitrang05/assets/lib/bootstrap/toast.js"
+        type="text/javascript"></script>
+    <script
+        src="assets/templates/thoitrang05/assets/lib/bootstrap/tab.js"
+        type="text/javascript"></script>
+    <script
+        src="assets/templates/thoitrang05/assets/lib/swiper/swiper-bundle.min.js"
+        type="text/javascript"></script>
+    <script
+        src="assets/templates/thoitrang05/assets/js/constants.js"
+        type="text/javascript"></script>
+    <script
+        src="assets/templates/thoitrang05/assets/js/locales/vi.js"
+        type="text/javascript"></script>
+    <script
+        src="assets/templates/thoitrang05/assets/js/lazy.js"
+        type="text/javascript"></script>
 
-  <script
-    src="assets/templates/thoitrang05/assets/js/main.js"
-    type="text/javascript"></script>
-  <script
-    src="assets/templates/thoitrang05/assets/js/menu.js"
-    type="text/javascript"></script>
-  <script
-    src="assets/templates/thoitrang05/assets/js/search.js"
-    type="text/javascript"></script>
-  <script
-    src="assets/templates/thoitrang05/assets/js/product.js"
-    type="text/javascript"></script>
-  <script
-    src="assets/templates/thoitrang05/assets/js/order.js"
-    type="text/javascript"></script>
-  <script
-    src="assets/templates/thoitrang05/assets/js/wishlist.js"
-    type="text/javascript"></script>
-  <script
-    src="assets/templates/thoitrang05/assets/js/compare.js"
-    type="text/javascript"></script>
-  <script
-    src="assets/templates/thoitrang05/assets/js/member.js"
-    type="text/javascript"></script>
-  <script
-    src="assets/templates/thoitrang05/assets/js/contact.js"
-    type="text/javascript"></script>
-  <script
-    src="assets/templates/thoitrang05/assets/js/custom.js"
-    type="text/javascript"></script>
-  <script>
-    function toggleDropdown() {
-      const dropdown = document.getElementById("dropdownUser");
-      dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
-    }
+    <script
+        src="assets/templates/thoitrang05/assets/js/main.js"
+        type="text/javascript"></script>
+    <script
+        src="assets/templates/thoitrang05/assets/js/menu.js"
+        type="text/javascript"></script>
+    <script
+        src="assets/templates/thoitrang05/assets/js/search.js"
+        type="text/javascript"></script>
+    <script
+        src="assets/templates/thoitrang05/assets/js/product.js"
+        type="text/javascript"></script>
+    <script
+        src="assets/templates/thoitrang05/assets/js/order.js"
+        type="text/javascript"></script>
+    <script
+        src="assets/templates/thoitrang05/assets/js/wishlist.js"
+        type="text/javascript"></script>
+    <script
+        src="assets/templates/thoitrang05/assets/js/compare.js"
+        type="text/javascript"></script>
+    <script
+        src="assets/templates/thoitrang05/assets/js/member.js"
+        type="text/javascript"></script>
+    <script
+        src="assets/templates/thoitrang05/assets/js/contact.js"
+        type="text/javascript"></script>
+    <script
+        src="assets/templates/thoitrang05/assets/js/custom.js"
+        type="text/javascript"></script>
+    <script>
+        function toggleDropdown() {
+            const dropdown = document.getElementById("dropdownUser");
+            dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+        }
 
-    // Tự động ẩn nếu click ra ngoài
-    document.addEventListener("click", function(event) {
-      const dropdown = document.getElementById("dropdownUser");
-      const toggle = document.querySelector(".user-toggle");
-      if (!toggle.contains(event.target) && !dropdown.contains(event.target)) {
-        dropdown.style.display = "none";
-      }
-    });
-  </script>
+        // Tự động ẩn nếu click ra ngoài
+        document.addEventListener("click", function(event) {
+            const dropdown = document.getElementById("dropdownUser");
+            const toggle = document.querySelector(".user-toggle");
+            if (!toggle.contains(event.target) && !dropdown.contains(event.target)) {
+                dropdown.style.display = "none";
+            }
+        });
+    </script>
 </body>
 
 </html>
