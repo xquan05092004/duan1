@@ -156,9 +156,18 @@ if ($role === 'admin') {
         case 'filter_variant':
             $userController->filterByVariant();
             break;
-
+        case 'donhangct':
+            switch ($action) {
+                case 'view':
+                    $adminController->view($_GET['id']);
+                    break;
+                default:
+                    $adminController->listOrder(); // hiển thị danh sách đơn hàng
+                    break;
+            }
+            break;
         default:
-            include 'app/views/guest/list.php'; // Trang chủ
+            include 'app/views/admin/list.php'; // Trang chủ
             break;
     }
 } else {

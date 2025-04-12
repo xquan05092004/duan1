@@ -64,27 +64,24 @@ class AdminController
             echo "❌ Không có ID danh mục!";
         }
     }
-
-    
-
-
-    public function deleteCategories() {
+    public function deleteCategories()
+    {
         $id = $_GET['id'] ?? null;
-    
+
         if ($id) {
             $result = $this->categoriesModel->deleteCategories($id);
-            
+
             if ($result['success']) {
                 $_SESSION['message'] = "✅ " . $result['message'];
             } else {
                 $_SESSION['error'] = "❌ " . $result['message'];
             }
         }
-    
+
         header("Location: index.php?page=categories&action=index");
         exit;
     }
-    
+
     public function listProducts()
     {
         $products = $this->productModel->getAllProducts();
@@ -256,16 +253,50 @@ class AdminController
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'], $_POST['status'])) {
             $id = $_POST['id'];
-            $status = $_POST['status'];
+            $newStatus = strtolower(trim($_POST['status']));  // ép thường
 
-            if ($this->orderModel->updateStatusOrder($id, $status)) {
-                header("Location: index.php?page=donhang");
-                exit();
+            $currentOrder = $this->orderModel->getOrderById($id);
+            if (!$currentOrder) {
+                echo "Không tìm thấy đơn hàng.";
+                return;
+            }
+
+            $currentStatus = strtolower(trim($currentOrder['status'])); // ép thường
+
+            // Danh sách trạng thái theo thứ tự
+            $statusList = ['chưa xác nhận', 'xác nhận', 'đang giao', 'hoàn thành'];
+
+            $currentIndex = array_search($currentStatus, $statusList);
+            $newIndex = array_search($newStatus, $statusList);
+
+            if ($currentIndex === false || $newIndex === false) {
+                echo "Trạng thái không hợp lệ.";
+                return;
+            }
+
+            // Cho phép cập nhật nếu là trạng thái kế tiếp hoặc 'hủy'
+            if ($newIndex === $currentIndex + 1 || $newStatus === 'hủy') {
+                if ($this->orderModel->updateStatusOrder($id, $newStatus)) {
+                    header("Location: index.php?page=donhang");
+                    exit();
+                } else {
+                    echo "Cập nhật trạng thái thất bại.";
+                }
+            } else {
+                echo "Không thể cập nhật trạng thái. Vui lòng tuân theo trình tự.";
             }
         } else {
-            echo "Lỗi cập nhật trạng thái";
+            echo "Dữ liệu gửi không hợp lệ.";
         }
     }
+    public function view($id) {
+        $order = $this->orderModel->getOrderInfo($id);
+        $orderDetails = $this->orderModel->getOrderDetailsById($id);
+    
+        include 'app/views/admin/order_detail.php';
+    }
+    
+
     public function listComments()
     {
         $commentModel = new Comment();

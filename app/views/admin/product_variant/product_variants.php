@@ -165,6 +165,24 @@ $variants = $db->runQuery($query);
             <!-- Main content -->
             <section class="content">
                 <div class="container-fluid">
+                    <?php if (isset($_SESSION['success'])): ?>
+                        <div class="alert alert-success">
+                            <?php
+                            echo $_SESSION['success'];
+                            unset($_SESSION['success']);
+                            ?>
+                        </div>
+                    <?php endif; ?>
+
+                    <?php if (isset($_SESSION['error'])): ?>
+                        <div class="alert alert-danger">
+                            <?php
+                            echo $_SESSION['error'];
+                            unset($_SESSION['error']);
+                            ?>
+                        </div>
+                    <?php endif; ?>
+
                     <a href="index.php?page=add_variant" class="btn btn-success mb-3">➕ Thêm biến thể mới</a>
 
                     <table class="table table-bordered table-hover bg-white" id="productTable">

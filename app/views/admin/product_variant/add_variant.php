@@ -14,10 +14,19 @@ if (isset($_SESSION['error'])) {
 }
 ?>
 
-<form action="/duan1web/duan11/routes/ProductVariant.php?action=store" method="POST">
+<form action="/duan11/routes/ProductVariant.php?action=store" method="POST">
 
-    <label>Product ID:</label>
-    <input type="number" name="product_id" required><br><br>
+    <label>Sản phẩm:</label>
+    <select name="product_id" id="product-select" required>
+        <option value="">Chọn sản phẩm</option>
+        <?php
+        require_once(__DIR__ . '/../../../models/Product.php');
+        $products = Product::all();
+        foreach ($products as $product) {
+            echo "<option value='" . $product['id'] . "'>" . $product['name'] . "</option>";
+        }
+        ?>
+    </select><br><br>
 
     <label>Size:</label>
     <select name="size_id[]" id="size-select" multiple required>
@@ -44,13 +53,22 @@ if (isset($_SESSION['error'])) {
     <button type="submit">Thêm</button>
 </form>
 
-<a href="/duan1web/duan11/index.php?page=product_variants">← Quay lại danh sách</a>
+<a href="/duan11/index.php?page=product_variants">← Quay lại danh sách</a>
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         // Khởi tạo Choices cho các dropdown
         var sizeSelect = document.getElementById('size-select');
         var colorSelect = document.getElementById('color-select');
+        // Thêm vào trong đoạn script đã có
+        var productSelect = document.getElementById('product-select');
+        new Choices(productSelect, {
+            removeItemButton: false,
+            searchEnabled: true,
+            itemSelectText: 'Chọn sản phẩm',
+            placeholder: true,
+            placeholderValue: 'Chọn sản phẩm',
+        });
 
         // Khởi tạo Choices.js cho các trường chọn nhiều
         new Choices(sizeSelect, {

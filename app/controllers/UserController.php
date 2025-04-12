@@ -393,7 +393,6 @@ class UserController
 
         $user_id = $_SESSION['user']['id'];
 
-        // Lấy dữ liệu từ bảng cart
         $query = "SELECT c.*, p.price FROM cart c JOIN products p ON c.product_id = p.id WHERE c.user_id = ? AND c.status = 'active'";
         $stmt = $this->conn->prepare($query);
         if ($stmt === false) {
@@ -405,18 +404,14 @@ class UserController
         $result = $stmt->get_result();
         $cart_items = $result->fetch_all(MYSQLI_ASSOC);
         $stmt->close();
-
-        // Kiểm tra giỏ hàng
         if (empty($cart_items)) {
             $_SESSION['error'] = "Giỏ hàng của bạn đang trống!";
             header("Location: index.php?page=view_cart");
             exit;
         }
 
-        // Ghi log dữ liệu giỏ hàng để kiểm tra
         error_log("Cart items: " . json_encode($cart_items));
 
-        // Tính tổng số tiền
         $total_amount = 0;
         foreach ($cart_items as $item) {
             if (!isset($item['price']) || !isset($item['quantity'])) {
@@ -428,7 +423,6 @@ class UserController
             $total_amount += $item['price'] * $item['quantity'];
         }
 
-        // Thêm đơn hàng vào bảng orders
         $street_address = $_POST['street_address'] ?? '';
         $ward = $_POST['ward'] ?? '';
         $district = $_POST['district'] ?? '';
@@ -455,9 +449,7 @@ class UserController
         $order_id = $stmt->insert_id;
         $stmt->close();
 
-        // Thêm chi tiết đơn hàng vào bảng order_items
         foreach ($cart_items as $item) {
-            // Lấy product_variant_id dựa trên product_id, color và size
             $query = "SELECT pv.id FROM product_variants pv 
                  WHERE pv.product_id = ? AND pv.color_id = ? AND pv.size_id = ? LIMIT 1";
             $stmt = $this->conn->prepare($query);
@@ -474,12 +466,10 @@ class UserController
             if (!$variant || !isset($variant['id'])) {
                 error_log("Không tìm thấy variant cho sản phẩm: " . $item['product_id'] .
                     ", màu: " . $item['color'] . ", size: " . $item['size']);
-                continue; // Bỏ qua item này nếu không tìm thấy variant
+                continue;
             }
 
             $product_variant_id = $variant['id'];
-
-            // Thêm vào bảng order_items với product_variant_id đúng
             $query = "INSERT INTO order_items (order_id, product_variant_id, quantity, price) 
                 VALUES (?, ?, ?, ?)";
             $stmt = $this->conn->prepare($query);
@@ -494,8 +484,6 @@ class UserController
             }
             $stmt->close();
         }
-
-        // Xóa giỏ hàng
         $query = "DELETE FROM cart WHERE user_id = ? AND status = 'active'";
         $stmt = $this->conn->prepare($query);
         if (!$stmt) {
@@ -523,7 +511,6 @@ class UserController
 
         $user_id = $_SESSION['user']['id'];
 
-        // Lấy danh sách đơn hàng
         $query = "SELECT o.id, o.created_at, o.total_amount, o.status, o.payment_status, o.payment_method, pm.name as payment_method_name 
       FROM orders o 
       LEFT JOIN payment_methods pm ON o.payment_method = pm.id 
@@ -540,16 +527,14 @@ class UserController
         $orders = $result->fetch_all(MYSQLI_ASSOC);
         $stmt->close();
 
-        // Nếu không có đơn hàng, trả về sớm
+
         if (empty($orders)) {
             include __DIR__ . '/../views/guest/manage_orders.php';
             return;
         }
 
-        // Lấy danh sách order_id để truy vấn chi tiết đơn hàng
         $order_ids = array_column($orders, 'id');
 
-        // Kiểm tra xem $order_ids có rỗng hay không
         if (empty($order_ids)) {
             error_log("Không có order_ids để truy vấn chi tiết đơn hàng.");
             foreach ($orders as &$order) {
@@ -559,14 +544,12 @@ class UserController
             return;
         }
 
-        // Truy vấn chi tiết đơn hàng
         $placeholders = implode(',', array_fill(0, count($order_ids), '?'));
 
         // Ghi log để kiểm tra
         error_log("Order IDs: " . json_encode($order_ids));
         error_log("Placeholders: " . $placeholders);
 
-        // Sửa lại truy vấn để lấy đúng dữ liệu
         $query = "SELECT oi.order_id, oi.quantity, oi.price, p.name as product_name,
               s.name as size_name, c.color_code as color
               FROM order_items oi 
@@ -582,7 +565,6 @@ class UserController
             die("Lỗi prepare (truy vấn chi tiết đơn hàng): " . $this->conn->error);
         }
 
-        // Chuẩn bị các tham số cho bind_param
         $types = str_repeat('i', count($order_ids));
         $stmt->bind_param($types, ...$order_ids);
         $stmt->execute();
@@ -590,7 +572,6 @@ class UserController
         $order_items = $result->fetch_all(MYSQLI_ASSOC);
         $stmt->close();
 
-        // Gắn chi tiết đơn hàng vào từng order và đảm bảo không trùng lặp
         foreach ($orders as &$order) {
             $order['items'] = [];
         }
@@ -599,7 +580,7 @@ class UserController
             foreach ($orders as &$order) {
                 if ($item['order_id'] == $order['id']) {
                     $order['items'][] = $item;
-                    break; // Thoát sau khi thêm vào đơn hàng phù hợp
+                    break;
                 }
             }
         }
@@ -650,6 +631,7 @@ class UserController
         header("Location: index.php?page=manage_orders");
         exit;
     }
+    
 
     // lọc sản phẩm theo giá
     public function filterByPrice() {

@@ -240,14 +240,9 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1>DataTables</h1>
+              <h1>Đơn hàng</h1>
             </div>
-            <div class="col-sm-6">
-              <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">DataTables</li>
-              </ol>
-            </div>
+            
           </div>
         </div><!-- /.container-fluid -->
       </section>
@@ -259,8 +254,8 @@
             <div class="col-12">
               <div class="card">
                 <div class="card-header">
-                <form method="GET" action="index.php">
-                <input type="hidden" name="page" value="donhang">
+                  <form method="GET" action="index.php">
+                    <input type="hidden" name="page" value="donhang">
                     <label>Chọn trạng thái:</label>
                     <select name="status" onchange="this.form.submit()">
                       <option value="">Tất cả</option>
@@ -274,7 +269,7 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                  
+
                   <table id="example2" class="table table-bordered table-hover">
                     <thead>
                       <tr>
@@ -283,39 +278,57 @@
                         <th>Trạng thái</th>
                         <th>Thanh toán</th>
                         <th>Tổng tiền</th>
+                        <th>Chi tiết</th>
                         <th>Hành động</th>
                       </tr>
                     </thead>
                     <tbody>
-                <?php foreach ($orders as $order): ?>
-                      <tr>
-                        <td><?=$order['id'] ?></td>
-                        <td><?=$order['user_id'] ?></td>
-                        <td><?=$order['status'] ?></td>
-                        <td><?=$order['payment_status'] ?></td>
-                        <td><?=$order['total_amount'] ?></td>
-                        <td>
-                    <?php if ($order['status'] != 'completed' && $order['status'] != 'canceled'): ?>
-                        <form action="index.php?page=capnhatorder" method="POST">
-                            <input type="hidden" name="id" value="<?= $order['id'] ?>">
-                            <select name="status">
-                                <option value="chưa xác nhận" <?= ($order['status'] == 'chưa xác nhận') ? 'selected' : '' ?>>Chưa xác nhận</option>
-                                <option value="xác nhận" <?= ($order['status'] == 'xác nhận') ? 'selected' : '' ?>>Xác nhận</option>
-                                <option value="đang giao" <?= ($order['status'] == 'đang giao') ? 'selected' : '' ?>>Đang giao</option>
-                                <option value="hoàn thành" <?= ($order['status'] == 'hoàn thành') ? 'selected' : '' ?>>Hoàn thành</option>
-                                <option value="hủy" <?= ($order['status'] == 'hủy') ? 'selected' : '' ?>>Hủy đơn hàng</option>
-                            </select>
-                            <button type="submit">Cập nhật</button>
-                        </form>
-                    <?php else: ?>
-                        <span>Không thể thay đổi</span>
-                    <?php endif; ?>
-                    <?php endforeach; ?>
-                </td>
-                      </tr>
+                      <?php foreach ($orders as $order): ?>
+                        <tr>
+                          <td><?= $order['id'] ?></td>
+                          <td><?= $order['user_id'] ?></td>
+                          <td><?= ucfirst($order['status']) ?></td>
+                          <td><?= $order['payment_status'] ?></td>
+                          <td><?= number_format($order['total_amount']) ?> VND</td> 
+                          <td>
+                            <a href="index.php?page=donhangct&action=view&id=<?= $order['id'] ?>" class="btn btn-sm btn-info">Xem chi tiết</a>
+                          </td>
+                          <td>
+                            <?php
+                            $statuses = ['chưa xác nhận', 'xác nhận', 'đang giao', 'hoàn thành'];
+                            $currentIndex = array_search($order['status'], $statuses);
+                            $nextStatus = $statuses[$currentIndex + 1] ?? null;
+                            ?>
 
+                            <?php if ($order['status'] != 'hoàn thành' && $order['status'] != 'hủy'): ?>
+                              <form action="index.php?page=capnhatorder" method="POST" style="display:inline-block">
+                                <input type="hidden" name="id" value="<?= $order['id'] ?>">
+                                <?php if ($nextStatus): ?>
+                                  <select name="status">
+                                    <option value="<?= $nextStatus ?>"><?= ucfirst($nextStatus) ?></option>
+                                  </select>
+                                  <button type="submit">Cập nhật</button>
+                                <?php else: ?>
+                                  <span>Đã hoàn thành</span>
+                                <?php endif; ?>
+                              </form>
+
+                              <!-- Form hủy tách riêng -->
+                              <form action="index.php?page=capnhatorder" method="POST" style="display:inline-block; margin-left: 5px">
+                                <input type="hidden" name="id" value="<?= $order['id'] ?>">
+                                <input type="hidden" name="status" value="hủy">
+                                <button type="submit" onclick="return confirm('Bạn có chắc muốn hủy đơn hàng này không?')">Hủy</button>
+                              </form>
+                            <?php else: ?>
+                              <span>Không thể thay đổi</span>
+                            <?php endif; ?>
+
+                          </td>
+                        </tr>
+                      <?php endforeach; ?>
                     </tbody>
-                   
+
+
                   </table>
                 </div>
                 <!-- /.card-body -->

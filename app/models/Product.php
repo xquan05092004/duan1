@@ -15,6 +15,23 @@ class Product
         $query = "SELECT * FROM products ORDER BY id DESC";
         return $this->db->runQuery($query);
     }
+    public static function all()
+    {
+        try {
+            $db = new Database();
+            $conn = $db->getConnection();
+
+            $sql = "SELECT * FROM products ORDER BY created_at DESC, id DESC";
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return [];
+        }
+    }
     public function getVariantsByProductId($product_id)
     {
         $query = "

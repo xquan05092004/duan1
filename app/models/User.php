@@ -12,7 +12,7 @@ class User
 
     public static function login($db, $email, $password)
     {
-        $stmt = $db->runQuery("SELECT * FROM users WHERE email = ?", [$email]);
+        $stmt = $db->runQuery("SELECT * FROM users WHERE email = ? AND status = 'active'", [$email]);
 
         if ($stmt) {
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -23,8 +23,6 @@ class User
         }
         return false;
     }
-
-
 
     public static function register($db, $data)
     {
@@ -51,8 +49,8 @@ class User
             }
 
             $hashedPassword = password_hash($data['password'], PASSWORD_DEFAULT);
-            $query = "INSERT INTO users (name, email, password, phone, address, role, created_at)
-                  VALUES (?, ?, ?, ?, ?, ?, NOW())";
+            $query = "INSERT INTO users (name, email, password, phone, address, role, status, created_at)
+                  VALUES (?, ?, ?, ?, ?, ?, 'active', NOW())";
             $result = $db->runQuery($query, [
                 htmlspecialchars($data['name']),
                 $data['email'],
@@ -67,5 +65,22 @@ class User
             error_log("Registration error: " . $e->getMessage());
             return ['success' => false, 'errors' => ['Database error occurred']];
         }
+    }
+
+    public function updateStatus($userId, $status)
+    {
+        try {
+            $query = "UPDATE users SET status = ? WHERE id = ?";
+            $result = $this->db->runQuery($query, [$status, $userId]);
+            return $result !== false;
+        } catch (PDOException $e) {
+            error_log("Update user status error: " . $e->getMessage());
+            return false;
+        }
+    }
+
+    public function deactivateUser($userId)
+    {
+        return $this->updateStatus($userId, 'inactive');
     }
 }

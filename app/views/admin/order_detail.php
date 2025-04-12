@@ -21,6 +21,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
 </head>
 
+
+
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
         <!-- Navbar -->
@@ -261,9 +263,8 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Sản Phẩm</h1>
-                        </div>
-                       
+                            <h1>Đơn Hàng</h1>
+                        </div>         
                     </div>
                 </div><!-- /.container-fluid -->
             </section>
@@ -273,71 +274,36 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-12">
-                            
+
                             <div class="card">
-                                <div class="card-header">
-                                    <a href="index.php?page=create_product" class="btn btn-success mb-3">
-                                        <i class="fas fa-plus-circle"></i> Thêm Sản Phẩm
-                                    </a>
-                                    <a href="index.php?page=product_variants" class="btn btn-info mb-3">
-                                        <i class="fas fa-layer-group"></i> Quản lý Biến Thể Sản Phẩm
-                                    </a>
-                                </div>
-                                
 
                                 <!-- /.card-header -->
                                 <div class="card-body">
                                     <table id="example2" class="table table-bordered table-hover">
+                                        <h3>Chi tiết đơn hàng #<?= $order['id'] ?></h3>
+                                        <p><strong>Khách hàng:</strong> <?= $order['customer_name'] ?> (<?= $order['email'] ?> - <?= $order['phone'] ?>)</p>
+                                        <p><strong>Trạng thái:</strong> <?= $order['status'] ?></p>
+                                        <p><strong>Thanh toán:</strong> <?= $order['payment_status'] ?></p>
+                                        <p><strong>Tổng tiền:</strong> <?= number_format($order['total_amount']) ?>đ</p>
+
                                         <thead>
                                             <tr>
-                                                <th>ID</th>
-                                                <th>Tên</th>
-                                                <th>Giá</th>
-                                                <th>Mô Tả</th>
-                                                <th>Danh Mục</th>
-                                                <th>Số Lượng</th>
-                                                <th>Hình Ảnh</th>
-                                                <th>Thao Tác</th>
+
+                                                <th>Sản phẩm</th>
+                                                <th>Ảnh</th>
+                                                <th>Số lượng</th>
+                                                <th>Đơn giá</th>
+                                                <th>Thành tiền</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php foreach ($products as $product): ?>
+                                            <?php foreach ($orderDetails as $item): ?>
                                                 <tr>
-                                                    <td><?php echo $product['id']; ?></td>
-                                                    <td><?php echo $product['name']; ?></td>
-                                                    <td><?php echo number_format($product['price'], 0); ?> VNĐ</td>
-                                                    <td><?php echo $product['description']; ?></td>
-                                                    <td>
-                                                        <?php
-                                                        if (isset($categories) && is_array($categories)) {
-                                                            foreach ($categories as $category) {
-                                                                if ($category['id'] == $product['category_id']) {
-                                                                    echo htmlspecialchars($category['name']);
-                                                                    break; // Dừng vòng lặp khi tìm thấy danh mục phù hợp
-                                                                }
-                                                            }
-                                                        }
-                                                        ?>
-                                                    </td>
-                                                    <td><?php echo $product['quantity']; ?></td>
-                                                    <td>
-                                                        <!-- Hiển thị ảnh sản phẩm với kích thước nhỏ -->
-                                                        <?php if ($product['image']): ?>
-                                                            <img src="public/uploads/<?= $product['image'] ?>" alt="Product Image" width="100" class="mt-2">
-                                                        <?php endif; ?>
-                                                    </td>
-                                                    <td>
-                                                        <!-- Các thao tác (Sửa, Xóa) với sản phẩm -->
-                                                        <a href="index.php?page=edit_product&id=<?php echo $product['id']; ?>"
-                                                            class="btn btn-warning btn-sm">
-                                                            <i class="fas fa-edit"></i> Sửa
-                                                        </a>
-                                                        <a href="index.php?page=delete_product&id=<?php echo $product['id']; ?>"
-                                                            class="btn btn-danger btn-sm"
-                                                            onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này không?');">
-                                                            <i class="fas fa-trash-alt"></i> Xóa
-                                                        </a>
-                                                    </td>
+                                                    <td><?= $item['product_name'] ?></td>
+                                                    <td><img src="public/uploads/<?= $item['product_image'] ?>" width="60"></td>
+                                                    <td><?= $item['quantity'] ?></td>
+                                                    <td><?= number_format($item['price']) ?>đ</td>
+                                                    <td><?= number_format($item['price'] * $item['quantity']) ?>đ</td>
                                                 </tr>
                                             <?php endforeach; ?>
                                         </tbody>
