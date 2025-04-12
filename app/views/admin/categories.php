@@ -286,6 +286,19 @@
 
 
                 </div>
+                <?php if (isset($_SESSION['message'])): ?>
+                  <div class="alert alert-success">
+                    <?= $_SESSION['message']; ?>
+                    <?php unset($_SESSION['message']); ?>
+                  </div>
+                <?php endif; ?>
+
+                <?php if (isset($_SESSION['error'])): ?>
+                  <div class="alert alert-danger">
+                    <?= $_SESSION['error']; ?>
+                    <?php unset($_SESSION['error']); ?>
+                  </div>
+                <?php endif; ?>
                 <!-- /.card-header -->
                 <div class="card-body">
                   <table id="example2" class="table table-bordered table-hover">

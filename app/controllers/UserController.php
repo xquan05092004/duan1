@@ -7,6 +7,7 @@ ob_start(); // Bắt đầu bộ đệm đầu ra
 
 class UserController
 {
+    private $db;
     private $conn;
     private $productModel;
     private $categoriesModel;
@@ -650,7 +651,32 @@ class UserController
         exit;
     }
 
-
+    // lọc sản phẩm theo giá
+    public function filterByPrice() {
+        $allCategories = $this->categoriesModel->getAllCategories();
+        $categories = $this->categoriesModel->getAllCategories();
+        $minPrice = $_GET['price_from'] ?? null;
+        $maxPrice = $_GET['price_to'] ?? null;
+    
+        $productModel = new Product();
+        $products = $productModel->getProductsByMinMax($minPrice, $maxPrice);
+    
+        include __DIR__ . '/../views/guest/locgia.php';
+    }
+    public function filterByVariant() {
+        $allCategories = $this->categoriesModel->getAllCategories();
+        $colorId = $_GET['color_id'] ?? null;
+        $sizeId = $_GET['size_id'] ?? null;
+    
+        $categories = $this->categoriesModel->getAllCategories();
+        $productModel = new Product();
+        $products = $productModel->getProductsByVariants($colorId, $sizeId);
+    
+        include __DIR__ . '/../views/guest/locgia.php';
+    }
+    
+    
+    
     public function logout()
     {
         session_start();

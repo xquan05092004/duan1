@@ -278,6 +278,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-12">
+                            
                             <div class="card">
                                 <div class="card-header">
                                     <a href="index.php?page=create_product" class="btn btn-success mb-3">
@@ -287,6 +288,8 @@
                                         <i class="fas fa-layer-group"></i> Quản lý Biến Thể Sản Phẩm
                                     </a>
                                 </div>
+                                
+
                                 <!-- /.card-header -->
                                 <div class="card-body">
                                     <table id="example2" class="table table-bordered table-hover">

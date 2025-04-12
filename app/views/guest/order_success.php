@@ -309,35 +309,6 @@
       </div>
     </div>
   </header>
-  <div class="container mt-5">
-    <h2>Thanh toán</h2>
-    <form action="index.php?page=process_checkout" method="POST">
-        <div class="mb-3">
-            <label for="street_address" class="form-label">Địa chỉ giao hàng:</label>
-            <input type="text" class="form-control" id="street_address" name="street_address" required>
-        </div>
-        <div class="mb-3">
-            <label for="ward" class="form-label">Phường / Xã:</label>
-            <input type="text" class="form-control" id="ward" name="ward" required>
-        </div>
-        <div class="mb-3">
-            <label for="district" class="form-label">Quận / Huyện:</label>
-            <input type="text" class="form-control" id="district" name="district" required>
-        </div>
-        <div class="mb-3">
-            <label for="city" class="form-label">Tỉnh / Thành phố:</label>
-            <input type="text" class="form-control" id="city" name="city" required>
-        </div>
-        <div class="mb-3">
-            <label for="payment_method" class="form-label">Phương thức thanh toán:</label>
-            <select class="form-select" id="payment_method" name="payment_method" required>
-                <option value="1">Thanh toán khi nhận hàng</option>
-                <option value="2">Chuyển khoản ngân hàng</option>
-            </select>
-        </div>
-        <button type="submit" class="btn btn-primary">Xác nhận đặt hàng</button>
-    </form>
-</div>
 <div class="container mt-5 text-center">
     <h2>Đặt hàng thành công!</h2>
     <p>Cảm ơn bạn đã mua hàng. Đơn hàng của bạn đang được xử lý.</p>

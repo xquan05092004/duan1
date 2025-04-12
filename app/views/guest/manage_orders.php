@@ -364,7 +364,7 @@
                                             <strong>Sản phẩm:</strong> <?php echo htmlspecialchars($item['product_name']); ?><br>
                                             <strong>Số lượng:</strong> <?php echo htmlspecialchars($item['quantity']); ?><br>
                                             <strong>Màu sắc:</strong>
-                                            <?php echo htmlspecialchars($item['color_name'] ?? 'Không xác định'); ?><br>
+                                            <?php echo htmlspecialchars($item['color'] ?? 'Không xác định'); ?><br>
                                             <strong>Size:</strong>
                                             <?php echo htmlspecialchars($item['size_name'] ?? 'Không xác định'); ?>
                                         </li>
@@ -390,7 +390,7 @@
                 <?php endforeach; ?>
             </tbody>
         </table>
-        <a href="index.php" class="btn btn-primary">Về trang chủ</a>
+        <a href="index.php?page=home" class="btn btn-primary">Về trang chủ</a>
     <?php endif; ?>
 </div>
 

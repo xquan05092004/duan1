@@ -12,4 +12,5 @@ class Color
         return $db->runQuery($query);
     }
     
+    
 }

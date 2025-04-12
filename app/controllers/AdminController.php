@@ -68,23 +68,23 @@ class AdminController
     
 
 
-    public function deleteCategories()
-    {
-        if (isset($_GET['id'])) {
-            $id = $_GET['id'];
-
-            $categoriesModel = new Categories(); // Đảm bảo khởi tạo model
-
-            if ($categoriesModel->deleteCategories($id)) {
-                header("Location: index.php?page=categories");
-                exit();
+    public function deleteCategories() {
+        $id = $_GET['id'] ?? null;
+    
+        if ($id) {
+            $result = $this->categoriesModel->deleteCategories($id);
+            
+            if ($result['success']) {
+                $_SESSION['message'] = "✅ " . $result['message'];
             } else {
-                echo "❌ Lỗi khi xóa danh mục!";
+                $_SESSION['error'] = "❌ " . $result['message'];
             }
-        } else {
-            echo "❌ Không tìm thấy ID danh mục!";
         }
+    
+        header("Location: index.php?page=categories&action=index");
+        exit;
     }
+    
     public function listProducts()
     {
         $products = $this->productModel->getAllProducts();

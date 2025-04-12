@@ -10,6 +10,7 @@ require_once 'app/controllers/UserController.php';
 
 // Lấy tham số từ URL
 $page = isset($_GET['page']) ? $_GET['page'] : 'home';
+$action = isset($_GET['action']) ? $_GET['action'] : null;
 // Điều hướng URL
 if (!isset($_SESSION['user'])) {
     $userController->home(); // ✅ Gọi đúng controller để truyền biến
@@ -121,21 +122,28 @@ if ($role === 'admin') {
                 echo "Vui lòng chọn đủ thông tin sản phẩm!";
             }
             break;
-            case 'checkout':
-                $userController->checkout();
-                break;
-            case 'process_checkout':
-                $userController->processCheckout();
-                break;
-            case 'order_success':
-                include 'app/views/guest/order_success.php';
-                break;
-            case 'manage_orders':
-                $userController->manageOrders();
-                break;
-            case 'cancel_order':
-                $userController->cancelOrder();
-                break;
+        case 'checkout':
+            $userController->checkout();
+            break;
+        case 'process_checkout':
+            $userController->processCheckout();
+            break;
+        case 'loc':
+            if ($action == 'filter') {
+                $userController->filterByPrice();
+            } else {
+                $userController->index(); // hoặc show all
+            }
+            break;
+        case 'order_success':
+            include 'app/views/guest/order_success.php';
+            break;
+        case 'manage_orders':
+            $userController->manageOrders();
+            break;
+        case 'cancel_order':
+            $userController->cancelOrder();
+            break;
         case 'view_cart':
             $userController->viewCart();
             break;
@@ -144,6 +152,9 @@ if ($role === 'admin') {
             break;
         case 'delete_cart':
             $userController->deleteCartItem();
+            break;
+        case 'filter_variant':
+            $userController->filterByVariant();
             break;
 
         default:
@@ -156,12 +167,18 @@ if ($role === 'admin') {
 
     switch ($page) {
         case 'home':
-            $userController->home(); // ✅ để có products & categories
+            $userController->home();
             break;
         case 'search':
             $userController->search();
             break;
-
+        case 'loc':
+            if ($action == 'filter') {
+                $userController->filterByPrice();
+            } else {
+                $userController->index(); // hoặc show all
+            }
+            break;
         case 'chitiet':
             isset($_GET['id']) ? $userController->showProductDetail($_GET['id']) : print("Không có sản phẩm!");
             break;

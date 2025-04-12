@@ -176,7 +176,7 @@
                                     <li class=""><a href="index.html"> Trang chủ<span class="fa-light fa-chevron-down"></span></a></li>
                                     <li class="position-relative has-child "><a href="index.php?page=sanpham">Sản phẩm<span class="fa-light fa-chevron-down"></span></a><span class="grower" nh-toggle="x6ncflqm90"></span>
                                         <ul nh-toggle-element="x6ncflqm90" class="entry-menu dropdown">
-                                            
+
                                         </ul>
                                     </li>
                                     <li class=""><a href="trang-tin-tuc.html">Bài viết<span class="fa-light fa-chevron-down"></span></a></li>
@@ -281,11 +281,11 @@
                         <div class="categories">
                             <div class="border-bottom text-uppercase h5 font-weight-bold border-gray pb-4 mb-4">Danh mục</div>
                             <div nh-menu="active">
-                            <?php foreach ($categories as $category): ?>
-                                <ul class="categories-section list-unstyled mb-0">
-                                    <li class="has-child"><a href="index.php?page=showCategory&id=<?= $category['id'] ?>"><?= htmlspecialchars($category['name']) ?></a><span nh-toggle="child-category-32" class="dropdown-toggle"></span>
-                                    </li>
-                                </ul>
+                                <?php foreach ($categories as $category): ?>
+                                    <ul class="categories-section list-unstyled mb-0">
+                                        <li class="has-child"><a href="index.php?page=showCategory&id=<?= $category['id'] ?>"><?= htmlspecialchars($category['name']) ?></a><span nh-toggle="child-category-32" class="dropdown-toggle"></span>
+                                        </li>
+                                    </ul>
                                 <?php endforeach; ?>
                             </div>
                         </div>
@@ -300,17 +300,29 @@
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center border-bottom border-gray pb-4 mb-4">
-                                    <div class="text-uppercase h5 font-weight-bold mb-0">Giá sản phẩm</div><a style='display: none' href="javascript:;" nh-link-redirect="/ao-nam" class="reset-attribute border-0 color-highlight">Xóa</a>
+                                    <div class="text-uppercase h5 font-weight-bold mb-0">Giá sản phẩm</div>
+                                    <a href="index.php?page=sanpham" class="reset-attribute border-0 color-highlight">Xóa</a>
                                 </div>
                                 <ul class="filter-section mb-5">
-                                    <li><a href="javascript:;" nh-link-redirect="/ao-nam?price_to=5000000" nh-link-toggle="/ao-nam" class="color-main"><span class="inner-switch circle"><span></span></span><span class="inner-name">Dưới 5 triệu</span></a></li>
-                                    <li><a href="javascript:;" nh-link-redirect="/ao-nam?price_from=5000000&price_to=8000000" nh-link-toggle="/ao-nam" class="color-main"><span class="inner-switch circle"><span></span></span><span class="inner-name">Từ 5 triệu đến 8 triệu</span></a></li>
-                                    <li><a href="javascript:;" nh-link-redirect="/ao-nam?price_from=8000000" nh-link-toggle="/ao-nam" class="color-main"><span class="inner-switch circle"><span></span></span><span class="inner-name">Trên 8 triệu</span></a></li>
+                                    <li>
+                                        <a href="index.php?page=loc&action=filter&price_to=100000" class="color-main">
+                                            <span class="inner-switch circle"><span></span></span>
+                                            <span class="inner-name">Dưới 100.000Đ</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="index.php?page=loc&action=filter&price_from=100000&price_to=500000" class="color-main">
+                                            <span class="inner-switch circle"><span></span></span>
+                                            <span class="inner-name">Từ 100.000 đến 500.000</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="index.php?page=loc&action=filter&price_from=500000" class="color-main">
+                                            <span class="inner-switch circle"><span></span></span>
+                                            <span class="inner-name">Trên 500.000</span>
+                                        </a>
+                                    </li>
                                 </ul>
-                                <div class="d-flex justify-content-between align-items-center border-bottom border-gray pb-4 mb-4">
-                                    <div class="text-uppercase h5 font-weight-bold mb-0">Trạng thái</div><a style='display: none' href="javascript:;" nh-link-redirect="/ao-nam" class="reset-attribute border-0 color-highlight">Xóa</a>
-                                </div>
-                                <div class="product-attribute-switch d-flex justify-content-start text-switch flex-wrap mb-5"><a href="javascript:;" nh-link-redirect="/ao-nam?status=featured" nh-link-toggle="/ao-nam" class="inner-product-attribute">Nổi Bật</a><a href="javascript:;" nh-link-redirect="/ao-nam?status=discount" nh-link-toggle="/ao-nam" class="inner-product-attribute">Giảm giá</a><a href="javascript:;" nh-link-redirect="/ao-nam?status=stocking" nh-link-toggle="/ao-nam" href="#" class="inner-product-attribute">Còn hàng</a></div>
 
                                 <div class="d-flex justify-content-between align-items-center border-bottom border-gray pb-4 mb-4">
                                     <div class="text-uppercase h5 font-weight-bold mb-0">
@@ -320,26 +332,22 @@
                                         Xóa
                                     </a>
                                 </div>
-
                                 <div class="product-attribute-switch d-flex justify-content-start text-switch flex-wrap mb-5">
-                                    <a href="javascript:;" nh-link-redirect="/ao-nam?item_color=17_or" nh-link-toggle="/ao-nam" class="inner-product-attribute">
-                                        Nâu
-                                    </a>
-                                    <a href="javascript:;" nh-link-redirect="/ao-nam?item_color=16_or" nh-link-toggle="/ao-nam" class="inner-product-attribute">
-                                        Be
-                                    </a>
-                                    <a href="javascript:;" nh-link-redirect="/ao-nam?item_color=12_or" nh-link-toggle="/ao-nam" class="inner-product-attribute">
-                                        Trắng
-                                    </a>
-                                    <a href="javascript:;" nh-link-redirect="/ao-nam?item_color=11_or" nh-link-toggle="/ao-nam" class="inner-product-attribute">
-                                        Xám
-                                    </a>
-                                    <a href="javascript:;" nh-link-redirect="/ao-nam?item_color=10_or" nh-link-toggle="/ao-nam" class="inner-product-attribute">
-                                        Đỏ
-                                    </a>
-                                    <a href="javascript:;" nh-link-redirect="/ao-nam?item_color=9_or" nh-link-toggle="/ao-nam" class="inner-product-attribute">
+                                    <a href="index.php?page=filter_variant&color_id=1;" class="inner-product-attribute">
                                         Đen
                                     </a>
+                                    <a href="index.php?page=filter_variant&color_id=4;"  class="inner-product-attribute">
+                                        Xanh
+                                    </a>
+                                    <a href="index.php?page=filter_variant&color_id=2;"  class="inner-product-attribute">
+                                        Trắng
+                                    </a>
+                                    <a href="index.php?page=filter_variant&color_id=3;"  class="inner-product-attribute">
+                                        Xám
+                                    </a>
+                                    <a href="index.php?page=filter_variant&color_id=5" class="inner-product-attribute">
+                                        Đỏ
+                                    </a>   
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center border-bottom border-gray pb-4 mb-4">
                                     <div class="text-uppercase h5 font-weight-bold mb-0">
@@ -351,29 +359,20 @@
                                 </div>
 
                                 <div class="product-attribute-switch d-flex justify-content-start text-switch flex-wrap mb-5">
-                                    <a href="javascript:;" nh-link-redirect="/ao-nam?item_size=8_or" nh-link-toggle="/ao-nam" class="inner-product-attribute">
-                                        28
+                                    <a href="index.php?page=filter_variant&color_id=1;"  class="inner-product-attribute">
+                                        S
                                     </a>
-                                    <a href="javascript:;" nh-link-redirect="/ao-nam?item_size=7_or" nh-link-toggle="/ao-nam" class="inner-product-attribute">
-                                        29
+                                    <a href="index.php?page=filter_variant&color_id=2;"  class="inner-product-attribute">
+                                        M
                                     </a>
-                                    <a href="javascript:;" nh-link-redirect="/ao-nam?item_size=6_or" nh-link-toggle="/ao-nam" class="inner-product-attribute">
-                                        30
+                                    <a href="index.php?page=filter_variant&color_id=3;"  class="inner-product-attribute">
+                                        L
                                     </a>
-                                    <a href="javascript:;" nh-link-redirect="/ao-nam?item_size=5_or" nh-link-toggle="/ao-nam" class="inner-product-attribute">
-                                        31
+                                    <a href="index.php?page=filter_variant&color_id=4;"  class="inner-product-attribute">
+                                        XL
                                     </a>
-                                    <a href="javascript:;" nh-link-redirect="/ao-nam?item_size=4_or" nh-link-toggle="/ao-nam" class="inner-product-attribute">
-                                        32
-                                    </a>
-                                    <a href="javascript:;" nh-link-redirect="/ao-nam?item_size=3_or" nh-link-toggle="/ao-nam" class="inner-product-attribute">
-                                        33
-                                    </a>
-                                    <a href="javascript:;" nh-link-redirect="/ao-nam?item_size=2_or" nh-link-toggle="/ao-nam" class="inner-product-attribute">
-                                        34
-                                    </a>
-                                    <a href="javascript:;" nh-link-redirect="/ao-nam?item_size=1_or" nh-link-toggle="/ao-nam" class="inner-product-attribute">
-                                        35
+                                    <a href="index.php?page=filter_variant&color_id=5;"  class="inner-product-attribute">
+                                        XXL
                                     </a>
                                 </div>
                                 <div class="btn_dat_lai mb-5 w-100"><a href="javascript:;" nh-link-redirect="/ao-nam" class="btn btn-submit px-5 w-100">Đặt lại</a></div>
