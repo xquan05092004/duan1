@@ -229,11 +229,11 @@ $result = mysqli_query($conn, $query);
                           echo "<td>" . $row['phone'] . "</td>";
                           echo "<td>" . $row['email'] . "</td>";
                           echo "<td>" . $row['address'] . "</td>";
-                          echo "<td>" . ($row['role'] == 'active' ? '<span class="badge badge-success">Hoạt động</span>' : '<span class="badge badge-danger">Đã khóa</span>') . "</td>";
+                          echo "<td>" . ($row['status'] == 'active' ? '<span class="badge badge-success">Hoạt động</span>' : '<span class="badge badge-danger">Đã khóa</span>') . "</td>";
                           echo "<td>" . $row['created_at'] . "</td>";
                           echo "<td>";
                           echo "<a href='index.php?page=edit_user&id=" . $row['id'] . "' class='btn btn-warning btn-sm'>Sửa</a> ";
-                          if ($row['role'] == 'active') {
+                          if ($row['status'] == 'active') {
                             echo "<a href='/duan11/routes/User.php?action=deactivate&id=" . $row['id'] . "' class='btn btn-danger btn-sm' onclick='return confirm(\"Bạn có chắc muốn khóa tài khoản này?\")'>Khóa</a>";
                           } else {
                             echo "<a href='/duan11/routes/User.php?action=activate&id=" . $row['id'] . "' class='btn btn-success btn-sm' onclick='return confirm(\"Bạn có chắc muốn mở khóa tài khoản này?\")'>Mở khóa</a>";

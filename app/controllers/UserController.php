@@ -35,7 +35,7 @@ class UserController
             $this->conn->close();
         }
     }
-     private function ensureConnection()
+    private function ensureConnection()
     {
         if ($this->conn->ping() === false) {
             $this->conn = new mysqli("localhost", "root", "", "clothing_store");
@@ -60,10 +60,8 @@ class UserController
             die("Sản phẩm không tồn tại!");
         }
 
-        // Lấy danh sách biến thể theo ID sản phẩm
         $variants = $this->productModel->getVariantsByProductId($id);
 
-        // Lấy danh sách màu sắc và kích thước theo sản phẩm
         $colors = [];
         $sizes = [];
 
@@ -72,12 +70,16 @@ class UserController
             $sizes[$variant['size_id']] = $variant['size_name'];
         }
 
-        // Lấy sản phẩm liên quan
         $relatedProducts = $this->productModel->getRelatedProducts($product['category_id'], $id);
 
-        // Load giao diện chi tiết sản phẩm
+        $commentModel = new Comment();
+        $comments = $commentModel->getCommentsByProductId($id); // ✨ Dữ liệu bình luận
+
+        $product_id = $id;
+
         include __DIR__ . "/../views/guest/chitietsanpham.php";
     }
+
 
 
     public function showCategory($categoryId)
@@ -631,34 +633,62 @@ class UserController
         header("Location: index.php?page=manage_orders");
         exit;
     }
-    
+
 
     // lọc sản phẩm theo giá
-    public function filterByPrice() {
+    public function filterByPrice()
+    {
         $allCategories = $this->categoriesModel->getAllCategories();
         $categories = $this->categoriesModel->getAllCategories();
         $minPrice = $_GET['price_from'] ?? null;
         $maxPrice = $_GET['price_to'] ?? null;
-    
+
         $productModel = new Product();
         $products = $productModel->getProductsByMinMax($minPrice, $maxPrice);
-    
+
         include __DIR__ . '/../views/guest/locgia.php';
     }
-    public function filterByVariant() {
+    public function filterByVariant()
+    {
         $allCategories = $this->categoriesModel->getAllCategories();
         $colorId = $_GET['color_id'] ?? null;
         $sizeId = $_GET['size_id'] ?? null;
-    
+
         $categories = $this->categoriesModel->getAllCategories();
         $productModel = new Product();
         $products = $productModel->getProductsByVariants($colorId, $sizeId);
-    
+
         include __DIR__ . '/../views/guest/locgia.php';
     }
-    
-    
-    
+    public function guiBinhLuan()
+    {
+        if (!isset($_SESSION['user'])) {
+            header("Location: index.php?page=login");
+            exit;
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $user_id = $_SESSION['user']['id'];
+            $product_id = $_POST['product_id'] ?? null;
+            $content = $_POST['content'] ?? '';
+
+            if ($product_id && $content) {
+                require_once 'app/models/Comment.php';
+                $commentModel = new Comment();
+                $commentModel->create($user_id, $product_id, $content);
+                header("Location: index.php?page=chitiet&id=$product_id");
+                exit;
+            } else {
+                echo "Thiếu thông tin!";
+            }
+        }
+    }
+
+
+
+
+
+
     public function logout()
     {
         session_start();

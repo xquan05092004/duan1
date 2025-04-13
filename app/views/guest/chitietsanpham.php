@@ -997,114 +997,46 @@
                             </div>
                         </div>
                     </div>
-                    <div nh-block="erit8cp" nh-block-cache="false" class="">
-                        <div nh-rating="{&quot;class&quot;:&quot;&quot;,&quot;cache&quot;:&quot;0&quot;,&quot;number_record&quot;:5,&quot;sort_field&quot;:&quot;&quot;,&quot;login_required&quot;:&quot;0&quot;,&quot;awaiting_approval&quot;:&quot;0&quot;,&quot;block_code&quot;:&quot;erit8cp&quot;}"
-                            nh-anchor="rating">
-                            <div class="title-rating-comment">Khách hàng đánh giá</div>
-                            <div class="overall-rating ">
-                                <div class="row">
-                                    <div class="rating-average col-lg-3 col-5">
-                                        <div class="point-comment"><span>5.0</span></div>
-                                        <div class="star-rating"><span class="star-lg" style="width:100%"></span>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-7">
-                                        <div class="percent-bar">
-                                            <div class="rating-num">5 <i class="fa-solid fa-star"></i></div>
-                                            <div class="progress">
-                                                <div style="width: 0%;" class="progress-bar progress-bar-warning">
-                                                </div>
-                                            </div>
-                                            <div class="star-percent"><span>0</span>%</div>
-                                        </div>
-                                        <div class="percent-bar">
-                                            <div class="rating-num">4 <i class="fa-solid fa-star"></i></div>
-                                            <div class="progress">
-                                                <div style="width: 0%;" class="progress-bar progress-bar-warning">
-                                                </div>
-                                            </div>
-                                            <div class="star-percent"><span>0</span>%</div>
-                                        </div>
-                                        <div class="percent-bar">
-                                            <div class="rating-num">3 <i class="fa-solid fa-star"></i></div>
-                                            <div class="progress">
-                                                <div style="width: 0%;" class="progress-bar progress-bar-warning">
-                                                </div>
-                                            </div>
-                                            <div class="star-percent"><span>0</span>%</div>
-                                        </div>
-                                        <div class="percent-bar">
-                                            <div class="rating-num">2 <i class="fa-solid fa-star"></i></div>
-                                            <div class="progress">
-                                                <div style="width: 0%;" class="progress-bar progress-bar-warning">
-                                                </div>
-                                            </div>
-                                            <div class="star-percent"><span>0</span>%</div>
-                                        </div>
-                                        <div class="percent-bar">
-                                            <div class="rating-num">1 <i class="fa-solid fa-star"></i></div>
-                                            <div class="progress">
-                                                <div style="width: 0%;" class="progress-bar progress-bar-warning">
-                                                </div>
-                                            </div>
-                                            <div class="star-percent"><span>0</span>%</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-12">
-                                        <p class="d-none d-lg-block mb-0">Chia sẻ nhận xét về sản phẩm</p>
-                                        <div nh-btn-show-rating class="btn btn-submit mt-3 w-100">Đánh giá và nhận
-                                            xét
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <form nh-form-rating id="rating-form" method="POST" class="rating-form collapse"
-                                autocomplete="off">
-                                <div class="form-group">
-                                    <h3><b>Gửi nhận xét của bạn</b></h3><label>1. Đánh giá của bạn về sản phẩm
-                                        này:</label>
-                                    <div nh-review-star class="review-star"><input id="star5" name="rating"
-                                            value="5" type="radio" /><label for="star5"
-                                            title="Tuyệt vời"></label><input id="star4" name="rating" value="4"
-                                            type="radio" /><label for="star4" title="Khá tốt"></label><input
-                                            id="star3" name="rating" value="3" type="radio" /><label for="star3"
-                                            title="Khá"></label><input id="star2" name="rating" value="2"
-                                            type="radio" /><label for="star2" title="Hơi tệ"></label><input
-                                            id="star1" name="rating" value="1" type="radio" /><label for="star1"
-                                            title="Thật tệ"></label></div>
-                                </div>
-                                <div class="form-group"><label>2. Viết nhận xét của bạn vào bên
-                                        dưới:</label><textarea nh-input-rating name="content" cols="45" rows="8"
-                                        placeholder="Nhận xét của bạn về sản phẩm này"
-                                        class="required form-control"></textarea></div><label>3. Thông tin cá nhân
-                                    của
-                                    bạn:</label>
-                                <div class="form-group"><label>Họ và tên:<span
-                                            class="required">*</span></label><input name="full_name" type="text"
-                                        value="" class="form-control required" autocomplete="off"></div>
-                                <div class="row">
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group"><label>Số điện thoại:<span
-                                                    class="required">*</span></label><input name="phone" type="text"
-                                                value="" class="form-control required" autocomplete="off"></div>
-                                    </div>
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group"><label>Email</label><input name="email" type="text"
-                                                value="" class="form-control" autocomplete="off"></div>
-                                    </div>
-                                </div>
-                                <ul class="comment-images"></ul><input nh-input-rating-images name="files[]"
-                                    type="file" class="d-none" accept="image/*" multiple="multiple"><span
-                                    class="mb-0 btn btn-submit" nh-trigger-upload><i
-                                        class="fa-light fa-camera"></i></span><button nh-btn-send-rating
-                                    class="btn btn-submit ml-3">Gửi đánh giá</button>
-                            </form>
-                            <ul nh-list-rating class="rating-list"></ul>
+
+                    <form action="index.php?page=guibinhluan" method="POST">
+
+                        <!-- Gửi product_id ẩn từ PHP sang -->
+                        <input type="hidden" name="product_id" value="<?= $product_id ?>">
+
+                        <!-- Textarea nội dung bình luận -->
+                        <div class="form-group">
+                            <label>Viết nhận xét của bạn vào bên dưới:</label>
+                            <textarea nh-input-rating name="content" cols="45" rows="8"
+                                placeholder="Nhận xét của bạn về sản phẩm này"
+                                class="required form-control" required></textarea>
                         </div>
+
+                        <button type="submit" class="btn btn-submit ml-3">
+                            Gửi đánh giá
+                        </button>
+                    </form>
+                    <div class="product-comments mt-5">
+                        <h4>Bình luận sản phẩm</h4>
+
+                        <?php if (!empty($comments)): ?>
+                            <?php foreach ($comments as $comment): ?>
+                                <div class="comment-item mb-3 p-3 border rounded">
+                                    <strong><?= htmlspecialchars($comment['user_name']) ?></strong>
+                                    <p class="mb-1"><?= nl2br(htmlspecialchars($comment['content'])) ?></p>
+                                    <small class="text-muted"><?= date('d/m/Y H:i', strtotime($comment['created_at'])) ?></small>
+                                </div>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <p>Chưa có bình luận nào cho sản phẩm này.</p>
+                        <?php endif; ?>
                     </div>
+
+
                 </div>
             </div>
         </div>
+    </div>
+    </div>
     </div>
     <div nh-row="zch06od" class="box-article-detail-02">
         <div class="container">

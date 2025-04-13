@@ -166,6 +166,9 @@ if ($role === 'admin') {
                     break;
             }
             break;
+        case 'guibinhluan':
+            $userController->guiBinhLuan();
+            break;
         default:
             include 'app/views/admin/list.php'; // Trang chủ
             break;
@@ -231,6 +234,9 @@ if ($role === 'admin') {
             break;
         case 'showCategory':
             isset($_GET['id']) ? $userController->showCategory($_GET['id']) : print("Không có danh mục!");
+            break;
+        case 'guibinhluan':
+            $userController->guiBinhLuan();
             break;
         default:
             $userController->home();
