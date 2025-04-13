@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th4 13, 2025 lúc 08:11 AM
+-- Thời gian đã tạo: Th4 13, 2025 lúc 02:41 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -65,8 +65,7 @@ CREATE TABLE `categories` (
 INSERT INTO `categories` (`id`, `name`) VALUES
 (1, 'Áo Thun'),
 (2, 'Quần Jean'),
-(3, 'Giày Dép'),
-(4, 'Phụ Kiện');
+(3, 'Quần Nam');
 
 -- --------------------------------------------------------
 
@@ -162,7 +161,8 @@ INSERT INTO `orders` (`id`, `user_id`, `status`, `payment_status`, `payment_meth
 (31, 12, 'hủy', 'chưa thanh toán', '1', 99999999.99, '2025-04-10 16:30:29', '11 đức diễn, phúc diễn, bắc từ liêm, hà nội', ''),
 (32, 12, 'hủy', 'chưa thanh toán', '1', 680000.00, '2025-04-11 03:06:22', '11 đức diễn, phúc diễn, bắc từ liêm, hà nội', ''),
 (33, 12, 'hủy', 'chưa thanh toán', '1', 60000.00, '2025-04-12 07:59:57', ', , , ', ''),
-(34, 12, 'hoàn thành', 'chưa thanh toán', '1', 99999999.99, '2025-04-12 09:31:11', ', , , ', '');
+(34, 12, 'hoàn thành', 'chưa thanh toán', '1', 99999999.99, '2025-04-12 09:31:11', ', , , ', ''),
+(35, 8, 'chưa xác nhận', 'chưa thanh toán', '1', 220000.00, '2025-04-13 12:27:59', 'Hà Nội , Sóc Sơn, Sóc Sơn, Hà Nội', '');
 
 -- --------------------------------------------------------
 
@@ -191,7 +191,8 @@ INSERT INTO `order_items` (`id`, `order_id`, `product_variant_id`, `quantity`, `
 (18, 32, 116, 1, 380000.00),
 (19, 32, 91, 2, 150000.00),
 (20, 33, 276, 6, 10000.00),
-(21, 34, 226, 134, 1000000.00);
+(21, 34, 226, 134, 1000000.00),
+(22, 35, 67, 1, 220000.00);
 
 -- --------------------------------------------------------
 
@@ -240,14 +241,14 @@ INSERT INTO `products` (`id`, `name`, `description`, `price`, `image`, `quantity
 (4, 'Quần Jean Slim Fit', 'Quần jean ôm dáng màu xanh đậm', 350000.00, 'quan_jean_slim.jpg', 30, 2, '2025-04-11 14:37:48'),
 (5, 'Quần Jean Rách', 'Quần jean rách gối thời trang', 380000.00, 'quan_jean_rach.jpg', 25, 2, '2025-04-11 14:37:48'),
 (6, 'Quần Jean Baggy', 'Quần jean ống rộng phong cách đường phố', 400000.00, 'quan_jean_baggy.jpg', 20, 2, '2025-04-11 14:37:48'),
-(7, 'Giày Sneaker', 'Giày thể thao năng động', 550000.00, 'giay_sneaker.jpg', 15, 3, '2025-04-11 14:37:48'),
-(8, 'Dép Quai Ngang', 'Dép đi biển thoáng mát', 120000.00, 'dep_quai_ngang.jpg', 45, 3, '2025-04-11 14:37:48'),
-(9, 'Giày Tây', 'Giày da công sở lịch lãm', 750000.00, 'giay_tay.jpg', 10, 3, '2025-04-11 14:37:48'),
-(10, 'Nón Lưỡi Trai', 'Nón kết thời trang', 100000.00, 'non_luoi_trai.jpg', 60, 4, '2025-04-11 14:37:48'),
-(11, 'Thắt Lưng Da', 'Thắt lưng da bò cao cấp', 250000.00, 'that_lung_da.jpg', 20, 4, '2025-04-11 14:37:48'),
-(12, 'Túi Đeo Chéo', 'Túi đeo chéo nhỏ gọn tiện lợi', 220000.00, 'tui_deo_cheo.jpg', 25, 4, '2025-04-11 14:37:48'),
-(18, 'áo thun new', 'ddđ', 1000000.00, '1744341050_5d843cbb-f039-4b36-87be-b999325ae1a4.jpg', 100, 1, '2025-04-11 14:37:48'),
-(19, 'Đức1111', 'dddd', 10000.00, '1744381839_5d843cbb-f039-4b36-87be-b999325ae1a4.jpg', 1111, 1, '2025-04-11 14:37:48');
+(7, 'Áo Thun Nam Họa Tiết Thêu Xù Playful Snake Form Regular', '► THUN COTTON DÀY DẶN, CHẮC TAY, KHÔNG BAI NHÃO\r\n\r\nChất vải có độ dày vừa đủ, mềm mịn, giữ form tốt và không bị xô lệch sau nhiều lần giặt, mang lại cảm giác thoải mái cả ngày.\r\n\r\n► FORM REGULAR CÂN ĐỐI, DỄ PHỐI TRONG NHIỀU HOÀN CẢNH\r\n\r\nDáng áo vừa vặn, giúp tổng thể gọn gàng mà vẫn thoải mái. Dễ dàng kết hợp với jeans, jogger hoặc layering theo phong cách riêng.\r\n\r\n► THÊU XÙ NỔI BẬT, MANG TINH THẦN NGẪU HỨNG VÀ SÁNG TẠO\r\n\r\nHọa tiết rắn thêu xù tạo hiệu ứng sinh động, có chiều sâu, mang đến phong cách trẻ trung, nghệ thuật, phù hợp với tín đồ streetwear cá tính.', 550000.00, '1744547131_ao-thun-nam-hoa-tiet-in-marvel-iconic-form-regular__2__898cedc8b59b440da75af7ba18e8432e_master.jpg', 15, 1, '2025-04-11 14:37:48'),
+(8, 'Quần Short Denim Nam ICONDENIM Roll-up Form Slimfit', '► DENIM BỀN ĐẸP, MẶC LÊN CHUẨN DÁNG\r\nVải denim kết hợp spandex co giãn nhẹ, đàn hồi giúp cử động linh hoạt và giữ form quần chuẩn dáng lâu dài, cho cảm giác thoải mái khi vận động mà vẫn giữ phom dáng gọn gàng. Vải dày dặn, chắc tay, dễ giặt – ít nhăn, tiện lợi trong quá trình sử dụng và bảo quản.\r\n\r\n► FORM SLIMFIT – TÔN DÁNG GỌN GÀNG\r\nThiết kế slimfit ôm nhẹ, lên dáng vừa vặn giúp đôi chân trông thon gọn và năng động hơn. Dáng quần dễ mặc, dễ phối trong nhiều dịp – từ đi dạo phố đến gặp gỡ bạn bè cuối tuần, đều toát lên chất riêng, phong cách năng động.\r\n\r\n► HIỆU ỨNG WASH SÁNG – GẤU XẮN GỌN GÀNG\r\nThiết kế wash sáng kết hợp hiệu ứng fading và râu mèo tự nhiên giúp quần trông nổi bật đúng chất denim. Gấu quần xắn đôi gọn gàng, tăng độ đứng phom và tạo nét trẻ trung, dễ phối đồ linh hoạt với nhiều item khác nhau.\r\n\r\n ', 120000.00, '1744547208_quan-short-denim-nam-icondenim-roll-up-form-slimfit_c45e7549493f4854876449de413ac0cb_master.jpg', 45, 2, '2025-04-11 14:37:48'),
+(9, 'Quần Jean Nam Be Ống Suông Meet Every Challenge With Courage Form Straight', '► CHẤT DENIM BỀN BỈ VÀ ĐỨNG FORM \r\nDenim chắc chắn, bền bỉ, ít phai màu và chống mài mòn tốt, phù hợp cho nhu cầu sử dụng lâu dài. Chất vải có độ đứng form tự nhiên, dễ phối với nhiều trang phục, tạo nên phong cách mạnh mẽ và cá tính.\r\n\r\n► FORM STRAIGHT SUÔNG THẲNG GIÚP CHE KHUYẾT ĐIỂM CHÂN\r\nForm straight suông từ hông đến ống, cân đối và dễ mặc, mang lại sự thoải mái mà không gò bó. Thiết kế giúp tạo hiệu ứng kéo dài đôi chân, tôn dáng tự nhiên và phù hợp với nhiều phong cách khác nhau.\r\n\r\n►THIẾT KẾ PHỐI NHUNG TĂM TRÊN TÚI TRÁI GIÚP DỄ PHỐI ĐỒ\r\nQuần jeans màu be lạ mắt giúp đa dạng lựa chọn phối đồ linh hoạt và ấn tượng. Điểm nhấn nổi bật với thiết kế nhiều túi đắp, trong đó túi trái được phối nhung tăm tạo điểm nhấn mới mẻ.', 750000.00, '1744547252_quan-jean-icondenim-meet-every-challenge-with-courage__1__8d142b27c3f44df8baf6525613025ecf_master.jpg', 10, 3, '2025-04-11 14:37:48'),
+(10, 'Áo Thun Nam Trơn Basic Just Tee Form Regular ', '1. Kiểu sản phẩm: Áo thun cổ tròn tay ngắn dáng vừa.\r\n2. Ưu điểm:\r\n• Bền màu, bền form: Công nghệ in hiện đại giúp màu sắc và hình in luôn tươi mới, không bị bong tróc hay phai màu sau nhiều lần giặt và sử dụng.\r\n• Chất liệu mềm mịn, thấm hút mồ hôi tốt, mang đến cảm giác dễ chịu suốt cả ngày.\r\n• Thiết kế đơn giản, tinh tế, phù hợp với nhiều phong cách thời trang khác nhau, từ casual đến streetwear.\r\n• Chất liệu cotton tự nhiên, dễ phân hủy, an toàn cho da và thân thiện với môi trường.\r\n3. Chất liệu: Cotton Compact 4S, thành phần 92% Cotton 8% Spandex..\r\n4. Kỹ thuật: In kỹ thuật số sắc nét, màu sắc tươi tắn, tạo điểm nhấn độc đáo cho sản phẩm. Các đường may được gia công cẩn thận, đảm bảo sản phẩm bền đẹp theo thời gian.', 100000.00, '1744546923_combo-ao-thun-nam-tron-basic-just-tee-form-regular-_2-ao__a132246c124c4e29954528244f28ddbe_master.jpg', 60, 1, '2025-04-11 14:37:48'),
+(11, 'Áo Thun Nam Họa Tiết Dây Dệt Sleek Stripes Form Boxy', '► COTTON DÀY DẶN, MỀM MỊN, THOÁNG KHÍ, MẶC ĐƯỢC QUANH NĂM\r\n\r\nBề mặt vải mịn, co giãn nhẹ giúp thấm hút tốt, hạn chế bám dính, giữ form chuẩn. Độ dày vừa phải giúp áo mặc thoải mái từ hè đến đông.\r\n\r\n► FORM BOXY FIT HIỆN ĐẠI, CHẤT STREETWEAR ĐẬM NÉT\r\n\r\nDáng áo rộng rãi, tôn vẻ năng động, phù hợp với mọi dáng người. Thiết kế giúp layering đẹp mắt, dễ kết hợp với nhiều phong cách.\r\n\r\n► THIẾT KẾ VIỀN VAI CÁ TÍNH, ĐẬM CHẤT THỂ THAO\r\n\r\nĐường viền chạy dọc vai tạo điểm nhấn khỏe khoắn, lấy cảm hứng từ phong cách retro-sport, giúp outfit thêm phần mạnh mẽ và thời trang.', 250000.00, '1744547062_ao-thun-nam-hoa-tiet-day-det-sleek-stripes-form-boxy___2__31d8d49a025347a9923dbe528e05e515_master.jpg', 20, 1, '2025-04-11 14:37:48'),
+(12, 'Áo Thun Nam Logo Thêu Nổi Phối Vải Edge Striped Form Regular', '► CHẤT LIỆU COTTON\r\n\r\nVải cotton không cắt lông có bề mặt mềm mịn, thoáng và lên dáng tự nhiên. Kết cấu vải ổn định, dày dặn vừa phải giúp giữ phom chuẩn và làm nổi bật các chi tiết phối vải tinh tế.\r\n\r\n► FORM REGULAR GỌN GÀNG – DỄ DIỆN MỌI NGÀY\r\n\r\nDáng regular vừa vặn, mặc thoải mái mà vẫn giữ được sự gọn gàng, chỉn chu cho một outfit chuẩn chỉn. Phối linh hoạt với item sẵn có, quần jeans, jogger hay short – trông outfit chỉn chu, năng động hơn.\r\n\r\n►PHỐI VẢI KHÁC MÀU ẤN TƯỢNG – LOGO THÊU NỔI BẬT\r\n\r\nMảng phối vải đen sắc nét ở ngực tạo nên hiệu ứng thị giác mạnh mẽ, dẫn ánh nhìn ngay vào logo ID thêu nổi. Chi tiết logo viền trắng nổi bật trên nền tối – tinh gọn, đầy chất nhận diện và nâng tầm thẩm mỹ tổng thể của áo.', 220000.00, '1744546993_ao-thun-nam-logo-theu-noi-phoi-vai-edge-striped-form-regular_625bf2c4ebd449c594f77a7e9f03a46b_master.jpg', 25, 1, '2025-04-11 14:37:48'),
+(18, 'PEACE FOR ALL Áo Thun | Kosuke Kawamura', 'Chất liệu: 100% Recycle \r\n\r\nKiểu dáng: Phom slimfit ôm vừa người, tôn dáng \r\n\r\nThiết kế: Cổ tròn cơ bản dễ phối đồ\r\n\r\nƯu điểm: Ứng dụng công nghệ DRI-AIR với khả năng bền màu, dễ làm sạch, thân thiện với da và môi trường', 1000000.00, '1744547982_193_e873dc27368644ff9b93651b2aed5b29_master.jpg', 100, 1, '2025-04-11 14:37:48'),
+(19, 'Áo Thun No Style', 'Áo Thun Dáng Vừa Tay Ngắn No Style 04 Vol 24\r\n1. Kiểu sản phẩm: Áo thun cổ tròn tay ngắn dáng vừa.\r\n2. Ưu điểm:\r\n• Bền màu, bền form: Công nghệ in hiện đại giúp màu sắc và hình in luôn tươi mới, không bị bong tróc hay phai màu sau nhiều lần giặt và sử dụng.\r\n• Chất liệu mềm mịn, thấm hút mồ hôi tốt, mang đến cảm giác dễ chịu suốt cả ngày.\r\n• Thiết kế đơn giản, tinh tế, phù hợp với nhiều phong cách thời trang khác nhau, từ casual đến streetwear.\r\n• Chất liệu cotton tự nhiên, dễ phân hủy, an toàn cho da và thân thiện với môi trường.\r\n3. Chất liệu: Cotton Compact 4S, thành phần 92% Cotton 8% Spandex..\r\n4. Kỹ thuật: In kỹ thuật số sắc nét, màu sắc tươi tắn, tạo điểm nhấn độc đáo cho sản phẩm. Các đường may được gia công cẩn thận, đảm bảo sản phẩm bền đẹp theo thời gian.', 10000.00, '1744548071_89e26efc-a521-0900-4488-001b72c3bd23.jpg', 1111, 1, '2025-04-11 14:37:48');
 
 -- --------------------------------------------------------
 
@@ -625,7 +626,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT cho bảng `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT cho bảng `categories`
@@ -655,13 +656,13 @@ ALTER TABLE `discount_codes`
 -- AUTO_INCREMENT cho bảng `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT cho bảng `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT cho bảng `payment_methods`

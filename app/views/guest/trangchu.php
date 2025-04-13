@@ -369,8 +369,8 @@
               $categoryImages = [
                 'Áo Thun' => 'https://cdn3533.cdn-template-4s.com/thumbs/danh-muc/17_thumb_720.jpg',
                 'Quần Jean' => 'https://cdn3533.cdn-template-4s.com/thumbs/danh-muc/ao-so-mi-trang-nam-nu-form-rong-jbagy-js02-2_thumb_720.jpg',
-                'Giày Dép' => 'https://cdn3533.cdn-template-4s.com/thumbs/danh-muc/ao-so-mi-nam-jbagy-js02_thumb_720.jpg',
-                'Phụ Kiện' => 'https://flexhouse.vn/wp-content/uploads/2019/09/phu%CC%A3-kie%CC%A3%CC%82n-tu%CC%89-qua%CC%82%CC%80n-a%CC%81o.png',
+                'Quần Nam' => 'https://img.lazcdn.com/g/p/5e9a39b1b82061b35c244f788d9a515e.jpg_720x720q80.jpg_.webp',
+                
               ];
 
               // Ảnh mặc định nếu không tìm thấy danh mục
