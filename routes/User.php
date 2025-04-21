@@ -1,11 +1,11 @@
 <?php
 session_start();
-require_once '../app/models/User.php';
-require_once '../app/config/database.php';
-
-$db = new Database(); // Khởi tạo database
+require_once __DIR__ . '/../app/config/database.php';
+require_once __DIR__ . '/../app/models/User.php';
 
 $action = $_GET['action'] ?? '';
+$db = new Database();
+$userModel = new User($db);
 
 switch ($action) {
     case 'login':
@@ -13,53 +13,83 @@ switch ($action) {
             $email = $_POST['email'] ?? '';
             $password = $_POST['password'] ?? '';
 
-            $user = User::login($db,$email, $password);
-            if ($user) {
-                $_SESSION['user'] = $user;
-                header("Location: ../index.php"); // Redirect to main page
-                exit;
+            // Kiểm tra trạng thái tài khoản trước
+            $account = $userModel->getAccountByEmail($email);
+            if ($account) {
+                if ($account['status'] === 'inactive') {
+                    $_SESSION['login_error'] = 'Tài khoản của bạn đã bị khóa. Vui lòng liên hệ quản trị viên để được hỗ trợ.';
+                    header('Location: ../app/views/users/login.php');
+                    exit;
+                }
+
+                // Nếu tài khoản active, tiếp tục kiểm tra đăng nhập
+                $user = User::login($db, $email, $password);
+                if ($user) {
+                    $_SESSION['user'] = $user;
+                    if ($user['role'] === 'admin') {
+                        header('Location: ../index.php?page=dashboard');
+                    } else {
+                        header('Location: ../index.php');
+                    }
+                    exit;
+                } else {
+                    $_SESSION['login_error'] = 'Email hoặc mật khẩu không chính xác';
+                    header('Location: ../app/views/users/login.php');
+                    exit;
+                }
             } else {
-                // Store error message in session
-                $_SESSION['login_error'] = "Tên đăng nhập hoặc mật khẩu không chính xác";
-                header("Location: ../app/views/users/login.php?error");
+                $_SESSION['login_error'] = 'Email hoặc mật khẩu không chính xác';
+                header('Location: ../app/views/users/login.php');
                 exit;
             }
         }
-        break;  
+        break;
 
     case 'register':
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $data = [
-                'name' => $_POST['name'] ?? '',
-                'email' => $_POST['email'] ?? '',
-                'password' => $_POST['password'] ?? '',
-                'address' => $_POST['address'] ?? '',
-                'phone' => $_POST['phone'] ?? '',
-                'role' => 'user',
-            ];  
-
-            $registrationResult = User::register($db,$data);
-
-            if ($registrationResult['success']) {
-                // Redirect to login with success message
-                header("Location: ../app/views/users/login.php?registered");
-                exit;
+            $result = User::register($db, $_POST);
+            if ($result['success']) {
+                $_SESSION['success'] = 'Đăng ký thành công';
+                header('Location: ../index.php?page=login');
             } else {
-                // Store errors in session to display on registration page
-                $_SESSION['registration_errors'] = $registrationResult['errors'];
-                header("Location: ../app/views/users/register.php");
-                exit;
+                $_SESSION['error'] = implode(', ', $result['errors']);
+                header('Location: ../index.php?page=register');
             }
+            exit;
         }
         break;
 
     case 'logout':
         session_destroy();
-        unset($_SESSION['user']);
-        header("Location: ../index.php"); // Chuyển về trang chính sau khi logout
-        exit;
+        header('Location: ../index.php');
+        break;
+
+    case 'deactivate':
+        $id = $_GET['id'] ?? null;
+        if ($id) {
+            if ($userModel->deactivateUser($id)) {
+                $_SESSION['success'] = 'Đã khóa tài khoản thành công';
+            } else {
+                $_SESSION['error'] = 'Không thể khóa tài khoản';
+            }
+        }
+        header('Location: ../index.php?page=user');
+        break;
+
+    case 'activate':
+        $id = $_GET['id'] ?? null;
+        if ($id) {
+            if ($userModel->updateStatus($id, 'active')) {
+                $_SESSION['success'] = 'Đã mở khóa tài khoản thành công';
+            } else {
+                $_SESSION['error'] = 'Không thể mở khóa tài khoản';
+            }
+        }
+        header('Location: ../index.php?page=user');
+        break;
 
     default:
-        echo "Không tìm thấy hành động phù hợp!";
+        header('Location: ../index.php');
         break;
 }
+exit;

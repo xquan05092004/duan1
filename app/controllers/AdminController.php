@@ -321,6 +321,7 @@ class AdminController
         $commentModel->delete($id);
         header("Location: index.php?page=binhluan");
     }
+    
 }
 ob_end_flush(); // Xuất nội dung ra trình duyệt
 

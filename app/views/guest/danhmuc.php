@@ -173,7 +173,7 @@
                             <nav class="menu-section" nh-menu="sidebar" menu-type="main">
                                 <div class="menu-top"><span class="menu-header">Menu</span><a href="javascript:;" nh-menu="btn-close" class="close-sidebar effect-rotate icon-close"><i class="fa-light fa-xmark"></i></a></div>
                                 <ul>
-                                    <li class=""><a href="index.html"> Trang chủ<span class="fa-light fa-chevron-down"></span></a></li>
+                                    <li class=""><a href="index.php?page=home"> Trang chủ<span class="fa-light fa-chevron-down"></span></a></li>
                                     <li class="position-relative has-child "><a href="index.php?page=sanpham">Sản phẩm<span class="fa-light fa-chevron-down"></span></a><span class="grower" nh-toggle="x6ncflqm90"></span>
                                         <ul nh-toggle-element="x6ncflqm90" class="entry-menu dropdown">
 
@@ -323,96 +323,57 @@
                                     </li>
                                 </ul>
 
+                               
+
                                 <div class="d-flex justify-content-between align-items-center border-bottom border-gray pb-4 mb-4">
-                                    <div class="text-uppercase h5 font-weight-bold mb-0">Trạng thái</div><a style='display: none' href="javascript:;" nh-link-redirect="/ao-nam" class="reset-attribute border-0 color-highlight">Xóa</a>
+                                    <div class="text-uppercase h5 font-weight-bold mb-0">
+                                        Màu sắc
+                                    </div>
+                                    <a style='display: none' href="javascript:;" nh-link-redirect="/ao-nam" class="reset-attribute border-0 color-highlight">
+                                        Xóa
+                                    </a>
                                 </div>
-                                <div class="product-attribute-switch d-flex justify-content-start text-switch flex-wrap mb-5"><a href="javascript:;" nh-link-redirect="/ao-nam?status=featured" nh-link-toggle="/ao-nam" class="inner-product-attribute">Nổi Bật</a><a href="javascript:;" nh-link-redirect="/ao-nam?status=discount" nh-link-toggle="/ao-nam" class="inner-product-attribute">Giảm giá</a><a href="javascript:;" nh-link-redirect="/ao-nam?status=stocking" nh-link-toggle="/ao-nam" href="#" class="inner-product-attribute">Còn hàng</a></div>
-
-                                <?php
-                                // Lấy giá trị hiện tại từ URL
-                                $currentColor = $_GET['color'] ?? null;
-                                $currentSize = $_GET['size'] ?? null;
-
-                                // Tạo URL giữ tham số GET hiện tại
-                                function buildFilterUrl($key, $value)
-                                {
-                                    $query = $_GET;
-                                    $query[$key] = $value;
-                                    return '?' . http_build_query($query);
-                                }
-
-                                function removeFilterUrl($key)
-                                {
-                                    $query = $_GET;
-                                    unset($query[$key]);
-                                    return '?' . http_build_query($query);
-                                }
-                                ?>
-
-                                <!-- Bộ lọc màu sắc -->
+                                <div class="product-attribute-switch d-flex justify-content-start text-switch flex-wrap mb-5">
+                                    <a href="index.php?page=filter_variant&color_id=1;" class="inner-product-attribute">
+                                        Đen
+                                    </a>
+                                    <a href="index.php?page=filter_variant&color_id=4;"  class="inner-product-attribute">
+                                        Xanh
+                                    </a>
+                                    <a href="index.php?page=filter_variant&color_id=2;"  class="inner-product-attribute">
+                                        Trắng
+                                    </a>
+                                    <a href="index.php?page=filter_variant&color_id=3;"  class="inner-product-attribute">
+                                        Xám
+                                    </a>
+                                    <a href="index.php?page=filter_variant&color_id=5" class="inner-product-attribute">
+                                        Đỏ
+                                    </a>   
+                                </div>
                                 <div class="d-flex justify-content-between align-items-center border-bottom border-gray pb-4 mb-4">
-                                    <div class="text-uppercase h5 font-weight-bold mb-0">Màu sắc</div>
-                                    <?php if ($currentColor): ?>
-                                        <a href="<?= removeFilterUrl('color') ?>" class="reset-attribute border-0 color-highlight">Xóa</a>
-                                    <?php endif; ?>
+                                    <div class="text-uppercase h5 font-weight-bold mb-0">
+                                        Kích cỡ
+                                    </div>
+                                    <a style='display: none' href="javascript:;" nh-link-redirect="/ao-nam" class="reset-attribute border-0 color-highlight">
+                                        Xóa
+                                    </a>
                                 </div>
 
                                 <div class="product-attribute-switch d-flex justify-content-start text-switch flex-wrap mb-5">
-                                    <?php
-                                    $colors = ['nau' => 'Nâu', 'be' => 'Be', 'trang' => 'Trắng', 'xam' => 'Xám', 'do' => 'Đỏ', 'den' => 'Đen'];
-                                    foreach ($colors as $slug => $name):
-                                        $active = ($currentColor === $slug) ? 'font-weight-bold text-primary' : '';
-                                    ?>
-                                        <a href="<?= buildFilterUrl('color', $slug) ?>" class="inner-product-attribute <?= $active ?>">
-                                            <?= $name ?>
-                                        </a>
-                                    <?php endforeach; ?>
-                                </div>
-
-                                <!-- Bộ lọc kích cỡ -->
-                                <div class="d-flex justify-content-between align-items-center border-bottom border-gray pb-4 mb-4">
-                                    <div class="text-uppercase h5 font-weight-bold mb-0">Kích cỡ</div>
-                                    <?php if ($currentSize): ?>
-                                        <a href="<?= removeFilterUrl('size') ?>" class="reset-attribute border-0 color-highlight">Xóa</a>
-                                    <?php endif; ?>
-                                </div>
-
-                                <div class="product-attribute-switch d-flex justify-content-start text-switch flex-wrap mb-5">
-                                    <?php
-                                    $sizes = ['S', 'M', 'L', 'XL', 'XXL'];
-                                    foreach ($sizes as $size):
-                                        $active = ($currentSize === $size) ? 'font-weight-bold text-primary' : '';
-                                    ?>
-                                        <a href="<?= buildFilterUrl('size', $size) ?>" class="inner-product-attribute <?= $active ?>">
-                                            <?= $size ?>
-                                        </a>
-                                    <?php endforeach; ?>
-                                </div>
-
-                                <div class="product-attribute-switch d-flex justify-content-start text-switch flex-wrap mb-5">
-                                    <a href="javascript:;" nh-link-redirect="/ao-nam?item_size=8_or" nh-link-toggle="/ao-nam" class="inner-product-attribute">
-                                        28
+                                    <a href="index.php?page=filter_variant&color_id=1;"  class="inner-product-attribute">
+                                        S
                                     </a>
-                                    <a href="javascript:;" nh-link-redirect="/ao-nam?item_size=7_or" nh-link-toggle="/ao-nam" class="inner-product-attribute">
-                                        29
+                                    <a href="index.php?page=filter_variant&color_id=2;"  class="inner-product-attribute">
+                                        M
                                     </a>
-                                    <a href="javascript:;" nh-link-redirect="/ao-nam?item_size=6_or" nh-link-toggle="/ao-nam" class="inner-product-attribute">
-                                        30
+                                    <a href="index.php?page=filter_variant&color_id=3;"  class="inner-product-attribute">
+                                        L
                                     </a>
-                                    <a href="javascript:;" nh-link-redirect="/ao-nam?item_size=5_or" nh-link-toggle="/ao-nam" class="inner-product-attribute">
-                                        31
+                                    <a href="index.php?page=filter_variant&color_id=4;"  class="inner-product-attribute">
+                                        XL
                                     </a>
-                                    <a href="javascript:;" nh-link-redirect="/ao-nam?item_size=4_or" nh-link-toggle="/ao-nam" class="inner-product-attribute">
-                                        32
-                                    </a>
-                                    <a href="javascript:;" nh-link-redirect="/ao-nam?item_size=3_or" nh-link-toggle="/ao-nam" class="inner-product-attribute">
-                                        33
-                                    </a>
-                                    <a href="javascript:;" nh-link-redirect="/ao-nam?item_size=2_or" nh-link-toggle="/ao-nam" class="inner-product-attribute">
-                                        34
-                                    </a>
-                                    <a href="javascript:;" nh-link-redirect="/ao-nam?item_size=1_or" nh-link-toggle="/ao-nam" class="inner-product-attribute">
-                                        35
+                                    <a href="index.php?page=filter_variant&color_id=5;"  class="inner-product-attribute">
+                                        XXL
                                     </a>
                                 </div>
                                 <div class="btn_dat_lai mb-5 w-100"><a href="javascript:;" nh-link-redirect="/ao-nam" class="btn btn-submit px-5 w-100">Đặt lại</a></div>
@@ -440,7 +401,7 @@
                                             <div class="inner-image mb-3">
                                                 <div class="product-status"><span class="onsale">-4%</span></div>
                                                 <div class="ratio-custome"> <img src="public/uploads/<?= htmlspecialchars($product['image']) ?>" alt="<?= htmlspecialchars($product['name']) ?>" width="150"></div>
-                                                <div class="product-action"><a class="btn-product-action" title="Xem chi tiết"><i class="fa-light fa-cart-shopping"></i> Thêm giỏ hàng</a><a class="btn-product-action" href="index.php?page=chitiet&id=<?= $product['id'] ?>" title="Xem chi tiết"><i class="fa-light fa-eye"></i> Xem chi tiết</a></div>
+                                                <div class="product-action"><a href="index.php?page=chitiet&id=<?= $product['id'] ?>" class="btn-product-action" title="Xem chi tiết"><i class="fa-light fa-cart-shopping"></i> Thêm giỏ hàng</a><a class="btn-product-action" href="index.php?page=chitiet&id=<?= $product['id'] ?>" title="Xem chi tiết"><i class="fa-light fa-eye"></i> Xem chi tiết</a></div>
                                             </div>
                                             <div class="inner-content text-center">
                                                 <h4 class="product-title"><a href="index.php?page=chitiet&id=<?= $product['id'] ?>"><?= htmlspecialchars($product['name']) ?></a></h4>

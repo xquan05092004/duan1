@@ -400,7 +400,7 @@
                                             <div class="inner-image mb-3">
                                                 <div class="product-status"><span class="onsale">-4%</span></div>
                                                 <div class="ratio-custome"> <img src="public/uploads/<?= htmlspecialchars($product['image']) ?>" alt="<?= htmlspecialchars($product['name']) ?>" width="150"></div>
-                                                <div class="product-action"><a class="btn-product-action" title="Xem chi tiết"><i class="fa-light fa-cart-shopping"></i> Thêm giỏ hàng</a><a class="btn-product-action" href="index.php?page=chitiet&id=<?= $product['id'] ?>" title="Xem chi tiết"><i class="fa-light fa-eye"></i> Xem chi tiết</a></div>
+                                                <div class="product-action"><a href="index.php?page=chitiet&id=<?= $product['id'] ?>" class="btn-product-action" title="Xem chi tiết"><i class="fa-light fa-cart-shopping"></i> Thêm giỏ hàng</a><a class="btn-product-action" href="index.php?page=chitiet&id=<?= $product['id'] ?>" title="Xem chi tiết"><i class="fa-light fa-eye"></i> Xem chi tiết</a></div>
                                             </div>
                                             <div class="inner-content text-center">
                                                 <h4 class="product-title"><a href="index.php?page=chitiet&id=<?= $product['id'] ?>"><?= htmlspecialchars($product['name']) ?></a></h4>

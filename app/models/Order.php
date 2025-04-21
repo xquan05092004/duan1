@@ -32,11 +32,12 @@ class Order
         if (!$this->db) {
             die("Lỗi: Không có kết nối database!");
         }
-
+        
         $query = "SELECT * FROM orders";
         if ($status !== null) {
             $query .= " WHERE status = :status";
         }
+        $query .= " ORDER BY id DESC";
 
         $stmt = $this->db->getConnection()->prepare($query); // Gọi kết nối từ class Database
 
@@ -68,4 +69,6 @@ class Order
 
         return $stmt->execute();
     }
+    
+    
 }

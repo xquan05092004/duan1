@@ -10,18 +10,41 @@ class User
         $this->db = $db;
     }
 
+    public function getAccountByEmail($email)
+    {
+        try {
+            $stmt = $this->db->runQuery("SELECT * FROM users WHERE email = ?", [$email]);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log("Get account error: " . $e->getMessage());
+            return false;
+        }
+    }
+
     public static function login($db, $email, $password)
     {
-        $stmt = $db->runQuery("SELECT * FROM users WHERE email = ? AND status = 'active'", [$email]);
-
-        if ($stmt) {
+        try {
+            // Kiểm tra email và lấy thông tin user
+            $stmt = $db->runQuery("SELECT * FROM users WHERE email = ?", [$email]);
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
-            if ($user && password_verify($password, $user['password'])) {
-                unset($user['password']);
-                return $user;
+
+            if (!$user) {
+                return false;
             }
+
+            // Kiểm tra mật khẩu
+            if (!password_verify($password, $user['password'])) {
+                return false;
+            }
+
+            // Nếu mọi thứ ok, trả về thông tin user (đã loại bỏ password)
+            unset($user['password']);
+            return $user;
+        } catch (PDOException $e) {
+            error_log("Login error: " . $e->getMessage());
+            $_SESSION['login_error'] = 'Có lỗi xảy ra, vui lòng thử lại sau';
+            return false;
         }
-        return false;
     }
 
     public static function register($db, $data)
@@ -71,8 +94,8 @@ class User
     {
         try {
             $query = "UPDATE users SET status = ? WHERE id = ?";
-            $result = $this->db->runQuery($query, [$status, $userId]);
-            return $result !== false;
+            $stmt = $this->db->runQuery($query, [$status, $userId]);
+            return $stmt->rowCount() > 0;
         } catch (PDOException $e) {
             error_log("Update user status error: " . $e->getMessage());
             return false;

@@ -52,7 +52,7 @@ class Product
     {
         $sql = "SELECT * FROM products WHERE id = ?";
         $stmt = $this->db->runQuery($sql, [$id]);
-
+        
         // Nếu $stmt là một đối tượng PDOStatement, gọi fetch()
         if ($stmt instanceof PDOStatement) {
             return $stmt->fetch(PDO::FETCH_ASSOC);

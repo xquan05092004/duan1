@@ -158,7 +158,7 @@
 
       <!-- Sidebar -->
       <div class="sidebar">
-        
+
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
@@ -222,7 +222,7 @@
             <div class="col-sm-6">
               <h1>Đơn hàng</h1>
             </div>
-            
+
           </div>
         </div><!-- /.container-fluid -->
       </section>
@@ -250,11 +250,15 @@
                 <!-- /.card-header -->
                 <div class="card-body">
 
-                  <table id="example2" class="table table-bordered table-hover">
+                  // Lấy các đơn hàng
+                  $orderModel = new Order();
+                  $orders = $orderModel->getOrders();
+                  ?>
+                  <table class="table table-bordered table-hover">
                     <thead>
                       <tr>
-                        <th>Id </th>
-                        <th>Khách hàng</th>
+                        <th>Id</th>
+                        <th>Id khách hàng</th>
                         <th>Trạng thái</th>
                         <th>Thanh toán</th>
                         <th>Tổng tiền</th>
@@ -269,47 +273,34 @@
                           <td><?= $order['user_id'] ?></td>
                           <td><?= ucfirst($order['status']) ?></td>
                           <td><?= $order['payment_status'] ?></td>
-                          <td><?= number_format($order['total_amount']) ?> VND</td> 
+                          <td><?= number_format($order['total_amount']) ?> VND</td>
                           <td>
                             <a href="index.php?page=donhangct&action=view&id=<?= $order['id'] ?>" class="btn btn-sm btn-info">Xem chi tiết</a>
                           </td>
                           <td>
-                            <?php
-                            $statuses = ['chưa xác nhận', 'xác nhận', 'đang giao', 'hoàn thành'];
-                            $currentIndex = array_search($order['status'], $statuses);
-                            $nextStatus = $statuses[$currentIndex + 1] ?? null;
-                            ?>
+                            <!-- Xử lý thay đổi trạng thái đơn hàng -->
+                            <form action="index.php?page=capnhatorder" method="POST" style="display:inline-block">
+                              <input type="hidden" name="id" value="<?= $order['id'] ?>">
+                              <select name="status">
+                                <option value="xác nhận">Xác nhận</option>
+                                <option value="đang giao">Đang giao</option>
+                                <option value="hoàn thành">Hoàn thành</option>
+                              </select>
+                              <button type="submit">Cập nhật</button>
+                            </form>
 
-                            <?php if ($order['status'] != 'hoàn thành' && $order['status'] != 'hủy'): ?>
-                              <form action="index.php?page=capnhatorder" method="POST" style="display:inline-block">
-                                <input type="hidden" name="id" value="<?= $order['id'] ?>">
-                                <?php if ($nextStatus): ?>
-                                  <select name="status">
-                                    <option value="<?= $nextStatus ?>"><?= ucfirst($nextStatus) ?></option>
-                                  </select>
-                                  <button type="submit">Cập nhật</button>
-                                <?php else: ?>
-                                  <span>Đã hoàn thành</span>
-                                <?php endif; ?>
-                              </form>
-
-                              <!-- Form hủy tách riêng -->
-                              <form action="index.php?page=capnhatorder" method="POST" style="display:inline-block; margin-left: 5px">
-                                <input type="hidden" name="id" value="<?= $order['id'] ?>">
-                                <input type="hidden" name="status" value="hủy">
-                                <button type="submit" onclick="return confirm('Bạn có chắc muốn hủy đơn hàng này không?')">Hủy</button>
-                              </form>
-                            <?php else: ?>
-                              <span>Không thể thay đổi</span>
-                            <?php endif; ?>
-
+                            <!-- Hủy đơn hàng -->
+                            <form action="index.php?page=capnhatorder" method="POST" style="display:inline-block; margin-left: 5px">
+                              <input type="hidden" name="id" value="<?= $order['id'] ?>">
+                              <input type="hidden" name="status" value="hủy">
+                              <button type="submit" onclick="return confirm('Bạn có chắc muốn hủy đơn hàng này không?')">Hủy</button>
+                            </form>
                           </td>
                         </tr>
                       <?php endforeach; ?>
                     </tbody>
-
-
                   </table>
+
                 </div>
                 <!-- /.card-body -->
               </div>

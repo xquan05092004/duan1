@@ -541,125 +541,7 @@
                                             </div>
                                         </div>
 
-                                        <div nh-slider-thumbs
-                                            nh-swiper-thumbs="{&quot;spaceBetween&quot;:10,&quot;slidesPerView&quot;:4,&quot;freeMode&quot;:true,&quot;watchSlidesProgress&quot;:true,&quot;breakpoints&quot;:{&quot;640&quot;:{&quot;slidesPerView&quot;:4,&quot;spaceBetween&quot;:10},&quot;768&quot;:{&quot;slidesPerView&quot;:4,&quot;spaceBetween&quot;:10},&quot;1024&quot;:{&quot;slidesPerView&quot;:5,&quot;spaceBetween&quot;:10}}}"
-                                            class="swiper images-thumbs">
-                                            <div class="swiper-wrapper">
-                                                <div class="swiper-slide">
-                                                    <div class="img ratio-custome">
-                                                        <img src="public/uploads/<?= htmlspecialchars($product['image']) ?>"
-                                                            alt="<?= htmlspecialchars($product['name']) ?>"
-                                                            width="150">
-                                                    </div>
-                                                </div>
-                                                <div class="swiper-slide">
-                                                    <div class="img ratio-custome">
-                                                        <img class="img-fluid"
-                                                            src="https://cdn3533.cdn-template-4s.com/thumbs/san-pham/9/20240627_zgwv5rrxdq_thumb_150.webp"
-                                                            alt="Quần Âu Carrot Polyester 7054">
-                                                    </div>
-                                                </div>
-                                                <div class="swiper-slide">
-                                                    <div class="img ratio-custome">
-                                                        <img class="img-fluid"
-                                                            src="https://cdn3533.cdn-template-4s.com/thumbs/san-pham/9/20240702_nrrw3qqnmq_thumb_150.webp"
-                                                            alt="Quần Âu Carrot Polyester 7054">
-                                                    </div>
-                                                </div>
-                                                <div class="swiper-slide">
-                                                    <div class="img ratio-custome">
-                                                        <img class="img-fluid"
-                                                            src="https://cdn3533.cdn-template-4s.com/thumbs/san-pham/9/20240702_juvu46qwm7_thumb_150.webp"
-                                                            alt="Quần Âu Carrot Polyester 7054">
-                                                    </div>
-                                                </div>
-                                                <div class="swiper-slide">
-                                                    <div class="img ratio-custome">
-                                                        <img class="img-fluid"
-                                                            src="https://cdn3533.cdn-template-4s.com/thumbs/san-pham/9/20240702_flidg73rlh_thumb_150.webp"
-                                                            alt="Quần Âu Carrot Polyester 7054">
-                                                    </div>
-                                                </div>
-                                                <div class="swiper-slide">
-                                                    <div class="img ratio-custome">
-                                                        <img class="img-fluid"
-                                                            src="https://cdn3533.cdn-template-4s.com/thumbs/san-pham/9/20240702_oeouofeoga_thumb_150.webp"
-                                                            alt="Quần Âu Carrot Polyester 7054">
-                                                    </div>
-                                                </div>
-                                                <div class="swiper-slide">
-                                                    <div class="img ratio-custome">
-                                                        <img class="img-fluid"
-                                                            src="https://cdn3533.cdn-template-4s.com/thumbs/san-pham/9/20240606_xk4jppuumt_thumb_150.webp"
-                                                            alt="Quần Âu Carrot Polyester 7054">
-                                                    </div>
-                                                </div>
-                                                <div class="swiper-slide">
-                                                    <div class="img ratio-custome">
-                                                        <img class="img-fluid"
-                                                            src="https://cdn3533.cdn-template-4s.com/thumbs/san-pham/9/20240606_44jqjywhx2_thumb_150.webp"
-                                                            alt="Quần Âu Carrot Polyester 7054">
-                                                    </div>
-                                                </div>
-                                                <div class="swiper-slide">
-                                                    <div class="img ratio-custome">
-                                                        <img class="img-fluid"
-                                                            src="https://cdn3533.cdn-template-4s.com/thumbs/san-pham/9/20240606_wfc99e5eqy_thumb_150.webp"
-                                                            alt="Quần Âu Carrot Polyester 7054">
-                                                    </div>
-                                                </div>
-                                                <div class="swiper-slide">
-                                                    <div class="img ratio-custome">
-                                                        <img class="img-fluid"
-                                                            src="https://cdn3533.cdn-template-4s.com/thumbs/san-pham/9/20240606_tfqusqlmvc_thumb_150.webp"
-                                                            alt="Quần Âu Carrot Polyester 7054">
-                                                    </div>
-                                                </div>
-                                                <div class="swiper-slide">
-                                                    <div class="img ratio-custome">
-                                                        <img class="img-fluid"
-                                                            src="https://cdn3533.cdn-template-4s.com/thumbs/san-pham/9/20240627_tkd3sdpyas_thumb_150.webp"
-                                                            alt="Quần Âu Carrot Polyester 7054">
-                                                    </div>
-                                                </div>
-                                                <div class="swiper-slide">
-                                                    <div class="img ratio-custome">
-                                                        <img class="img-fluid"
-                                                            src="https://cdn3533.cdn-template-4s.com/thumbs/san-pham/9/20240702_74ic6jgwek_thumb_150.webp"
-                                                            alt="Quần Âu Carrot Polyester 7054">
-                                                    </div>
-                                                </div>
-                                                <div class="swiper-slide">
-                                                    <div class="img ratio-custome">
-                                                        <img class="img-fluid"
-                                                            src="https://cdn3533.cdn-template-4s.com/thumbs/san-pham/9/20240702_aqohzgk0yj_thumb_150.webp"
-                                                            alt="Quần Âu Carrot Polyester 7054">
-                                                    </div>
-                                                </div>
-                                                <div class="swiper-slide">
-                                                    <div class="img ratio-custome">
-                                                        <img class="img-fluid"
-                                                            src="https://cdn3533.cdn-template-4s.com/thumbs/san-pham/9/20240702_noh7zfcpwo_thumb_150.webp"
-                                                            alt="Quần Âu Carrot Polyester 7054">
-                                                    </div>
-                                                </div>
-                                                <div class="swiper-slide">
-                                                    <div class="img ratio-custome">
-                                                        <img class="img-fluid"
-                                                            src="https://cdn3533.cdn-template-4s.com/thumbs/san-pham/9/20240702_q99dhzdhj1_thumb_150.webp"
-                                                            alt="Quần Âu Carrot Polyester 7054">
-                                                    </div>
-                                                </div>
-                                                <div class="swiper-slide">
-                                                    <div class="img ratio-custome">
-                                                        <img class="img-fluid"
-                                                            src="https://cdn3533.cdn-template-4s.com/thumbs/san-pham/9/20240702_vohjucylok_thumb_150.webp"
-                                                            alt="Quần Âu Carrot Polyester 7054">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
+                                        
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
@@ -816,7 +698,7 @@
 
                                                 <div id="accordion">
                                                     <div class="card">
-                                                        <div class="card-header">
+                                                        <!-- <div class="card-header">
                                                             <div class="btn btn-link" data-toggle="collapse"
                                                                 data-target="#description01" aria-expanded="true"
                                                                 aria-controls="collapseOne">
@@ -831,7 +713,7 @@
                                                                 <p><?= htmlspecialchars($product['description']) ?>
                                                                 </p>
                                                             </div>
-                                                        </div>
+                                                        </div> -->
                                                     </div>
                                                     <div class="card">
                                                         <div class="card-header">
@@ -987,9 +869,8 @@
                             <div class="warp-content-detail">
                                 <div>
                                     <div class="content-detail content-text">
-                                        <p><img alt="" width="500" height="500" nh-lazy="image"
-                                                data-src="https://cdn3533.cdn-template-4s.com/media/san-pham/z4341084428964_6bcba3cca07c771573358b745683b763_c311a7db83914ef09dfbb7592641adce_grande.webp" />
-                                        </p>
+                                    <p><?= htmlspecialchars($product['description']) ?>
+                                    </p>
                                     </div>
                                 </div>
 

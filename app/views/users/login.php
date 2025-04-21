@@ -226,7 +226,7 @@ unset($_SESSION['login_error']);
             <div class="logo-section">
               <a href="../index.html"><img
                   class="img-fluid"
-                  src="/duan11/assets/templates/thoitrang05/assets/media/logo/logo_black.png"
+                  src="/duan11/assets/templates/thoitrang05/assets/media/logo/logo.png"
                   alt="logo" /></a>
             </div>
           </div>
@@ -408,7 +408,7 @@ unset($_SESSION['login_error']);
               <div class="logo-section">
                 <a href="../index.html"><img
                     class="img-fluid"
-                    src="/duan11/assets/templates/thoitrang05/assets/media/logo/logo_black.png"
+                    src="/duan11/assets/templates/thoitrang05/assets/media/logo/logo.png"
                     alt="logo" /></a>
               </div>
             </div>

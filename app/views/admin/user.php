@@ -1,21 +1,11 @@
 <?php
-// Database connection settings
-$servername = "localhost";
-$username = "root"; // MySQL username
-$password = "";     // MySQL password (empty for XAMPP)
-$dbname = "clothing_store"; // Database name
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
-}
+require_once __DIR__ . '/../../config/database.php';
+$db = new Database();
 
 // Query to select users with role 'user'
 $query = "SELECT * FROM users WHERE role = 'user'";
-$result = mysqli_query($conn, $query);
+$stmt = $db->runQuery($query);
+$users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +14,7 @@ $result = mysqli_query($conn, $query);
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | DataTables</title>
+    <title>Quản lý tài khoản</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -37,6 +27,23 @@ $result = mysqli_query($conn, $query);
     <link rel="stylesheet" href="assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="assets/dist/css/adminlte.min.css">
+    <style>
+        .status-badge {
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-weight: 500;
+        }
+
+        .status-active {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .status-inactive {
+            background-color: #dc3545;
+            color: white;
+        }
+    </style>
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -82,7 +89,7 @@ $result = mysqli_query($conn, $query);
 
             <!-- Sidebar -->
             <div class="sidebar">
-                
+
 
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
@@ -162,66 +169,73 @@ $result = mysqli_query($conn, $query);
             <section class="content">
                 <div class="container-fluid">
                     <?php if (isset($_SESSION['success'])): ?>
-                    <div class="alert alert-success alert-dismissible">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                        <?php
-              echo $_SESSION['success'];
-              unset($_SESSION['success']);
-              ?>
-                    </div>
+                        <div class="alert alert-success alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            <?php
+                            echo $_SESSION['success'];
+                            unset($_SESSION['success']);
+                            ?>
+                        </div>
                     <?php endif; ?>
 
                     <?php if (isset($_SESSION['error'])): ?>
-                    <div class="alert alert-danger alert-dismissible">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                        <?php
-              echo $_SESSION['error'];
-              unset($_SESSION['error']);
-              ?>
-                    </div>
+                        <div class="alert alert-danger alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            <?php
+                            echo $_SESSION['error'];
+                            unset($_SESSION['error']);
+                            ?>
+                        </div>
                     <?php endif; ?>
 
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <table id="example2" class="table table-bordered table-hover">
+                                    <table id="userTable" class="table table-bordered table-hover">
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
-                                                <th>Name</th>
-                                                <th>Phone</th>
+                                                <th>Tên</th>
                                                 <th>Email</th>
-                                                <th>Address</th>
+                                                <th>Số điện thoại</th>
+                                                <th>Địa chỉ</th>
                                                 <th>Trạng thái</th>
-                                                <th>Created At</th>
+                                                <th>Ngày tạo</th>
                                                 <th>Thao tác</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php
-                      if ($result->num_rows > 0) {
-                        while ($row = $result->fetch_assoc()) {
-                          echo "<tr>";
-                          echo "<td>" . $row['id'] . "</td>";
-                          echo "<td>" . $row['name'] . "</td>";
-                          echo "<td>" . $row['phone'] . "</td>";
-                          echo "<td>" . $row['email'] . "</td>";
-                          echo "<td>" . $row['address'] . "</td>";
-                          echo "<td>" . ($row['status'] == 'active' ? '<span class="badge badge-success">Hoạt động</span>' : '<span class="badge badge-danger">Đã khóa</span>') . "</td>";
-                          echo "<td>" . $row['created_at'] . "</td>";
-                          echo "<td>";
-                          echo "<a href='index.php?page=edit_user&id=" . $row['id'] . "' class='btn btn-warning btn-sm'>Sửa</a> ";
-                          if ($row['status'] == 'active') {
-                            echo "<a href='/duan11/routes/User.php?action=deactivate&id=" . $row['id'] . "' class='btn btn-danger btn-sm' onclick='return confirm(\"Bạn có chắc muốn khóa tài khoản này?\")'>Khóa</a>";
-                          } else {
-                            echo "<a href='/duan11/routes/User.php?action=activate&id=" . $row['id'] . "' class='btn btn-success btn-sm' onclick='return confirm(\"Bạn có chắc muốn mở khóa tài khoản này?\")'>Mở khóa</a>";
-                          }
-                          echo "</td>";
-                          echo "</tr>";
-                        }
-                      }
-                      ?>
+                                            <?php foreach ($users as $user): ?>
+                                                <tr>
+                                                    <td><?= htmlspecialchars($user['id']) ?></td>
+                                                    <td><?= htmlspecialchars($user['name']) ?></td>
+                                                    <td><?= htmlspecialchars($user['email']) ?></td>
+                                                    <td><?= htmlspecialchars($user['phone']) ?></td>
+                                                    <td><?= htmlspecialchars($user['address']) ?></td>
+                                                    <td>
+                                                        <span class="status-badge status-<?= $user['status'] ?>">
+                                                            <?= ucfirst($user['status']) ?>
+                                                        </span>
+                                                    </td>
+                                                    <td><?= htmlspecialchars($user['created_at']) ?></td>
+                                                    <td>
+                                                        <?php if ($user['status'] === 'active'): ?>
+                                                            <a href="routes/User.php?action=deactivate&id=<?= $user['id'] ?>"
+                                                                class="btn btn-danger btn-sm"
+                                                                onclick="return confirm('Bạn có chắc chắn muốn khóa tài khoản này?')">
+                                                                <i class="fas fa-lock"></i> Khóa
+                                                            </a>
+                                                        <?php else: ?>
+                                                            <a href="routes/User.php?action=activate&id=<?= $user['id'] ?>"
+                                                                class="btn btn-success btn-sm"
+                                                                onclick="return confirm('Bạn có chắc chắn muốn mở khóa tài khoản này?')">
+                                                                <i class="fas fa-unlock"></i> Mở khóa
+                                                            </a>
+                                                        <?php endif; ?>
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach; ?>
                                         </tbody>
 
                                     </table>
@@ -259,17 +273,17 @@ $result = mysqli_query($conn, $query);
     <script src="assets/dist/js/adminlte.min.js"></script>
 
     <script>
-    $(function() {
-        $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
+        $(function() {
+            $('#userTable').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
         });
-    });
     </script>
 
 </body>
