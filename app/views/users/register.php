@@ -107,6 +107,11 @@ unset($_SESSION['registration_errors']);
             src: url("/duan11/assets/templates/thoitrang05/assets/fonts/fa-brands-400.html") format("woff2"), url("/duan11/assets/templates/thoitrang05/assets/fonts/fonts/fa-brands-400.html") format("truetype");
             font-display: swap;
         }
+        .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
 
         /* ]]> */
     </style>
@@ -128,12 +133,9 @@ unset($_SESSION['registration_errors']);
                             <nav class="menu-section" nh-menu="sidebar" menu-type="main">
                                 <div class="menu-top"><span class="menu-header">Menu</span><a href="javascript:;" nh-menu="btn-close" class="close-sidebar effect-rotate icon-close"><i class="fa-light fa-xmark"></i></a></div>
                                 <ul>
-                                    <li class=""><a href="../index.html"> Trang chủ<span class="fa-light fa-chevron-down"></span></a></li>
-                                    <li class="position-relative has-child "><a href="../san-pham.html">Sản phẩm<span class="fa-light fa-chevron-down"></span></a><span class="grower" nh-toggle="xc2hn8am1y"></span>
-                                        <ul nh-toggle-element="xc2hn8am1y" class="entry-menu dropdown">
-                                            <li class=" "><a class="menu-link" href="../ao-nam.html">Áo Nam</a></li>
-                                            <li class=" "><a class="menu-link" href="../quan-nam.html">Quần Nam</a></li>
-                                        </ul>
+                                    <li class=""><a href="index.php"> Trang chủ<span class="fa-light fa-chevron-down"></span></a></li>
+                                    <li class="position-relative has-child "><a href="index.php?page=sanpham">Sản phẩm<span class="fa-light fa-chevron-down"></span></a><span class="grower" nh-toggle="xc2hn8am1y"></span>
+                                        
                                     </li>
                                     <li class=""><a href="../trang-tin-tuc.html">Bài viết<span class="fa-light fa-chevron-down"></span></a></li>
                                     <li class=""><a href="../lien-he.html">Liên hệ<span class="fa-light fa-chevron-down"></span></a></li>
@@ -157,15 +159,33 @@ unset($_SESSION['registration_errors']);
                             </form>
                         </div>
                     </div>
-                    <div nh-block="g1syznh" nh-block-cache="true" class="float-lg-right">
-                        <div nh-mini-member class="entire-action-header"><a class="btn-action-header" title="Tài khoản" href="javascript:;" data-toggle="modal" data-target="#login-modal"><i class="fa-light fa-user"></i></a></div>
-                    </div>
-                    <div nh-block="mgqafzd" nh-block-cache="true" class="float-right">
-                        <div class="entire-action-header"><a class="btn-action-header btn-mini-wishlist" title="Yêu thích" href="../yeu-thich.html"><i class="fa-light fa-heart"></i><span wishlist-total="all" class="items-number">0</span> </a></div>
-                    </div>
-                    <div nh-block="i57yxn3" nh-block-cache="true" class="float-right">
-                        <div class="entire-action-header"><a class="btn-mini-cart btn-action-header" nh-mini-cart="open" title="Giỏ hàng" href="javascript:;"><i class="fa-light fa-basket-shopping"></i><span nh-total-quantity-mini-cart class="items-number">0</span></a></div>
-                    </div>
+                    <div class="header-actions">
+            <?php if (isset($_SESSION['user'])): ?>
+              <div class="user-dropdown-wrapper">
+                <div class="user-toggle" onclick="toggleDropdown()">
+                  <i class="fa-light fa-user"></i>
+                </div>
+                <div class="dropdown-user" id="dropdownUser">
+                  <a class="nav-link">👋 Xin chào, <strong><?= $_SESSION['user']['name'] ?></strong></a>
+                  <a class="nav-link logout-zoom" href="/duan11/routes/User.php?action=logout">Đăng xuất</a>
+                </div>
+              </div>
+            <?php else: ?>
+              <a class="btn-action-header" title="Tài khoản" href="app/views/users/login.php">
+                <i class="fa-light fa-user"></i>
+              </a>
+            <?php endif; ?>
+
+            <!-- Icon giỏ hàng -->
+            <a class="btn-action-header" title="Giỏ hàng" href="index.php?page=view_cart">
+              <i class="fa-light fa-basket-shopping"></i>
+              <span nh-total-quantity-mini-cart></span>
+            </a>
+            <a class="btn-action-header" title="Giỏ hàng" href="index.php?page=manage_orders">
+              <i class="fa fa-address-book"></i>
+              <span nh-total-quantity-mini-cart></span>
+            </a>
+          </div>
                 </div>
             </div>
         </div>
@@ -194,19 +214,14 @@ unset($_SESSION['registration_errors']);
                                                         <input name="name" type="text" class="form-control required" placeholder="Họ và tên *">
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="row">
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group ">
                                                         <input name="password" id="password-register" type="password" class="form-control required" placeholder="Mật khẩu *">
                                                     </div>
                                                 </div>
-
-                                                <!-- <div class="col-md-6 col-12">
-                                                    <div class="form-group ">
-                                                        <input name="verify_password" type="password" class="form-control required" placeholder="Xác nhận mật khẩu *">
-                                                    </div>
-                                                </div> -->
+                                            </div>
+                                            <div class="row">
+                                                
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-6 col-12">
@@ -222,95 +237,10 @@ unset($_SESSION['registration_errors']);
                                                 </div>
                                             </div>
 
-                                            <!-- <div class="row">
-                                                <div class="col-md-6 col-12">
-                                                    <div class="form-group">
-                                                        <select name="city_id" id="city_id" class="form-control selectpicker" data-size="10" data-live-search="1">
-                                                            <option value="" selected="selected">-- Tỉnh thành --</option>
-                                                            <option value="1">Hà Nội</option>
-                                                            <option value="2">Hà Giang</option>
-                                                            <option value="4">Cao Bằng</option>
-                                                            <option value="6">Bắc Kạn</option>
-                                                            <option value="8">Tuyên Quang</option>
-                                                            <option value="10">Lào Cai</option>
-                                                            <option value="11">Điện Biên</option>
-                                                            <option value="12">Lai Châu</option>
-                                                            <option value="14">Sơn La</option>
-                                                            <option value="15">Yên Bái</option>
-                                                            <option value="17">Hòa Bình</option>
-                                                            <option value="19">Thái Nguyên</option>
-                                                            <option value="20">Lạng Sơn</option>
-                                                            <option value="22">Quảng Ninh</option>
-                                                            <option value="24">Bắc Giang</option>
-                                                            <option value="25">Phú Thọ</option>
-                                                            <option value="26">Vĩnh Phúc</option>
-                                                            <option value="27">Bắc Ninh</option>
-                                                            <option value="30">Hải Dương</option>
-                                                            <option value="31">Hải Phòng</option>
-                                                            <option value="33">Hưng Yên</option>
-                                                            <option value="34">Thái Bình</option>
-                                                            <option value="35">Hà Nam</option>
-                                                            <option value="36">Nam Định</option>
-                                                            <option value="37">Ninh Bình</option>
-                                                            <option value="38">Thanh Hóa</option>
-                                                            <option value="40">Nghệ An</option>
-                                                            <option value="42">Hà Tĩnh</option>
-                                                            <option value="44">Quảng Bình</option>
-                                                            <option value="45">Quảng Trị</option>
-                                                            <option value="46">Thừa Thiên Huế</option>
-                                                            <option value="48">Đà Nẵng</option>
-                                                            <option value="49">Quảng Nam</option>
-                                                            <option value="51">Quảng Ngãi</option>
-                                                            <option value="52">Bình Định</option>
-                                                            <option value="54">Phú Yên</option>
-                                                            <option value="56">Khánh Hòa</option>
-                                                            <option value="58">Ninh Thuận</option>
-                                                            <option value="60">Bình Thuận</option>
-                                                            <option value="62">Kon Tum</option>
-                                                            <option value="64">Gia Lai</option>
-                                                            <option value="66">Đắk Lắk</option>
-                                                            <option value="67">Đắk Nông</option>
-                                                            <option value="68">Lâm Đồng</option>
-                                                            <option value="70">Bình Phước</option>
-                                                            <option value="72">Tây Ninh</option>
-                                                            <option value="74">Bình Dương</option>
-                                                            <option value="75">Đồng Nai</option>
-                                                            <option value="77">Bà Rịa - Vũng Tàu</option>
-                                                            <option value="79">Hồ Chí Minh</option>
-                                                            <option value="80">Long An</option>
-                                                            <option value="82">Tiền Giang</option>
-                                                            <option value="83">Bến Tre</option>
-                                                            <option value="84">Trà Vinh</option>
-                                                            <option value="86">Vĩnh Long</option>
-                                                            <option value="87">Đồng Tháp</option>
-                                                            <option value="89">An Giang</option>
-                                                            <option value="91">Kiên Giang</option>
-                                                            <option value="92">Cần Thơ</option>
-                                                            <option value="93">Hậu Giang</option>
-                                                            <option value="94">Sóc Trăng</option>
-                                                            <option value="95">Bạc Liêu</option>
-                                                            <option value="96">Cà Mau</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-6 col-12">
-                                                    <div class="form-group">
-                                                        <select name="district_id" id="district_id" class="form-control selectpicker" data-size="10" data-live-search="1">
-                                                            <option value="" selected="selected">-- Quận huyện --</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                           
 
                                             <div class="row">
-                                                <div class="col-md-6 col-12">
-                                                    <div class="form-group">
-                                                        <select name="ward_id" id="ward_id" class="form-control selectpicker" data-size="10" data-live-search="1">
-                                                            <option value="" selected="selected">-- Phường xã --</option>
-                                                        </select>
-                                                    </div>
-                                                </div> -->
+                                               
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <input name="address" type="text" class="form-control required" placeholder="Địa chỉ *">
@@ -393,9 +323,9 @@ unset($_SESSION['registration_errors']);
                             <div class="menu-footer">
                                 <div class="title-footer">Liên hệ</div>
                                 <ul>
-                                    <li class=""><a href="../mailto_%20contact%40sm4s.html">Email: contact@sm4s.vn</a></li>
-                                    <li class=""><a href="../tel_0901191616.html">Hotline(Zalo): 0901191616</a></li>
-                                    <li class=""><a href="../tel_1900%206680.html">Điện thoại: 1900 6680</a></li>
+                                    <li class=""><a href="../mailto_%20contact%40sm4s.html">Email: email@fpt.edu.vn</a></li>
+                                    <li class=""><a href="../tel_0901191616.html">Hotline(Zalo): 0123456789</a></li>
+                                    <li class=""><a href="../tel_1900%206680.html">Điện thoại: 1900 0000</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -405,14 +335,9 @@ unset($_SESSION['registration_errors']);
                             <div class="entire-info-website">
                                 <div class="title-footer">Hệ thống cửa hàng</div>
                                 <address>
-                                    <p><span class="d-inline-block mr-2 font-weight-bold">Hà Nội:</span>Tầng 4, Tòa nhà số 97 - 99 Láng Hạ, Đống Đa, Hà Nội (Tòa nhà Petrowaco)</p>
+                                    <p><span class="d-inline-block mr-2 font-weight-bold">Hà Nội:</span>Tòa nhà FPT Polytechnic, đường Trịnh Văn Bô, Phương Canh, Nam Từ Liêm, Hà Nội</p>
                                 </address>
-                                <address>
-                                    <p><span class="d-inline-block mr-2 font-weight-bold">HCM:</span>927/1 CMT8, Phường 7, Quận Tân Bình, TP.HCM</p>
-                                </address>
-                                <address>
-                                    <p><span class="d-inline-block mr-2 font-weight-bold">Vinh:</span>Tầng 2 chung cư saigonsky, Ngõ 26, Nguyễn Thái Học, Phường Đội Cung, TP. Vinh, Nghệ An</p>
-                                </address>
+                               
                             </div>
                         </div>
                     </div>

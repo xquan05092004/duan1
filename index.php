@@ -111,17 +111,17 @@ if ($role === 'admin') {
         case 'xoabinhluan':
             $adminController->deleteComment();
             break;
-        case 'add_to_cart':
-            if (isset($_GET['product_id'], $_GET['quantity'])) {
-                $product_id = $_GET['product_id'];
-                $quantity = $_GET['quantity'];
-                $color = isset($_GET['color']) ? $_GET['color'] : 'default';  
-                $size = isset($_GET['size']) ? $_GET['size'] : 'default';      
-                $userController->addToCart($product_id, $quantity, $color, $size);
-            } else {
-                echo "Vui lòng chọn đủ thông tin sản phẩm!";
-            }
-            
+            case 'add_to_cart':
+                if (isset($_GET['product_id'], $_GET['quantity'], $_GET['color'], $_GET['size'])) {
+                    $product_id = $_GET['product_id'];
+                    $quantity = $_GET['quantity'];
+                    $color = $_GET['color'];
+                    $size = $_GET['size'];
+                    $userController->addToCart($product_id, $quantity, $color, $size);
+                } else {
+                    echo "Vui lòng chọn đủ thông tin sản phẩm!";
+                }
+                break;
         case 'checkout':
             $userController->checkout();
             break;

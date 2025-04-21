@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <title>Trang chủ</title>
 
@@ -185,8 +186,9 @@
     /* ]]> */
   </style>
 </head>
+
 <body>
-<header>
+  <header>
     <div nh-row="p7fsjoq" class="align-row-center header-main py-4">
       <div class="row no-gutters">
         <div class="col-md-4 col-12">
@@ -309,110 +311,110 @@
       </div>
     </div>
   </header>
-<div class="container mt-5">
+  <div class="container mt-5">
     <h2>Quản lý đơn hàng</h2>
     <?php if (isset($_SESSION['message'])): ?>
-        <div class="alert alert-success" id="success-message">
-            <?php echo htmlspecialchars($_SESSION['message']); ?>
-            <?php unset($_SESSION['message']); ?>
-        </div>
+      <div class="alert alert-success" id="success-message">
+        <?php echo htmlspecialchars($_SESSION['message']); ?>
+        <?php unset($_SESSION['message']); ?>
+      </div>
     <?php endif; ?>
 
     <?php if (isset($_SESSION['error'])): ?>
-        <div class="alert alert-danger" id="error-message">
-            <?php echo htmlspecialchars($_SESSION['error']); ?>
-            <?php unset($_SESSION['error']); ?>
-        </div>
+      <div class="alert alert-danger" id="error-message">
+        <?php echo htmlspecialchars($_SESSION['error']); ?>
+        <?php unset($_SESSION['error']); ?>
+      </div>
     <?php endif; ?>
 
     <?php if (empty($orders)): ?>
-        <p>Bạn chưa có đơn hàng nào.</p>
-        <a href="index.php" class="btn btn-primary">Về trang chủ</a>
+      <p>Bạn chưa có đơn hàng nào.</p>
+      <a href="index.php" class="btn btn-primary">Về trang chủ</a>
     <?php else: ?>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Mã đơn hàng</th>
-                    <th>Ngày đặt</th>
-                    <th>Tổng tiền</th>
-                    <th>Trạng thái</th>
-                    <th>Trạng thái thanh toán</th>
-                    <th>Phương thức thanh toán</th>
-                    <th>Chi tiết đơn hàng</th>
-                    <th>Hành động</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($orders as $order): ?>
-                    <tr>
-                        <td><?php echo htmlspecialchars($order['id']); ?></td>
-                        <td><?php echo htmlspecialchars($order['created_at']); ?></td>
-                        <td><?php echo number_format($order['total_amount'], 0, ',', '.') . ' VNĐ'; ?></td>
-                        <td>
-                            <?php
-                            // Hiển thị trạng thái
-                            echo htmlspecialchars($order['status']);
-                            ?>
-                        </td>
-                        <td><?php echo htmlspecialchars($order['payment_status'] ?? 'Không xác định'); ?></td>
-                        <td><?php echo htmlspecialchars($order['payment_method_name'] ?? 'Không xác định'); ?></td>
-                        <td>
-                            <?php if (!empty($order['items'])): ?>
-                                <ul>
-                                    <?php foreach ($order['items'] as $item): ?>
-                                        <li>
-                                            <strong>Sản phẩm:</strong> <?php echo htmlspecialchars($item['product_name']); ?><br>
-                                            <strong>Số lượng:</strong> <?php echo htmlspecialchars($item['quantity']); ?><br>
-                                            <strong>Màu sắc:</strong>
-                                            <?php echo htmlspecialchars($item['color'] ?? 'Không xác định'); ?><br>
-                                            <strong>Size:</strong>
-                                            <?php echo htmlspecialchars($item['size_name'] ?? 'Không xác định'); ?>
-                                        </li>
-                                    <?php endforeach; ?>
-                                </ul>
-                            <?php else: ?>
-                                Không có sản phẩm trong đơn hàng.
-                            <?php endif; ?>
-                        </td>
-                        <td>
-                            <?php if ($order['status'] === 'chưa xác nhận'): ?>
-                                <a href="index.php?page=cancel_order&id=<?php echo $order['id']; ?>" class="btn btn-danger btn-sm"
-                                    onclick="return confirm('Bạn có chắc chắn muốn hủy đơn hàng này không?');">
-                                    Hủy đơn hàng
-                                </a>
-                            <?php elseif ($order['status'] === 'hủy'): ?>
-                                <span class="text-muted">Đã hủy</span>
-                            <?php else: ?>
-                                <span class="text-muted">Không thể hủy</span>
-                            <?php endif; ?>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-        <a href="index.php?page=home" class="btn btn-primary">Về trang chủ</a>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Mã đơn hàng</th>
+            <th>Ngày đặt</th>
+            <th>Tổng tiền</th>
+            <th>Trạng thái</th>
+            <th>Trạng thái thanh toán</th>
+            <th>Phương thức thanh toán</th>
+            <th>Chi tiết đơn hàng</th>
+            <th>Hành động</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php foreach ($orders as $order): ?>
+            <tr>
+              <td><?php echo htmlspecialchars($order['id']); ?></td>
+              <td><?php echo htmlspecialchars($order['created_at']); ?></td>
+              <td><?php echo number_format($order['total_amount'], 0, ',', '.') . ' VNĐ'; ?></td>
+              <td>
+                <?php
+                // Hiển thị trạng thái
+                echo htmlspecialchars($order['status']);
+                ?>
+              </td>
+              <td><?php echo htmlspecialchars($order['payment_status'] ?? 'Không xác định'); ?></td>
+              <td><?php echo htmlspecialchars($order['payment_method_name'] ?? 'Không xác định'); ?></td>
+              <td>
+                <?php if (!empty($order['items'])): ?>
+                  <ul>
+                    <?php foreach ($order['items'] as $item): ?>
+                      <li>
+                        <strong>Sản phẩm:</strong> <?php echo htmlspecialchars($item['product_name']); ?><br>
+                        <strong>Số lượng:</strong> <?php echo htmlspecialchars($item['quantity']); ?><br>
+                        <strong>Màu sắc:</strong>
+                        <?php echo htmlspecialchars($item['color'] ?? 'Không xác định'); ?><br>
+                        <strong>Size:</strong>
+                        <?php echo htmlspecialchars($item['size_name'] ?? 'Không xác định'); ?>
+                      </li>
+                    <?php endforeach; ?>
+                  </ul>
+                <?php else: ?>
+                  Không có sản phẩm trong đơn hàng.
+                <?php endif; ?>
+              </td>
+              <td>
+                <?php if ($order['status'] === 'chưa xác nhận'): ?>
+                  <a href="index.php?page=cancel_order&id=<?php echo $order['id']; ?>" class="btn btn-danger btn-sm"
+                    onclick="return confirm('Bạn có chắc chắn muốn hủy đơn hàng này không?');">
+                    Hủy đơn hàng
+                  </a>
+                <?php elseif ($order['status'] === 'hủy'): ?>
+                  <span class="text-muted">Đã hủy</span>
+                <?php else: ?>
+                  <span class="text-muted">Không thể hủy</span>
+                <?php endif; ?>
+              </td>
+            </tr>
+          <?php endforeach; ?>
+        </tbody>
+      </table>
+      <a href="index.php?page=home" class="btn btn-primary">Về trang chủ</a>
     <?php endif; ?>
-</div>
+  </div>
 
-<!-- Thêm JavaScript để ẩn thông báo sau 5 giây -->
-<script>
+  <!-- Thêm JavaScript để ẩn thông báo sau 5 giây -->
+  <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const successMessage = document.getElementById('success-message');
-        if (successMessage) {
-            setTimeout(function() {
-                successMessage.style.display = 'none';
-            }, 5000); // 5000ms = 5 giây
-        }
+      const successMessage = document.getElementById('success-message');
+      if (successMessage) {
+        setTimeout(function() {
+          successMessage.style.display = 'none';
+        }, 5000); // 5000ms = 5 giây
+      }
 
-        const errorMessage = document.getElementById('error-message');
-        if (errorMessage) {
-            setTimeout(function() {
-                errorMessage.style.display = 'none';
-            }, 5000); // 5000ms = 5 giây
-        }
+      const errorMessage = document.getElementById('error-message');
+      if (errorMessage) {
+        setTimeout(function() {
+          errorMessage.style.display = 'none';
+        }, 5000); // 5000ms = 5 giây
+      }
     });
-</script>
-<footer>
+  </script>
+  <footer>
     <div nh-row="601bgio" class="border-bottom-footer">
       <div class="container">
         <div class="row">
@@ -481,15 +483,9 @@
               <div class="menu-footer">
                 <div class="title-footer">Liên hệ</div>
                 <ul>
-                  <li class="">
-                    <a href="mailto_%20contact%40sm4s.html">Email: contact@sm4s.vn</a>
-                  </li>
-                  <li class="">
-                    <a href="tel_0901191616.html">Hotline(Zalo): 0901191616</a>
-                  </li>
-                  <li class="">
-                    <a href="tel_1900%206680.html">Điện thoại: 1900 6680</a>
-                  </li>
+                  <li class=""><a href="../mailto_%20contact%40sm4s.html">Email: email@fpt.edu.vn</a></li>
+                  <li class=""><a href="../tel_0901191616.html">Hotline(Zalo): 0123456789</a></li>
+                  <li class=""><a href="../tel_1900%206680.html">Điện thoại: 1900 0000</a></li>
                 </ul>
               </div>
             </div>
@@ -499,22 +495,9 @@
               <div class="entire-info-website">
                 <div class="title-footer">Hệ thống cửa hàng</div>
                 <address>
-                  <p>
-                    <span class="d-inline-block mr-2 font-weight-bold">Hà Nội:</span>Tầng 4, Tòa nhà số 97 - 99 Láng Hạ, Đống Đa, Hà Nội (Tòa
-                    nhà Petrowaco)
-                  </p>
+                  <p><span class="d-inline-block mr-2 font-weight-bold">Hà Nội:</span>Tòa nhà FPT Polytechnic, đường Trịnh Văn Bô, Phương Canh, Nam Từ Liêm, Hà Nội</p>
                 </address>
-                <address>
-                  <p>
-                    <span class="d-inline-block mr-2 font-weight-bold">HCM:</span>927/1 CMT8, Phường 7, Quận Tân Bình, TP.HCM
-                  </p>
-                </address>
-                <address>
-                  <p>
-                    <span class="d-inline-block mr-2 font-weight-bold">Vinh:</span>Tầng 2 chung cư saigonsky, Ngõ 26, Nguyễn Thái Học,
-                    Phường Đội Cung, TP. Vinh, Nghệ An
-                  </p>
-                </address>
+
               </div>
             </div>
           </div>
@@ -629,8 +612,8 @@
       }
     });
   </script>
-    src="assets/templates/thoitrang05/assets/lib/jquery/jquery-3.6.0.min.js"
-    type="text/javascript"></script>
+  src="assets/templates/thoitrang05/assets/lib/jquery/jquery-3.6.0.min.js"
+  type="text/javascript"></script>
   <script
     src="assets/templates/thoitrang05/assets/lib/jquery-lazy/jquery.lazy.min.js"
     type="text/javascript"></script>
@@ -723,4 +706,5 @@
     });
   </script>
 </body>
+
 </html>

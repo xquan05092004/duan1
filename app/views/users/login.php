@@ -400,130 +400,92 @@ unset($_SESSION['login_error']);
     </div>
   </div>
   <footer>
-    <div nh-row="601bgio" class="border-bottom-footer">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6 col-12">
-            <div nh-block="qhdw2uy" nh-block-cache="true" class="">
-              <div class="logo-section">
-                <a href="../index.html"><img
-                    class="img-fluid"
-                    src="/duan11/assets/templates/thoitrang05/assets/media/logo/logo.png"
-                    alt="logo" /></a>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-12">
-            <div nh-block="ze61uwh" nh-block-cache="true" class="">
-              <div class="footer-description-right">
-                <div class="btn-gop-y">
-                  <a href="../lien-he.html">GÓP Ý TỪ BẠN</a>
+        <div nh-row="601bgio" class="border-bottom-footer">
+            <div class="container">
+                <div class="row ">
+                    <div class="col-md-6 col-12">
+                        <div nh-block="qhdw2uy" nh-block-cache="true" class="">
+                            <div class="logo-section "><a href="../index.html"><img class="img-fluid" src="/duan11/assets/templates/thoitrang05/assets/media/logo/logo.png" alt="logo"></a></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-12">
+                        <div nh-block="ze61uwh" nh-block-cache="true" class="">
+                            <div class="footer-description-right">
+                                <div class="btn-gop-y"><a href="../lien-he.html">GÓP Ý TỪ BẠN</a></div>
+                                <div class="text-description-comments">Mỗi đóng góp từ bạn chính là kim chỉ nam
+                                    đề chúng tôi không ngừng thay đôi và cải thiện mỗi ngày</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="text-description-comments">
-                  Mỗi đóng góp từ bạn chính là kim chỉ nam đề chúng tôi không
-                  ngừng thay đôi và cải thiện mỗi ngày
+            </div>
+        </div>
+        <div nh-row="ileq1fy" class="border-bottom-footer-01">
+            <div class="container">
+                <div class="row ">
+                    <div class="col-md-3 col-12">
+                        <div nh-block="w41f9sj" nh-block-cache="true" class="">
+                            <div class="menu-footer">
+                                <div class="title-footer">về chúng tôi</div>
+                                <ul>
+                                    <li class=""><a href="../index.html">Thông tin</a></li>
+                                    <li class=""><a href="../tin-tuc.html">Blog</a></li>
+                                    <li class=""><a href="../index.html">Tuyển dụng</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-12">
+                        <div nh-block="p9mqyc2" nh-block-cache="true" class="">
+                            <div class="menu-footer">
+                                <div class="title-footer">CHÍNH SÁCH KHÁCH HÀNG</div>
+                                <ul>
+                                    <li class=""><a href="../index.html">Chính sách kiểm hàng</a></li>
+                                    <li class=""><a href="../tin-tuc.html">Chính sách đổi trả</a></li>
+                                    <li class=""><a href="../index.html">Bảo mật thông tin</a></li>
+                                    <li class=""><a href="../index.html">Thanh toán - Giao hàng</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-12">
+                        <div nh-block="8z96myo" nh-block-cache="true" class="">
+                            <div class="menu-footer">
+                                <div class="title-footer">Liên hệ</div>
+                                <ul>
+                                    <li class=""><a href="../mailto_%20contact%40sm4s.html">Email: email@fpt.edu.vn</a></li>
+                                    <li class=""><a href="../tel_0901191616.html">Hotline(Zalo): 0123456789</a></li>
+                                    <li class=""><a href="../tel_1900%206680.html">Điện thoại: 1900 0000</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-12">
+                        <div nh-block="5cpl2oh" nh-block-cache="true" class="">
+                            <div class="entire-info-website">
+                                <div class="title-footer">Hệ thống cửa hàng</div>
+                                <address>
+                                    <p><span class="d-inline-block mr-2 font-weight-bold">Hà Nội:</span>Tòa nhà FPT Polytechnic, đường Trịnh Văn Bô, Phương Canh, Nam Từ Liêm, Hà Nội</p>
+                                </address>
+                               
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
-    <div nh-row="ileq1fy" class="border-bottom-footer-01">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-3 col-12">
-            <div nh-block="w41f9sj" nh-block-cache="true" class="">
-              <div class="menu-footer">
-                <div class="title-footer">về chúng tôi</div>
-                <ul>
-                  <li class=""><a href="../index.html">Thông tin</a></li>
-                  <li class=""><a href="../tin-tuc.html">Blog</a></li>
-                  <li class=""><a href="../index.html">Tuyển dụng</a></li>
-                </ul>
-              </div>
+        <div nh-row="8kh5p9q" class="">
+            <div class="container">
+                <div class="row ">
+                    <div class="col-md-12 col-12">
+                        <div nh-block="47gc3wp" nh-block-cache="true" class="">
+                            <div class="text-white copyright text-center pb-4">Copyright © 2024 Web4s. All rights reserved.</div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="col-md-3 col-12">
-            <div nh-block="p9mqyc2" nh-block-cache="true" class="">
-              <div class="menu-footer">
-                <div class="title-footer">CHÍNH SÁCH KHÁCH HÀNG</div>
-                <ul>
-                  <li class="">
-                    <a href="../index.html">Chính sách kiểm hàng</a>
-                  </li>
-                  <li class="">
-                    <a href="../tin-tuc.html">Chính sách đổi trả</a>
-                  </li>
-                  <li class="">
-                    <a href="../index.html">Bảo mật thông tin</a>
-                  </li>
-                  <li class="">
-                    <a href="../index.html">Thanh toán - Giao hàng</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-3 col-12">
-            <div nh-block="8z96myo" nh-block-cache="true" class="">
-              <div class="menu-footer">
-                <div class="title-footer">Liên hệ</div>
-                <ul>
-                  <li class="">
-                    <a href="../mailto_%20contact%40sm4s.html">Email: contact@sm4s.vn</a>
-                  </li>
-                  <li class="">
-                    <a href="../tel_0901191616.html">Hotline(Zalo): 0901191616</a>
-                  </li>
-                  <li class="">
-                    <a href="../tel_1900%206680.html">Điện thoại: 1900 6680</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-3 col-12">
-            <div nh-block="5cpl2oh" nh-block-cache="true" class="">
-              <div class="entire-info-website">
-                <div class="title-footer">Hệ thống cửa hàng</div>
-                <address>
-                  <p>
-                    <span class="d-inline-block mr-2 font-weight-bold">Hà Nội:</span>Tầng 4, Tòa nhà số 97 - 99 Láng Hạ, Đống Đa, Hà Nội (Tòa
-                    nhà Petrowaco)
-                  </p>
-                </address>
-                <address>
-                  <p>
-                    <span class="d-inline-block mr-2 font-weight-bold">HCM:</span>927/1 CMT8, Phường 7, Quận Tân Bình, TP.HCM
-                  </p>
-                </address>
-                <address>
-                  <p>
-                    <span class="d-inline-block mr-2 font-weight-bold">Vinh:</span>Tầng 2 chung cư saigonsky, Ngõ 26, Nguyễn Thái Học,
-                    Phường Đội Cung, TP. Vinh, Nghệ An
-                  </p>
-                </address>
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
-    </div>
-    <div nh-row="8kh5p9q" class="">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12 col-12">
-            <div nh-block="47gc3wp" nh-block-cache="true" class="">
-              <div class="text-white copyright text-center pb-4">
-                Copyright © 2024 Web4s. All rights reserved.
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </footer>
+    </footer>
 
   <div
     id="login-modal"

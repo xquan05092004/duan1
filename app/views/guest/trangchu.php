@@ -370,7 +370,7 @@
                 'Áo Thun' => 'https://cdn3533.cdn-template-4s.com/thumbs/danh-muc/17_thumb_720.jpg',
                 'Quần Jean' => 'https://cdn3533.cdn-template-4s.com/thumbs/danh-muc/ao-so-mi-trang-nam-nu-form-rong-jbagy-js02-2_thumb_720.jpg',
                 'Quần Nam' => 'https://img.lazcdn.com/g/p/5e9a39b1b82061b35c244f788d9a515e.jpg_720x720q80.jpg_.webp',
-                
+
               ];
 
               // Ảnh mặc định nếu không tìm thấy danh mục
@@ -694,15 +694,9 @@
               <div class="menu-footer">
                 <div class="title-footer">Liên hệ</div>
                 <ul>
-                  <li class="">
-                    <a href="mailto_%20contact%40sm4s.html">Email: contact@sm4s.vn</a>
-                  </li>
-                  <li class="">
-                    <a href="tel_0901191616.html">Hotline(Zalo): 0901191616</a>
-                  </li>
-                  <li class="">
-                    <a href="tel_1900%206680.html">Điện thoại: 1900 6680</a>
-                  </li>
+                  <li class=""><a href="../mailto_%20contact%40sm4s.html">Email: email@fpt.edu.vn</a></li>
+                  <li class=""><a href="../tel_0901191616.html">Hotline(Zalo): 0123456789</a></li>
+                  <li class=""><a href="../tel_1900%206680.html">Điện thoại: 1900 0000</a></li>
                 </ul>
               </div>
             </div>
@@ -712,27 +706,15 @@
               <div class="entire-info-website">
                 <div class="title-footer">Hệ thống cửa hàng</div>
                 <address>
-                  <p>
-                    <span class="d-inline-block mr-2 font-weight-bold">Hà Nội:</span>Tầng 4, Tòa nhà số 97 - 99 Láng Hạ, Đống Đa, Hà Nội (Tòa
-                    nhà Petrowaco)
-                  </p>
+                  <p><span class="d-inline-block mr-2 font-weight-bold">Hà Nội:</span>Tòa nhà FPT Polytechnic, đường Trịnh Văn Bô, Phương Canh, Nam Từ Liêm, Hà Nội</p>
                 </address>
-                <address>
-                  <p>
-                    <span class="d-inline-block mr-2 font-weight-bold">HCM:</span>927/1 CMT8, Phường 7, Quận Tân Bình, TP.HCM
-                  </p>
-                </address>
-                <address>
-                  <p>
-                    <span class="d-inline-block mr-2 font-weight-bold">Vinh:</span>Tầng 2 chung cư saigonsky, Ngõ 26, Nguyễn Thái Học,
-                    Phường Đội Cung, TP. Vinh, Nghệ An
-                  </p>
-                </address>
+
               </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
     </div>
     <div nh-row="8kh5p9q" class="">
       <div class="container">

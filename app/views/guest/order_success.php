@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <title>Trang chủ</title>
 
@@ -185,8 +186,9 @@
     /* ]]> */
   </style>
 </head>
+
 <body>
-<header>
+  <header>
     <div nh-row="p7fsjoq" class="align-row-center header-main py-4">
       <div class="row no-gutters">
         <div class="col-md-4 col-12">
@@ -309,16 +311,16 @@
       </div>
     </div>
   </header>
-<div class="container mt-5 text-center">
+  <div class="container mt-5 text-center">
     <h2>Đặt hàng thành công!</h2>
     <p>Cảm ơn bạn đã mua hàng. Đơn hàng của bạn đang được xử lý.</p>
     <p>Mã đơn hàng:
-        <?php echo isset($_SESSION['last_order_id']) ? htmlspecialchars($_SESSION['last_order_id']) : 'N/A'; ?>
+      <?php echo isset($_SESSION['last_order_id']) ? htmlspecialchars($_SESSION['last_order_id']) : 'N/A'; ?>
     </p>
     <a href="index.php" class="btn btn-primary">Về trang chủ</a>
     <a href="index.php?page=manage_orders" class="btn btn-secondary">Quản lý đơn hàng</a>
-</div>
-<footer>
+  </div>
+  <footer>
     <div nh-row="601bgio" class="border-bottom-footer">
       <div class="container">
         <div class="row">
@@ -387,15 +389,9 @@
               <div class="menu-footer">
                 <div class="title-footer">Liên hệ</div>
                 <ul>
-                  <li class="">
-                    <a href="mailto_%20contact%40sm4s.html">Email: contact@sm4s.vn</a>
-                  </li>
-                  <li class="">
-                    <a href="tel_0901191616.html">Hotline(Zalo): 0901191616</a>
-                  </li>
-                  <li class="">
-                    <a href="tel_1900%206680.html">Điện thoại: 1900 6680</a>
-                  </li>
+                  <li class=""><a href="../mailto_%20contact%40sm4s.html">Email: email@fpt.edu.vn</a></li>
+                  <li class=""><a href="../tel_0901191616.html">Hotline(Zalo): 0123456789</a></li>
+                  <li class=""><a href="../tel_1900%206680.html">Điện thoại: 1900 0000</a></li>
                 </ul>
               </div>
             </div>
@@ -405,22 +401,9 @@
               <div class="entire-info-website">
                 <div class="title-footer">Hệ thống cửa hàng</div>
                 <address>
-                  <p>
-                    <span class="d-inline-block mr-2 font-weight-bold">Hà Nội:</span>Tầng 4, Tòa nhà số 97 - 99 Láng Hạ, Đống Đa, Hà Nội (Tòa
-                    nhà Petrowaco)
-                  </p>
+                  <p><span class="d-inline-block mr-2 font-weight-bold">Hà Nội:</span>Tòa nhà FPT Polytechnic, đường Trịnh Văn Bô, Phương Canh, Nam Từ Liêm, Hà Nội</p>
                 </address>
-                <address>
-                  <p>
-                    <span class="d-inline-block mr-2 font-weight-bold">HCM:</span>927/1 CMT8, Phường 7, Quận Tân Bình, TP.HCM
-                  </p>
-                </address>
-                <address>
-                  <p>
-                    <span class="d-inline-block mr-2 font-weight-bold">Vinh:</span>Tầng 2 chung cư saigonsky, Ngõ 26, Nguyễn Thái Học,
-                    Phường Đội Cung, TP. Vinh, Nghệ An
-                  </p>
-                </address>
+
               </div>
             </div>
           </div>
@@ -536,4 +519,5 @@
     });
   </script>
 </body>
+
 </html>

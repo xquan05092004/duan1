@@ -323,7 +323,7 @@
                                     </li>
                                 </ul>
 
-                               
+
 
                                 <div class="d-flex justify-content-between align-items-center border-bottom border-gray pb-4 mb-4">
                                     <div class="text-uppercase h5 font-weight-bold mb-0">
@@ -337,18 +337,18 @@
                                     <a href="index.php?page=filter_variant&color_id=1;" class="inner-product-attribute">
                                         Đen
                                     </a>
-                                    <a href="index.php?page=filter_variant&color_id=4;"  class="inner-product-attribute">
+                                    <a href="index.php?page=filter_variant&color_id=4;" class="inner-product-attribute">
                                         Xanh
                                     </a>
-                                    <a href="index.php?page=filter_variant&color_id=2;"  class="inner-product-attribute">
+                                    <a href="index.php?page=filter_variant&color_id=2;" class="inner-product-attribute">
                                         Trắng
                                     </a>
-                                    <a href="index.php?page=filter_variant&color_id=3;"  class="inner-product-attribute">
+                                    <a href="index.php?page=filter_variant&color_id=3;" class="inner-product-attribute">
                                         Xám
                                     </a>
                                     <a href="index.php?page=filter_variant&color_id=5" class="inner-product-attribute">
                                         Đỏ
-                                    </a>   
+                                    </a>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center border-bottom border-gray pb-4 mb-4">
                                     <div class="text-uppercase h5 font-weight-bold mb-0">
@@ -360,19 +360,19 @@
                                 </div>
 
                                 <div class="product-attribute-switch d-flex justify-content-start text-switch flex-wrap mb-5">
-                                    <a href="index.php?page=filter_variant&color_id=1;"  class="inner-product-attribute">
+                                    <a href="index.php?page=filter_variant&color_id=1;" class="inner-product-attribute">
                                         S
                                     </a>
-                                    <a href="index.php?page=filter_variant&color_id=2;"  class="inner-product-attribute">
+                                    <a href="index.php?page=filter_variant&color_id=2;" class="inner-product-attribute">
                                         M
                                     </a>
-                                    <a href="index.php?page=filter_variant&color_id=3;"  class="inner-product-attribute">
+                                    <a href="index.php?page=filter_variant&color_id=3;" class="inner-product-attribute">
                                         L
                                     </a>
-                                    <a href="index.php?page=filter_variant&color_id=4;"  class="inner-product-attribute">
+                                    <a href="index.php?page=filter_variant&color_id=4;" class="inner-product-attribute">
                                         XL
                                     </a>
-                                    <a href="index.php?page=filter_variant&color_id=5;"  class="inner-product-attribute">
+                                    <a href="index.php?page=filter_variant&color_id=5;" class="inner-product-attribute">
                                         XXL
                                     </a>
                                 </div>
@@ -478,9 +478,9 @@
                             <div class="menu-footer">
                                 <div class="title-footer">Liên hệ</div>
                                 <ul>
-                                    <li class=""><a href="mailto_%20contact%40sm4s.html">Email: contact@sm4s.vn</a></li>
-                                    <li class=""><a href="tel_0901191616.html">Hotline(Zalo): 0901191616</a></li>
-                                    <li class=""><a href="tel_1900%206680.html">Điện thoại: 1900 6680</a></li>
+                                    <li class=""><a href="../mailto_%20contact%40sm4s.html">Email: email@fpt.edu.vn</a></li>
+                                    <li class=""><a href="../tel_0901191616.html">Hotline(Zalo): 0123456789</a></li>
+                                    <li class=""><a href="../tel_1900%206680.html">Điện thoại: 1900 0000</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -490,14 +490,9 @@
                             <div class="entire-info-website">
                                 <div class="title-footer">Hệ thống cửa hàng</div>
                                 <address>
-                                    <p><span class="d-inline-block mr-2 font-weight-bold">Hà Nội:</span>Tầng 4, Tòa nhà số 97 - 99 Láng Hạ, Đống Đa, Hà Nội (Tòa nhà Petrowaco)</p>
+                                    <p><span class="d-inline-block mr-2 font-weight-bold">Hà Nội:</span>Tòa nhà FPT Polytechnic, đường Trịnh Văn Bô, Phương Canh, Nam Từ Liêm, Hà Nội</p>
                                 </address>
-                                <address>
-                                    <p><span class="d-inline-block mr-2 font-weight-bold">HCM:</span>927/1 CMT8, Phường 7, Quận Tân Bình, TP.HCM</p>
-                                </address>
-                                <address>
-                                    <p><span class="d-inline-block mr-2 font-weight-bold">Vinh:</span>Tầng 2 chung cư saigonsky, Ngõ 26, Nguyễn Thái Học, Phường Đội Cung, TP. Vinh, Nghệ An</p>
-                                </address>
+
                             </div>
                         </div>
                     </div>
