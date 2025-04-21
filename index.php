@@ -112,16 +112,16 @@ if ($role === 'admin') {
             $adminController->deleteComment();
             break;
         case 'add_to_cart':
-            if (isset($_GET['product_id'], $_GET['quantity'], $_GET['color'], $_GET['size'])) {
+            if (isset($_GET['product_id'], $_GET['quantity'])) {
                 $product_id = $_GET['product_id'];
                 $quantity = $_GET['quantity'];
-                $color = $_GET['color'];
-                $size = $_GET['size'];
+                $color = isset($_GET['color']) ? $_GET['color'] : 'default';  
+                $size = isset($_GET['size']) ? $_GET['size'] : 'default';      
                 $userController->addToCart($product_id, $quantity, $color, $size);
             } else {
                 echo "Vui lòng chọn đủ thông tin sản phẩm!";
             }
-            break;
+            
         case 'checkout':
             $userController->checkout();
             break;

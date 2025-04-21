@@ -52,33 +52,37 @@ class UserController
         include __DIR__ . "/../views/guest/trangchu.php";
     }
     public function showProductDetail($id)
-    {
-        $product = $this->productModel->getProductById($id);
-        $categories = $this->categoriesModel->getAllCategories();
-
-        if (!$product) {
-            die("Sản phẩm không tồn tại!");
-        }
-
-        $variants = $this->productModel->getVariantsByProductId($id);
-
-        $colors = [];
-        $sizes = [];
-
-        foreach ($variants as $variant) {
-            $colors[$variant['color_id']] = $variant['color_name'];
-            $sizes[$variant['size_id']] = $variant['size_name'];
-        }
-
-        $relatedProducts = $this->productModel->getRelatedProducts($product['category_id'], $id);
-
-        $commentModel = new Comment();
-        $comments = $commentModel->getCommentsByProductId($id); // ✨ Dữ liệu bình luận
-
-        $product_id = $id;
-
-        include __DIR__ . "/../views/guest/chitietsanpham.php";
+{
+    // 1. Lấy thông tin sản phẩm
+    $product = $this->productModel->getProductById($id);
+    if (!$product) {
+        die("Sản phẩm không tồn tại!");
     }
+
+    // 2. Lấy danh mục và biến thể
+    $categories = $this->categoriesModel->getAllCategories();
+    $variants = $this->productModel->getVariantsByProductId($id);
+
+    // 3. Phân tách màu sắc và kích cỡ
+    $colors = [];
+    $sizes = [];
+    foreach ($variants as $variant) {
+        $colors[$variant['color_id']] = $variant['color_name'];
+        $sizes[$variant['size_id']] = $variant['size_name'];
+    }
+
+    // 4. Sản phẩm liên quan (cùng category, loại trừ sản phẩm hiện tại)
+    $relatedProducts = $this->productModel->getRelatedProducts($product['category_id'], $product['id']);
+
+
+    // 5. Lấy bình luận
+    $commentModel = new Comment();
+    $comments = $commentModel->getCommentsByProductId($id);
+
+    // 6. Gửi dữ liệu qua view
+    $product_id = $id;
+    include __DIR__ . "/../views/guest/chitietsanpham.php";
+}
 
 
 
@@ -684,7 +688,19 @@ class UserController
         }
     }
 
+    public function show($productId)
+    {
+        $productModel = new Product();
+        
+        // Lấy chi tiết sản phẩm hiện tại
+        $product = $productModel->getProductById($productId);
+        
+        // Lấy sản phẩm liên quan cùng category_id
+        $relatedProducts = $productModel->getRelatedProducts($product['category_id'], $product['id']);
 
+        // Truyền dữ liệu sang view
+        include 'views/product_detail.php';
+    }
 
 
 
